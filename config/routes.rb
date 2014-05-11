@@ -1,5 +1,7 @@
 PUrb::Application.routes.draw do
-  root :to => "home#index"
+  resources :sites
+
+  root :to => "sites#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
 end
