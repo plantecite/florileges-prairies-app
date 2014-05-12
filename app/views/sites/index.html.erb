@@ -1,43 +1,59 @@
 
 
-<h1>Liste des sites</h1>
+<h1>CONSULTER LES SITES</h1>
 <div class="row">
-  <div class="col-md-6">
-  	<table class="table table-hover">
-  		<thead>
-  			<tr>
-  				<th>
-  					code
-  				</th>
-  				<th>
-  					nom
-  				</th>
-  			</tr>
-  		</thead>
-  		<tbody>
-  			<% for site in @sites %>
-  			<tr>
-  				<th><%= site.code %></th>
-  				<th> <%= link_to site.name, site  %></th>
-  			</tr>
-  			<% end %>
-  		</tbody>
-		</table>
+  <div class="col-md-9">
+    <ul class="nav nav-pills nav-justified" id="myTab">
+      <li class="active"><a href="#liste" data-toggle="pill"><h4>LISTE</h4></a></li>
+      <li><a href="#carte" data-toggle="pill"><h4>CARTE</h4></a></li>
+    </ul>
+    <div class="tab-content">
+            <div class="tab-pane active" id="liste">
+              <br>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>
+                        code
+                      </th>
+                      <th>
+                        nom
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for site in @sites %>
+                    <tr>
+                      <th><%= site.code %></th>
+                      <th> <%= link_to site.name, site  %></th>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="carte">
+              <br>
+              <div style="width: auto">
+                <div id="map" style="width: auto; height: 400px"></div>
+              </div>
+            </div>
+    </div><!-- tab content -->
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <%= link_to 'New Site', new_site_path , class: 'btn btn-warning btn-lg pull-right' %>
   </div>
 </div>
 
-<div style="width: auto">
-  <div id="map" style="width: auto; height: 350px"></div>
-</div>
 
 <script type="text/javascript">
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
+
+$("#myTab").on('shown.bs.tab', function() {
+  handler = Gmaps.build('Google', { markers: { clusterer: {clusterer_maxZoom: 25} } });
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
 });
+initialize();
 </script>

@@ -9,16 +9,17 @@
       <%= f.input :code %>
       <%= f.input :name %>
       <%= f.input :parc %>
-      <%= f.input :latitude %>
-      <%= f.input :longitude %>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :longitude %>
       <%= f.input :location %>
+
     </div>
     <div class="col-md-8">
       <input id="pac-input" class="gmcontrols" type="text"
       placeholder="Saisir un lieu ou une adresse">
       <div id="type-selector" class="gmcontrols">
         <input type="radio" name="type" id="changetype-all" checked="checked">
-        <label for="changetype-all">All</label>
+        <label for="changetype-all">Tout</label>
 
         <input type="radio" name="type" id="changetype-establishment">
         <label for="changetype-establishment">Lieux</label>
