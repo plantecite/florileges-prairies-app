@@ -21,6 +21,7 @@ gem 'gmaps4rails'
 
 gem 'font-awesome-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'select2-rails'
 
 
 group :development do
