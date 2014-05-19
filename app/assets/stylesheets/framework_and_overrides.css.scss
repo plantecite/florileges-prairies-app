@@ -10,7 +10,13 @@ img {
 .navbar-brand {
   font-size: inherit;
   }
-
+//overide for Telpok CSS
+.container, main {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral
@@ -35,13 +41,13 @@ img {
 main {
   @extend .container;
   background-color: #FFF;
-  padding-bottom: 80px;
+  padding-bottom: 0px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
   }
 section {
   @extend .row;
-  margin-top: 20px;
+  margin-top: 0px;
   }
 
 // Styles for Devise views

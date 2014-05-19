@@ -19,6 +19,9 @@ gem 'thin'
 gem 'geocoder'
 gem 'gmaps4rails'
 
+gem 'font-awesome-rails'
+gem 'bootstrap-datepicker-rails'
+
 
 group :development do
   gem 'better_errors'

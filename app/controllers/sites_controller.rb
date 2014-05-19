@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
@@ -15,6 +16,11 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
+    @hash = Gmaps4rails.build_markers(@site) do |site, marker|
+      marker.lat site.latitude
+      marker.lng site.longitude
+      marker.infowindow site.name
+    end
   end
 
   # GET /sites/new

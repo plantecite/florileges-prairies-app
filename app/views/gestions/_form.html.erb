@@ -1,0 +1,66 @@
+<%= simple_form_for(@gestion, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div id="general">
+      <hr>
+      <h3>Généralités</h3>
+      <%= f.input :gestion_date, :as => :string, :label => 'Date', :input_html => {:value => Date.today.to_s, :data => { :behaviour => "datepicker"}} %>
+      <%= f.input :gen_prop %>
+      <%= f.input :gen_gest %>
+      <%= f.input :gen_struct %>
+      <%= f.input :gen_surface %>
+      <%= f.input :gen_obj %>
+      <%= f.input :gen_freq %>
+    </div>
+    <div id="general">
+      <h3>Historiqe du site</h3>
+      <%= f.input :hist_occsol %>
+      <%= f.input :hist_date %>
+      <%= f.input :hist_trav %>
+      <%= f.input :hist_trav_info %>
+      <%= f.input :hist_desc %>
+      <%= f.input :hist_desc_date %>
+    </div>
+    <div id="itineraire">
+      <h3>Intinéraire de gestion</h3>
+      <%= f.input :hist_occsol %>
+      <%= f.input :hist_date %>
+      <%= f.input :hist_trav %>
+      <%= f.input :hist_trav_info %>
+      <%= f.input :hist_desc %>
+      <%= f.input :hist_desc_date %>
+      <%= f.input :it_trav %>
+      <%= f.input :it_trav_freq %>
+      <%= f.input :it_trav_freq_reginfo %>
+      <%= f.input :it_amend %>
+      <%= f.input :it_amend_freq %>
+      <%= f.input :it_amend_freq_reginfo %>
+      <%= f.input :it_gestion %>
+      <%= f.input :it_pat_nb %>
+      <%= f.input :it_pat_duree %>
+      <%= f.input :it_f_cal_prev %>
+      <%= f.input :it_f_cal_current %>
+      <%= f.input :it_p_cal_prev %>
+      <%= f.input :it_p_cal_current %>
+      <%= f.input :it_f_export %>
+      <%= f.input :it_phyto %>
+      <%= f.input :it_phyto_info %>
+      <%= f.input :it_pression %>
+    </div>
+
+    <%= f.input :scp_info %>
+    <%= f.input :scp_desc %>
+    <%= f.association :site %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+</script>

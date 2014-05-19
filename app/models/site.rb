@@ -1,6 +1,11 @@
 class Site < ActiveRecord::Base
 
-geocoded_by :location
-after_validation :geocode
+	has_many :ownerships  
+  has_many :users, :through => :ownerships
+
+  has_many :gestions
+
+	geocoded_by :location
+	after_validation :geocode
 
 end

@@ -1,0 +1,91 @@
+<h1>Listing gestions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gestion date</th>
+      <th>Gen prop</th>
+      <th>Gen gest</th>
+      <th>Gen struct</th>
+      <th>Gen surface</th>
+      <th>Gen obj</th>
+      <th>Gen freq</th>
+      <th>Hist occsol</th>
+      <th>Hist date</th>
+      <th>Hist trav</th>
+      <th>Hist trav info</th>
+      <th>Hist desc</th>
+      <th>Hist desc date</th>
+      <th>It trav</th>
+      <th>It trav freq</th>
+      <th>It trav freq reginfo</th>
+      <th>It amend</th>
+      <th>It amend freq</th>
+      <th>It amend freq reginfo</th>
+      <th>It gestion</th>
+      <th>It pat nb</th>
+      <th>It pat duree</th>
+      <th>It f cal prev</th>
+      <th>It f cal current</th>
+      <th>It p cal prev</th>
+      <th>It p cal current</th>
+      <th>It f export</th>
+      <th>It phyto</th>
+      <th>It phyto info</th>
+      <th>It pression</th>
+      <th>Scp info</th>
+      <th>Scp desc</th>
+      <th>Site</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gestions.each do |gestion| %>
+      <tr>
+        <td><%= gestion.gestion_date %></td>
+        <td><%= gestion.gen_prop %></td>
+        <td><%= gestion.gen_gest %></td>
+        <td><%= gestion.gen_struct %></td>
+        <td><%= gestion.gen_surface %></td>
+        <td><%= gestion.gen_obj %></td>
+        <td><%= gestion.gen_freq %></td>
+        <td><%= gestion.hist_occsol %></td>
+        <td><%= gestion.hist_date %></td>
+        <td><%= gestion.hist_trav %></td>
+        <td><%= gestion.hist_trav_info %></td>
+        <td><%= gestion.hist_desc %></td>
+        <td><%= gestion.hist_desc_date %></td>
+        <td><%= gestion.it_trav %></td>
+        <td><%= gestion.it_trav_freq %></td>
+        <td><%= gestion.it_trav_freq_reginfo %></td>
+        <td><%= gestion.it_amend %></td>
+        <td><%= gestion.it_amend_freq %></td>
+        <td><%= gestion.it_amend_freq_reginfo %></td>
+        <td><%= gestion.it_gestion %></td>
+        <td><%= gestion.it_pat_nb %></td>
+        <td><%= gestion.it_pat_duree %></td>
+        <td><%= gestion.it_f_cal_prev %></td>
+        <td><%= gestion.it_f_cal_current %></td>
+        <td><%= gestion.it_p_cal_prev %></td>
+        <td><%= gestion.it_p_cal_current %></td>
+        <td><%= gestion.it_f_export %></td>
+        <td><%= gestion.it_phyto %></td>
+        <td><%= gestion.it_phyto_info %></td>
+        <td><%= gestion.it_pression %></td>
+        <td><%= gestion.scp_info %></td>
+        <td><%= gestion.scp_desc %></td>
+        <td><%= gestion.site %></td>
+        <td><%= link_to 'Show', gestion %></td>
+        <td><%= link_to 'Edit', edit_gestion_path(gestion) %></td>
+        <td><%= link_to 'Destroy', gestion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gestion', new_gestion_path %>
