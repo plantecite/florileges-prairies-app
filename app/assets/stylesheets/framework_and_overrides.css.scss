@@ -1,6 +1,75 @@
 // import the CSS framework
 @import "bootstrap";
 
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('/assets/OpenSans-Regular-webfont.eot');
+    src: url('/assets/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/OpenSans-Regular-webfont.svg#open_sansregular') format('svg'),
+         url('/assets/OpenSans-Regular-webfont.woff') format('woff'),
+         url('/assets/OpenSans-Regular-webfont.ttf') format('truetype');        
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('/assets/OpenSans-Light-webfont.eot');
+    src: url('/assets/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/OpenSans-Light-webfont.svg#open_sanslight') format('svg'),
+         url('/assets/OpenSans-Light-webfont.woff') format('woff'),
+         url('/assets/OpenSans-Light-webfont.ttf') format('truetype');        
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('/assets/OpenSans-Semibold-webfont.eot');
+    src: url('/assets/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg'),
+         url('/assets/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('/assets/OpenSans-Semibold-webfont.ttf') format('truetype');        
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('/assets/OpenSans-Bold-webfont.eot');
+    src: url('/assets/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/OpenSans-Bold-webfont.svg#open_sansbold') format('svg'),
+         url('/assets/OpenSans-Bold-webfont.woff') format('woff'),
+         url('/assets/OpenSans-Bold-webfont.ttf') format('truetype');        
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body{
+  font-family: 'open_sansregular', 'open_sansregular', Arial, sans-serif;
+  line-height: 170%;
+}
+h1,h2,.h1,.h2 {
+  font-family: 'open_sansbold', 'open_sansbold', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit;
+  font-weight: 400;
+  line-height: 140%;
+}
+h3,h4,h5,h6,.h3,.h4,.h5,.h6 {
+  font-family: 'open_sanssemibold', 'open_sanssemibold', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit;
+  font-weight: 400;
+  line-height: 140%;
+}
+
 // make all images responsive by default
 img {
   @extend .img-responsive;

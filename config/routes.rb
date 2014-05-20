@@ -1,5 +1,8 @@
 PUrb::Application.routes.draw do
-  resources :gestions
+  
+  resources :sites do
+  	resources :gestions
+  end
 
   resources :sites
 

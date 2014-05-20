@@ -1,4 +1,5 @@
-<%= simple_form_for(@gestion, wrapper: :vertical_input_group,
+<div id="wizard">
+<%= simple_form_for([@site, @gestion], wrapper: :vertical_input_group,
         wrapper_mappings: {
           check_boxes: :horizontal_radio_and_checkboxes,
           radio_buttons: :horizontal_radio_and_checkboxes,
@@ -10,39 +11,37 @@
   <h3>Date</h3>
   <%= f.input :gestion_date,  wrapper: :vertical_input_group, :label => false  do %>
     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    <%= f.input_field :gestion_date, :as => :string, class: "form-control", placeholder: "Sélectionner une date avec le calendrier", :data => { :behaviour => "datepicker"} %>
+    <%= f.input_field :gestion_date, as: :datepicker, class: "form-control", placeholder: "Sélectionner une date avec le calendrier",  :data => { :behaviour => "datepicker", :provide => "datepicker"} %>
   <% end %>
 <% end %>
-<%= simple_form_for(@gestion, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
+<br>
+<%= simple_form_for([@site, @gestion], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
   <div class="form-inputs">
     <div id="general">
       <br>
       <h3>Questions générales</h3>
-      <%= f.input :gen_prop, label: "Propriétaire du site", placeholder: "Nom de la personne physique ou morale" %>
+      <br>
+      <%= f.input :gen_prop, label: "Propriétaire du site", :data => { :behaviour => "datepicker", :provide => "datepicker"}, placeholder: "Nom de la personne physique ou morale" %>
       <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
       <%= f.input :gen_struct, label: "Structure en charge des travaux" %>
       <%= f.input :gen_surface, label: "Surface (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
-      <%= f.input :gen_obj, as: :check_boxes, :input_html => {:class => 'none'}, :item_wrapper_class => 'checkbox-inline', label: "Objectif recherché pour la prairie", collection: [ "Esthétique", "Biodiversité", "Réduction des coûts d'entretien", "Récréatif"] %>
-      <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers" %>
+      <%= f.input :gen_obj, label: "Objectif recherché pour la prairie", placeholder: "Sélectionner une valeur par la liste"%>
+      <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
     </div>
+<hr>
     <div id="general">
-      <h3>Historiqe du site</h3>
-      <%= f.input :hist_occsol %>
-      <%= f.input :hist_date %>
-      <%= f.input :hist_trav %>
-      <%= f.input :hist_trav_info %>
-      <%= f.input :hist_desc %>
-      <%= f.input :hist_desc_date %>
+      <h3>Ce que vous savez de l'historique du site</h3>
+      <br>
+      <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une valeur par la liste" %>
+      <%= f.input :hist_date, label: "Date de création de la prairie", placeholder: "Février 2005, 2001, ..." %>
+      <%= f.input :hist_trav, label: "Travaux effectués sur l'emlacement de la prairie" %>
+      <%= f.input :hist_trav_info, label: "Date et provenance des apports" %>
+      <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
+      <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
     </div>
     <div id="itineraire">
-      <h3>Intinéraire de gestion</h3>
-      <%= f.input :hist_occsol %>
-      <%= f.input :hist_date %>
-      <%= f.input :hist_trav %>
-      <%= f.input :hist_trav_info %>
-      <%= f.input :hist_desc %>
-      <%= f.input :hist_desc_date %>
+      <h3>Intinéraire de culture de la prairie</h3>
       <%= f.input :it_trav %>
       <%= f.input :it_trav_freq %>
       <%= f.input :it_trav_freq_reginfo %>
@@ -71,12 +70,44 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+</div>
 
-<script type="text/javascript">
+<script>
   $(document).ready(function(){
-    $('[data-behaviour~=datepicker]').datepicker({
+    $("#gestion_gen_prop").datepicker({
       language: 'fr',
       startDate: 'd'
     });
   })
+</script>
+<script>
+    $(document).ready(function() { 
+      $("#gestion_gen_obj").select2({
+        tags:["Esthétique", "Biodiversité", "Réduction des coûts d'entretien", "Récréatif"]
+      });
+      $("#gestion_gen_freq").select2({
+        placeholder: "Select a State"
+      });
+      $("#gestion_hist_occsol").select2({
+        tags:["Bâti","Cultures","Industrie","Décharge","Boisement","Friche","Carrière"]
+      });
+      $("#gestion_hist_trav").select2({
+        tags:["Aucun travaux","Apport de remblais","Apport de terre végétale"]
+      });
+    });
+</script>
+<script>
+    // Initialize wizard
+    var wizard = $("#wizard").steps();
+     
+    // Add step
+    wizard.steps("add", {
+    title: "Date",
+    content: "<h3>Date</h3>"
+    }
+    {
+    title: "Questions générales",
+    content: "<h3>Questions générales</h3>"
+    });
+
 </script>

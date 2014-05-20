@@ -15,6 +15,9 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
+//= require select2
+//= require select2_locale_fr
+//= require jquery.steps
 //= require underscore
 //= require gmaps/google
 //= require_tree .
