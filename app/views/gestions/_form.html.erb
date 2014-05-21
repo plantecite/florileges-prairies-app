@@ -1,20 +1,5 @@
 <div id="wizard">
-<%= simple_form_for([@site, @gestion], wrapper: :vertical_input_group,
-        wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean
-        }) do |f| %>
-  <%= f.error_notification %>
-  <hr>
-  <h3>Date</h3>
-  <%= f.input :gestion_date,  wrapper: :vertical_input_group, :label => false  do %>
-    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    <%= f.input_field :gestion_date, as: :datepicker, class: "form-control", placeholder: "Sélectionner une date avec le calendrier",  :data => { :behaviour => "datepicker", :provide => "datepicker"} %>
-  <% end %>
-<% end %>
-<br>
+
 <%= simple_form_for([@site, @gestion], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
   <div class="form-inputs">
@@ -22,48 +7,57 @@
       <br>
       <h3>Questions générales</h3>
       <br>
+      <%= f.input :gestion_date, as: :string, label: "Date d'écriture de la fiche", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
       <%= f.input :gen_prop, label: "Propriétaire du site", :data => { :behaviour => "datepicker", :provide => "datepicker"}, placeholder: "Nom de la personne physique ou morale" %>
       <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
       <%= f.input :gen_struct, label: "Structure en charge des travaux" %>
       <%= f.input :gen_surface, label: "Surface (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
-      <%= f.input :gen_obj, label: "Objectif recherché pour la prairie", placeholder: "Sélectionner une valeur par la liste"%>
+      <%= f.input :gen_obj, label: "Objectif recherché pour la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
       <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
     </div>
 <hr>
     <div id="general">
       <h3>Ce que vous savez de l'historique du site</h3>
       <br>
-      <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une valeur par la liste" %>
+      <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
       <%= f.input :hist_date, label: "Date de création de la prairie", placeholder: "Février 2005, 2001, ..." %>
-      <%= f.input :hist_trav, label: "Travaux effectués sur l'emlacement de la prairie" %>
+      <%= f.input :hist_trav, label: "Travaux effectués sur l'emplacement de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
       <%= f.input :hist_trav_info, label: "Date et provenance des apports" %>
       <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
       <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
     </div>
     <div id="itineraire">
       <h3>Intinéraire de culture de la prairie</h3>
-      <%= f.input :it_trav %>
-      <%= f.input :it_trav_freq %>
-      <%= f.input :it_trav_freq_reginfo %>
-      <%= f.input :it_amend %>
-      <%= f.input :it_amend_freq %>
-      <%= f.input :it_amend_freq_reginfo %>
-      <%= f.input :it_gestion %>
-      <%= f.input :it_pat_nb %>
-      <%= f.input :it_pat_duree %>
-      <%= f.input :it_f_cal_prev %>
-      <%= f.input :it_f_cal_current %>
-      <%= f.input :it_p_cal_prev %>
-      <%= f.input :it_p_cal_current %>
-      <%= f.input :it_f_export %>
-      <%= f.input :it_phyto %>
-      <%= f.input :it_phyto_info %>
-      <%= f.input :it_pression %>
+      <%= f.input :it_trav, label: "Travail du sol préalable à la mise en place de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+      <%= f.input :it_trav_freq, label: "Fréquence du travail du sol", collection: ["Aucun","À la mise en place","Régulier"] %>
+      <%= f.input :it_trav_freq_reginfo, label: "Si régulier, à quelle fréquence pour le travail du sol" %>
+      <%= f.input :it_amend, label: "Amendement", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+      <%= f.input :it_amend_freq, label: "Fréquence de l'amendement", collection: ["Aucun","À la mise en place","Régulier"] %>
+      <%= f.input :it_amend_freq_reginfo, label: "Si régulier, à quelle fréquence pour les amendements" %>
+      <%= f.input :it_gestion, label: "Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs", :as => :grouped_select, :collection => [["Fauche", ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]], ["Pâturage", ["Ovin","Caprin","Bovin","Équidé"]]], :group_method => :last, input_html: {:multiple => true} %>
+      <%= f.input :it_pat_nb, label: "Pression de pâturage", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif" %>
+      <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
+      <hr>
+      <h4>Calendrier de gestion pour l'année en cours</h4>
+      <%= f.input :it_f_cal_current, as: :check_boxes, label: "Fauchage N", collection: ["janvier","février","mars"] %>
+      <%= f.input :it_p_cal_current, label: "Pâturage N" %>
+      <h4>Calendrier de gestion pour l'année précédant le relevé</h4>
+      <%= f.input :it_f_cal_prev, label: "Fauchage N-1" %>
+      <%= f.input :it_p_cal_prev, label: "Paturage N-1" %>
+      <hr>
+      <%= f.input :it_f_export, label: "Exportation des résidus de fauche ?" %>
+      <%= f.input :it_phyto, label: "Traitement phytosanitaire ?" %>
+      <%= f.input :it_phyto_info, label: "Si oui, préciser les produits utilisés" %>
+      <%= f.input :it_pression, label: "Pression de gestion non contrôlée" %>
+    </div>
+    <div id="science-participative">
+      <h3>Mise en place de suivis</h3>
+      <%= f.input :scp_info, :wrapper_class => :inline_checkbox  %>
+      <%= f.input :scp_desc, label: "Si oui, lesquels...", placeholder: "(suivis Vigie Nature, etc.)" %>
+      <%= f.association :site, hidden: true %>
     </div>
 
-    <%= f.input :scp_info %>
-    <%= f.input :scp_desc %>
-    <%= f.association :site %>
+
   </div>
 
   <div class="form-actions">
@@ -74,7 +68,7 @@
 
 <script>
   $(document).ready(function(){
-    $("#gestion_gen_prop").datepicker({
+    $("#gestion_gestion_date").datepicker({
       language: 'fr',
       startDate: 'd'
     });
@@ -86,7 +80,7 @@
         tags:["Esthétique", "Biodiversité", "Réduction des coûts d'entretien", "Récréatif"]
       });
       $("#gestion_gen_freq").select2({
-        placeholder: "Select a State"
+        placeholder: "Sélectionner une valeur"
       });
       $("#gestion_hist_occsol").select2({
         tags:["Bâti","Cultures","Industrie","Décharge","Boisement","Friche","Carrière"]
@@ -94,6 +88,24 @@
       $("#gestion_hist_trav").select2({
         tags:["Aucun travaux","Apport de remblais","Apport de terre végétale"]
       });
+      $("#gestion_it_trav").select2({
+        tags:["Aucun","Labour","Hersage","Étrépage"]
+      });
+      $("#gestion_it_trav_freq").select2({
+        placeholder: "Sélectionner une valeur"
+      });  
+      $("#gestion_it_amend").select2({
+        tags:["Aucun","Fumier","Compost","Engrais organique","Engrais chimique"]
+      });
+      $("#gestion_it_amend_freq").select2({
+        placeholder: "Sélectionner une valeur"
+      });
+      $("#gestion_it_gestion").select2({
+        placeholder: "Sélectionner une valeur"
+      });
+      $("#aaa").select2({
+        tags:[]
+      });  
     });
 </script>
 <script>
