@@ -39,7 +39,7 @@
       <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
       <hr>
       <h4>Calendrier de gestion pour l'année en cours</h4>
-      <%= f.input :it_f_cal_current, as: :check_boxes, label: "Fauchage N", collection: ["janvier","février","mars"] %>
+      <%= f.input :it_f_cal_current, as: :check_boxes, inline: true,  label: "Fauchage N", :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'}, collection: ["janvier","février","mars"] %>
       <%= f.input :it_p_cal_current, label: "Pâturage N" %>
       <h4>Calendrier de gestion pour l'année précédant le relevé</h4>
       <%= f.input :it_f_cal_prev, label: "Fauchage N-1" %>
@@ -52,7 +52,7 @@
     </div>
     <div id="science-participative">
       <h3>Mise en place de suivis</h3>
-      <%= f.input :scp_info, :wrapper_class => :inline_checkbox  %>
+      <%= f.input :scp_info, as: :radio_buttons, label: "Avez-vous mise en place d'autres protocoles de suivis de la biodiversité?", collection: [["oui","1"],["non","0"]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'}   %>
       <%= f.input :scp_desc, label: "Si oui, lesquels...", placeholder: "(suivis Vigie Nature, etc.)" %>
       <%= f.association :site, hidden: true %>
     </div>

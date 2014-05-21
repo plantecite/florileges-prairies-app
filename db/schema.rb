@@ -11,10 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519221849) do
+ActiveRecord::Schema.define(version: 20140521101940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "especes", force: true do |t|
+    t.integer  "taxref"
+    t.integer  "bdtfx"
+    t.string   "famille"
+    t.string   "nom_sci"
+    t.string   "auteur"
+    t.integer  "annee"
+    t.string   "nom_sci_complet"
+    t.string   "nom_vern"
+    t.string   "avatar"
+    t.text     "reconnaissance"
+    t.text     "confusion"
+    t.text     "habitat_desc"
+    t.text     "faune"
+    t.string   "flo_s"
+    t.integer  "flo_i"
+    t.integer  "indic_pel"
+    t.integer  "indic_pra"
+    t.integer  "indic_fri"
+    t.integer  "tol_fau"
+    t.integer  "tol_pat"
+    t.integer  "tol_pie"
+    t.integer  "off_nec"
+    t.integer  "off_pol"
+    t.string   "pollen"
+    t.integer  "hauteur"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "gestions", force: true do |t|
     t.date     "gestion_date"
