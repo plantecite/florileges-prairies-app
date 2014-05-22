@@ -7,13 +7,20 @@
 <%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
   <div class="row">
-    <div class="col-md-4 well">
-      <%= f.input :code %>
-      <%= f.input :name %>
-      <%= f.input :parc %>
-      <%= f.hidden_field :latitude %>
-      <%= f.hidden_field :longitude %>
-      <%= f.input :location %>
+    <div class="col-md-4">
+      <div class="well">
+        <%= f.input :code %>
+        <%= f.input :name %>
+        <%= f.input :parc %>
+        <%= f.hidden_field :latitude %>
+        <%= f.hidden_field :longitude %>
+        <%= f.input :location %>
+      </div>
+      <div class="well">
+        <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
+
+      </div>
+
 
     </div>
     <div class="col-md-8">

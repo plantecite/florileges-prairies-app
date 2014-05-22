@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521101940) do
+ActiveRecord::Schema.define(version: 20140521102731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,9 @@ ActiveRecord::Schema.define(version: 20140521101940) do
     t.string   "password"
     t.string   "topographie"
     t.string   "ensoleillement"
-    t.string   "image"
+    t.string   "photo"
     t.boolean  "public"
+    t.string   "plan"
   end
 
   create_table "taggings", force: true do |t|

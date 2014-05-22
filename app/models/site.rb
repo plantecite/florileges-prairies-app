@@ -5,7 +5,10 @@ class Site < ActiveRecord::Base
 
   has_many :gestions
 
-	geocoded_by :location
-	after_validation :geocode
+	# geocoded_by :location
+	# after_validation :geocode
+
+	mount_uploader :photo, ImageUploader
+	mount_uploader :plan, ImageUploader
 
 end

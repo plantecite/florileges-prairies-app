@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
 	has_many :ownerships  
   has_many :sites, :through => :ownerships
 
+  mount_uploader :avatar, ImageUploader
+
 end

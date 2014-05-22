@@ -8,48 +8,42 @@
 <div class="row">
   <div class="col-md-9">
     <ul class="nav nav-pills nav-justified" id="pillSites">
-      <li class="active"><a href="#liste" data-toggle="pill"><h4 class="glyphicon glyphicon-th-list"></h4></a></li>
-      <li><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
+      <li class="filter active"><a href="#liste" data-toggle="pill"><h4 class="glyphicon glyphicon-th-list"></h4></a></li>
+      <li class="filter"><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
     </ul>
     <div class="tab-content">
             <div class="tab-pane active" id="liste">
               <br>
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>
-                        Code
-                      </th>
-                      <th>
-                        Nom du site
-                      </th>
-                      <th>
-                        actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% for site in @sites %>
-                    <tr>
-                      <th><%= site.code %></th>
-                      <th> <%= link_to site.name, site  %></th>
-                      <th> 
-                      <% if can? :update, @sites %>
-                        <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
-                          <i class="glyphicon glyphicon-pencil"></i> Modifier
-                        <% end %>
+              <% for site in @sites %>
+              <div class="the-box-landing border-color-left">
+                <div class="row">
+                  <div class="col-md-3">
+                    <%= image_tag site.photo_url(:thumb).to_s, class: 'img-responsive img-circle'  %>
+                  </div>
+                  <div class="col-md-6">
+                    <h3><%= link_to site.name, site  %></h3>
+                    <p><i><%= site.location %></i></p>
+                    <span class="hint"><b>Code: </b><%= site.code %> | <b>Créé par: </b><i>en cours...</i></span><br/>
+                    <hr>
+                    <span><i class="glyphicon glyphicon-user"></i> Ajouter un co-observateur</span> | <span><i class="glyphicon glyphicon-user"></i> Remplir et modifier la fiche de gestion</span>
+                  </div>
+                  <div class="col-md-3">
+                    <% if can? :update, @sites %>
+                      <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
+                        <i class="glyphicon glyphicon-pencil"></i> Modifier
                       <% end %>
-                      
-                      <% if can? :destroy, @sites %>
-                       <%= link_to site, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger btn-xs' do %>
-                           <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
-                        <% end %>
-                      <% end %>
-                      </th>
-                    </tr>
                     <% end %>
-                  </tbody>
-                </table>
+                    
+                    <% if can? :destroy, @sites %>
+                     <%= link_to site, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger btn-xs' do %>
+                         <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+  
+                <% end %>
             </div>
             <div class="tab-pane" id="carte">
               <br>

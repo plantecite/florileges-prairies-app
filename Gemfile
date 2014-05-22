@@ -24,6 +24,9 @@ gem 'bootstrap-datepicker-rails'
 gem 'select2-rails'
 gem 'acts-as-taggable-on'
 
+gem 'carrierwave'
+gem "mini_magick"
+
 
 group :development do
   gem 'better_errors'

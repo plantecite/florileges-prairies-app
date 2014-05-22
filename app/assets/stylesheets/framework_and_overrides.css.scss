@@ -70,6 +70,13 @@ h3,h4,h5,h6,.h3,.h4,.h5,.h6 {
   line-height: 140%;
 }
 
+.alert, #error_explanation {
+  padding: 15px;
+  margin: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 // make all images responsive by default
 img {
   @extend .img-responsive;
