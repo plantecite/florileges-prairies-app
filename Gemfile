@@ -20,6 +20,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 
 gem 'font-awesome-rails'
+gem 'icomoon-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'select2-rails'
 gem 'acts-as-taggable-on'

@@ -14,6 +14,8 @@
  *= require select2
  *= require select2-bootstrap
  *= require jquery.steps
+ *= require hover.icon
+
  *= require_tree .
  */
 
@@ -367,6 +369,10 @@ a.btn.btn-default.btn-teplok:focus{
 .section-page-landing.section-light-grey{
   background: #f3f3f3;
 }
+.section-page-landing.section-beige{
+  background: #f3efe0;
+}
+
 .section-page-landing .section-overlay{
   background: rgba(1,1,1,0.5) url(../third/vegas/overlays/02.png);
   width: 100%;
@@ -415,10 +421,19 @@ a.btn.btn-default.btn-teplok:focus{
 .the-box-landing.the-box-transparent{background: transparent;}
 .the-box-landing.border-hover-bottom{border-bottom: 3px solid transparent;}
 .the-box-landing:hover.border-hover-bottom{border-bottom-color: #B3C833;}
-.the-box-landing.border-color-left{border-left: 3px solid #B3C833;}
-.the-box-landing.border-color-top{border-top: 3px solid #B3C833;}
-.the-box-landing.border-color-bottom{border-bottom: 3px solid #B3C833;}
-.the-box-landing.border-color-right{border-right: 3px solid #B3C833;}
+.the-box-landing.border-color-left{border-left: 5px solid #B3C833;}
+.the-box-landing.border-color-top{border-top: 5px solid #B3C833;}
+.the-box-landing.border-color-bottom{border-bottom: 5px solid #B3C833;}
+.the-box-landing.border-color-right{border-right: 5px solid #B3C833;}
+
+.the-box-landing.border-darkgreen-left{border-left: 5px solid #388a5a;}
+.the-box-landing.border-darkgreen-top{border-top: 5px solid #388a5a;}
+.the-box-landing.border-darkgreen-bottom{border-bottom: 5px solid #388a5a;}
+.the-box-landing.border-darkgreen-right{border-right: 5px solid #388a5a;}
+
+.the-box-landing.border-orange-left{border-left: 5px solid #f8c43a;}
+.the-box-landing.border-orange-topbottom{border-top: 5px solid #f8c43a; border-bottom: 5px solid #f8c43a; background: #fde8b0;}
+
 .the-box-landing.full{padding: 0px;}
 .the-box-landing.padd{padding: 10px;}
 .the-box-landing h3{

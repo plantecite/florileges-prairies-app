@@ -68,7 +68,7 @@
     <% end %>
     var mapOptions = {
       center: myLatlng,
-      zoom: 13
+      zoom: 15
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
@@ -84,20 +84,23 @@
     autocomplete.bindTo('bounds', map);
 
     var infowindow = new google.maps.InfoWindow();
+
     <% if @site.latitude? %>
-    var collection = new google.maps.Marker({
+    var site = new google.maps.Marker({
       position: myLatlng,
       map: map,
       draggable: true,
       title: 'Cliquer pour zoomer sur <%= @site.name %>'
     });
-    <% end %>
-
-    var site = new google.maps.Marker({
+    <% else  %>
+      var site = new google.maps.Marker({
       map: map,
       anchorPoint: new google.maps.Point(0, -29),
       draggable: true
     });
+    <% end %>
+
+
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
       infowindow.close();
@@ -140,6 +143,21 @@
       infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
       infowindow.open(map, site);
     });
+
+    //Sets a listener on marker drag to update lat/long fields based on new location
+
+    google.maps.event.addListener(site,'drag',function(event) {
+      document.getElementById('site_latitude').value = event.latLng.lat();
+      document.getElementById('site_longitude').value = event.latLng.lng();
+    });
+
+    google.maps.event.addListener(site, 'click', function() {
+      map.setZoom(18);
+      map.setCenter(site.getPosition());
+    });
+
+
+
 
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.

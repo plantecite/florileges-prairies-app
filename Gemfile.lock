@@ -106,6 +106,9 @@ GEM
     hike (1.2.3)
     hub (1.12.0)
     i18n (0.6.9)
+    icomoon-rails (0.1.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -229,6 +232,7 @@ DEPENDENCIES
   geocoder
   gmaps4rails
   hub
+  icomoon-rails
   jbuilder (~> 1.2)
   jquery-rails
   launchy

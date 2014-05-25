@@ -11,4 +11,13 @@ class Site < ActiveRecord::Base
 	mount_uploader :photo, ImageUploader
 	mount_uploader :plan, ImageUploader
 
+	reverse_geocoded_by :latitude, :longitude, :address => :location
+	after_validation :reverse_geocode  # auto-fetch address
+
+	def set_user!(user)
+  	self.users.id = user.id
+
+  	self.save!
+  end
+
 end

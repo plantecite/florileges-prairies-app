@@ -1,5 +1,7 @@
 PUrb::Application.routes.draw do
   
+  resources :releves
+
   resources :especes
 
   resources :sites do

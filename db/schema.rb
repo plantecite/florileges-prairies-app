@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521102731) do
+ActiveRecord::Schema.define(version: 20140524103301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,26 @@ ActiveRecord::Schema.define(version: 20140521102731) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "releves", force: true do |t|
+    t.date     "date"
+    t.text     "name"
+    t.string   "structure"
+    t.string   "fonction"
+    t.time     "time_start"
+    t.time     "time_end"
+    t.string   "hauteur"
+    t.string   "milieux"
+    t.integer  "user_id"
+    t.integer  "site_id"
+    t.integer  "gestion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "releves", ["gestion_id"], name: "index_releves_on_gestion_id", using: :btree
+  add_index "releves", ["site_id"], name: "index_releves_on_site_id", using: :btree
+  add_index "releves", ["user_id"], name: "index_releves_on_user_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

@@ -1,0 +1,21 @@
+<%= simple_form_for(@relefe) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :date %>
+    <%= f.input :name %>
+    <%= f.input :structure %>
+    <%= f.input :fonction %>
+    <%= f.input :time_start %>
+    <%= f.input :time_end %>
+    <%= f.input :hauteur %>
+    <%= f.input :milieux %>
+    <%= f.association :user %>
+    <%= f.association :site %>
+    <%= f.association :gestion %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

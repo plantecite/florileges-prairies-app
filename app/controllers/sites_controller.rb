@@ -39,6 +39,8 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
+    @user = current_user
+    @site.set_user!(current_user)
     @site = Site.new(site_params)
 
     respond_to do |format|
