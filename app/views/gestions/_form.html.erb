@@ -1,68 +1,85 @@
-<div id="wizard">
-
-<%= simple_form_for([@site, @gestion], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <div id="general">
-      <br>
-      <h3>Questions générales</h3>
-      <br>
-      <%= f.input :gestion_date, as: :string, label: "Date d'écriture de la fiche", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
-      <%= f.input :gen_prop, label: "Propriétaire du site", :data => { :behaviour => "datepicker", :provide => "datepicker"}, placeholder: "Nom de la personne physique ou morale" %>
-      <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
-      <%= f.input :gen_struct, label: "Structure en charge des travaux" %>
-      <%= f.input :gen_surface, label: "Surface (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
-      <%= f.input :gen_obj, label: "Objectif recherché pour la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-      <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
+<div class="row">
+  <div class="col-md-10">
+  <%= simple_form_for([@site, @gestion], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <div id="general">
+        <br>
+        <h3>Questions générales</h3>
+        <br>
+        <%= f.input :gestion_date, as: :string, label: "Date d'écriture de la fiche", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
+        <%= f.input :gen_prop, label: "Propriétaire du site", :data => { :behaviour => "datepicker", :provide => "datepicker"}, placeholder: "Nom de la personne physique ou morale" %>
+        <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
+        <%= f.input :gen_struct, label: "Structure en charge des travaux" %>
+        <%= f.input :gen_surface, label: "Surface (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
+        <%= f.input :gen_obj, label: "Objectif recherché pour la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+        <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
+      </div>
+  <hr>
+      <div id="historique">
+        <h3>Ce que vous savez de l'historique du site</h3>
+        <br>
+        <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+        <%= f.input :hist_date, label: "Date de création de la prairie", placeholder: "Février 2005, 2001, ..." %>
+        <%= f.input :hist_trav, label: "Travaux effectués sur l'emplacement de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+        <%= f.input :hist_trav_info, label: "Date et provenance des apports" %>
+        <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
+        <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
+      </div>
+      <div id="itineraire">
+        <div><h3>Intinéraire de culture de la prairie</h3></div>
+        <%= f.input :it_trav, label: "Travail du sol préalable à la mise en place de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+        <%= f.input :it_trav_freq, label: "Fréquence du travail du sol", collection: ["Aucun","À la mise en place","Régulier"] %>
+        <%= f.input :it_trav_freq_reginfo, label: "Si régulier, à quelle fréquence pour le travail du sol" %>
+        <%= f.input :it_amend, label: "Amendement", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
+        <%= f.input :it_amend_freq, label: "Fréquence de l'amendement", collection: ["Aucun","À la mise en place","Régulier"] %>
+        <%= f.input :it_amend_freq_reginfo, label: "Si régulier, à quelle fréquence pour les amendements" %>
+        <%= f.input :it_gestion, label: "Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs", :as => :grouped_select, :collection => [["Fauche", ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]], ["Pâturage", ["Ovin","Caprin","Bovin","Équidé"]]], :group_method => :last, input_html: {:multiple => true} %>
+        <%= f.input :it_pat_nb, label: "Pression de pâturage", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif" %>
+        <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
+        <hr>
+        <h4>Calendrier de gestion pour l'année en cours</h4>
+        <%= f.input :it_f_cal_current, as: :check_boxes, inline: true,  label: "Fauchage N", :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'}, collection: ["janvier","février","mars"] %>
+        <%= f.input :it_p_cal_current, label: "Pâturage N" %>
+        <h4>Calendrier de gestion pour l'année précédant le relevé</h4>
+        <%= f.input :it_f_cal_prev, label: "Fauchage N-1" %>
+        <%= f.input :it_p_cal_prev, label: "Paturage N-1" %>
+        <hr>
+        <%= f.input :it_f_export, label: "Exportation des résidus de fauche ?" %>
+        <%= f.input :it_phyto, label: "Traitement phytosanitaire ?" %>
+        <%= f.input :it_phyto_info, label: "Si oui, préciser les produits utilisés" %>
+        <%= f.input :it_pression, label: "Pression de gestion non contrôlée" %>
+      </div>
+      <div id="science-participative">
+        <h3>Mise en place de suivis</h3>
+        <%= f.input :scp_info, as: :radio_buttons, label: "Avez-vous mise en place d'autres protocoles de suivis de la biodiversité?", collection: [["oui","1"],["non","0"]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'}   %>
+        <%= f.input :scp_desc, label: "Si oui, lesquels...", placeholder: "(suivis Vigie Nature, etc.)" %>
+        <%= f.association :site, hidden: true %>
+      </div>
     </div>
-<hr>
-    <div id="general">
-      <h3>Ce que vous savez de l'historique du site</h3>
-      <br>
-      <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-      <%= f.input :hist_date, label: "Date de création de la prairie", placeholder: "Février 2005, 2001, ..." %>
-      <%= f.input :hist_trav, label: "Travaux effectués sur l'emplacement de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-      <%= f.input :hist_trav_info, label: "Date et provenance des apports" %>
-      <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
-      <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
-    </div>
-    <div id="itineraire">
-      <h3>Intinéraire de culture de la prairie</h3>
-      <%= f.input :it_trav, label: "Travail du sol préalable à la mise en place de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-      <%= f.input :it_trav_freq, label: "Fréquence du travail du sol", collection: ["Aucun","À la mise en place","Régulier"] %>
-      <%= f.input :it_trav_freq_reginfo, label: "Si régulier, à quelle fréquence pour le travail du sol" %>
-      <%= f.input :it_amend, label: "Amendement", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-      <%= f.input :it_amend_freq, label: "Fréquence de l'amendement", collection: ["Aucun","À la mise en place","Régulier"] %>
-      <%= f.input :it_amend_freq_reginfo, label: "Si régulier, à quelle fréquence pour les amendements" %>
-      <%= f.input :it_gestion, label: "Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs", :as => :grouped_select, :collection => [["Fauche", ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]], ["Pâturage", ["Ovin","Caprin","Bovin","Équidé"]]], :group_method => :last, input_html: {:multiple => true} %>
-      <%= f.input :it_pat_nb, label: "Pression de pâturage", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif" %>
-      <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
-      <hr>
-      <h4>Calendrier de gestion pour l'année en cours</h4>
-      <%= f.input :it_f_cal_current, as: :check_boxes, inline: true,  label: "Fauchage N", :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'}, collection: ["janvier","février","mars"] %>
-      <%= f.input :it_p_cal_current, label: "Pâturage N" %>
-      <h4>Calendrier de gestion pour l'année précédant le relevé</h4>
-      <%= f.input :it_f_cal_prev, label: "Fauchage N-1" %>
-      <%= f.input :it_p_cal_prev, label: "Paturage N-1" %>
-      <hr>
-      <%= f.input :it_f_export, label: "Exportation des résidus de fauche ?" %>
-      <%= f.input :it_phyto, label: "Traitement phytosanitaire ?" %>
-      <%= f.input :it_phyto_info, label: "Si oui, préciser les produits utilisés" %>
-      <%= f.input :it_pression, label: "Pression de gestion non contrôlée" %>
-    </div>
-    <div id="science-participative">
-      <h3>Mise en place de suivis</h3>
-      <%= f.input :scp_info, as: :radio_buttons, label: "Avez-vous mise en place d'autres protocoles de suivis de la biodiversité?", collection: [["oui","1"],["non","0"]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'}   %>
-      <%= f.input :scp_desc, label: "Si oui, lesquels...", placeholder: "(suivis Vigie Nature, etc.)" %>
-      <%= f.association :site, hidden: true %>
-    </div>
-
-
   </div>
+  <div class="col-md-2">
+    <div class="bs-sidebar affix">
+      <div class="the-box-landing border-orange-topbottom" id="navbar"> Navigation
+        <!-- NAV MENU -->
+        <ul class="nav scroll-nav">
+          <li class="active"><a href="#general"><span>Questions générales</span></a></li>
+          <li><a href="#historique"><span>Historique du site</span></a></li>
+          <li><a href="#itineraire"><span>Itinéraire de gestion</span></a></li>
+          <li><a href="#science-participative"><span>Autres suivis en cours</span></a></li>
+        </ul>
+        <!-- END NAV MENU -->
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+      </div>
+      <div class="the-box-landing border-orange-topbottom">
+        <div class="form-actions">
+          <%= f.submit class: 'btn btn-labeled btn-success' %>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
 <% end %>
 </div>
 
@@ -122,4 +139,31 @@
     content: "<h3>Questions générales</h3>"
     });
 
+</script>
+
+<script>
+// strict just to keep concept of bootstrap
++function ($) {
+  'use strict';
+
+
+// spy and scroll menu boogey
+$("#navbar ul li a[href^='#']").on('click', function(e) {
+
+   // prevent default anchor click behavior
+   e.preventDefault()
+
+   // store hash
+   var hash = this.hash
+
+   // animate
+   $('html, body').animate({
+       scrollTop: $(this.hash).offset().top -500
+     }, 1000, function(){
+       window.location.hash = hash -500
+     })
+
+})
+
+}(jQuery);
 </script>

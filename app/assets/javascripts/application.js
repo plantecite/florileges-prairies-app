@@ -22,4 +22,7 @@
 //= require gmaps/google
 //= require modernizr.custom
 //= require hover.icon.js
+//= require offcanvas.js
+//= require jquery.smooth-scroll.js
+//= require jquery.scrollTo.js
 //= require_tree .

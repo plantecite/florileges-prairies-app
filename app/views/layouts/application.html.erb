@@ -9,20 +9,20 @@
     <%= yield :javascript_head %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body id="top" data-spy="scroll" data-offset="50" data-target="#navbar" >
     <header>
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-          <div class="section-page-landing section-beige" id="features">
-            <div class="inner-section">
-              <div class="container">
-                <%= yield %>
-              </div>
-            </div>
+      <%= render 'layouts/messages' %>
+      <div class="section-page-landing section-beige" id="features">
+        <div class="inner-section">
+          <div class="container">
+            <%= yield %>
           </div>
-         <%= render 'layouts/footer' %>
+        </div>
+      </div>
+      <%= render 'layouts/footer' %>
     </main>
   </body>
 </html>

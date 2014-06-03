@@ -41,7 +41,9 @@
   </div>
 
   <div>
-    <%= f.submit 'Enregistrer les modifications', class: 'btn btn-warning pull-left' %>
+    <%= f.submit class: 'btn btn-labeled btn-success' do %>
+      <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Enregistrer les modifications
+    <% end %>
   </div>
   <br>
 <% end %>

@@ -119,7 +119,7 @@ main {
   background-color: #FFF;
   padding-bottom: 0px;
   width: 100%;
-  margin-top: 51px; // accommodate the navbar
+  /* margin-top: 51px; // accommodate the navbar */
   }
 section {
   @extend .row;
@@ -161,3 +161,4 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+

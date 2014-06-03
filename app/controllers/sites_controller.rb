@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = current_user.sites
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
@@ -39,13 +39,11 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    @user = current_user
-    @site.set_user!(current_user)
-    @site = Site.new(site_params)
-
+    @site = Site.create(site_params)
+    @site.users << current_user
     respond_to do |format|
       if @site.save
-        format.html { redirect_to @site, notice: 'Site was successfully created.' }
+        format.html { redirect_to @site, notice: 'Le site de la prairie a été crée avec succès.' }
         format.json { render action: 'show', status: :created, location: @site }
       else
         format.html { render action: 'new' }
@@ -59,7 +57,7 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update(site_params)
-        format.html { redirect_to sites_url, notice: 'Site was successfully updated.' }
+        format.html { redirect_to sites_url, notice: 'Le site a bien été mis à jour.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
