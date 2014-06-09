@@ -4,6 +4,7 @@ class Site < ActiveRecord::Base
   has_many :users, :through => :ownerships
 
   has_many :gestions
+  has_many :releves
 
 	# geocoded_by :location
 	# after_validation :geocode

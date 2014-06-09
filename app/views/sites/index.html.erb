@@ -43,10 +43,9 @@
                     <div class="btn btn-success btn-sm" data-toggle="modal" data-target="#mesGestions<%=site.id%>">
                       <i class="fa fa-list"></i>Fiche-gestion
                     </div>
-                    <div class="btn btn-success btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
-                      <%= link_to  edit_site_relefe_path(site), class:'btn btn-info btn-xs' do %>
+                    <hr>
+                    <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
                         <i class="glyphicon glyphicon-pencil"></i> Fiche-relevés
-                      <% end %>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
