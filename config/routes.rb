@@ -1,11 +1,12 @@
 PUrb::Application.routes.draw do
   
-  resources :releves
+  resources :observations
 
   resources :especes
 
   resources :sites do
   	resources :gestions
+    resources :releves
   end
 
   resources :sites

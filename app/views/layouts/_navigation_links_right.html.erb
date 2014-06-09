@@ -8,7 +8,6 @@
   	</li>
   	<li><a href="#">Tableau de bord</a></li>
     <li class="divider"></li>
-    <li><a href="#">Mes Sites <span class="badge"><%= current_user.sites.count %> </span></a></li>
     <li><%= link_to sites_path do %>
       Consulter mes sites <span class="badge"><%= current_user.sites.count %> </span>
     <% end %></li>

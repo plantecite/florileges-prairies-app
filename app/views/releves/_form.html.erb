@@ -1,4 +1,4 @@
-<%= simple_form_for(@relefe) do |f| %>
+<%= simple_form_for(@releve) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -19,3 +19,61 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+
+
+<div class="row">
+
+  <div class="col-md-10">
+  <%= simple_form_for([@site, @releve], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <!-- Form for Releve -->
+      <div id="information">
+
+      </div>
+      <!-- End of For for Releve -->
+
+      <!-- Form for nested ressource Observation -->
+      <div id="releve">
+        
+      </div>
+
+      <!-- End of Form for nested ressource Observation -->
+    </div>
+
+
+
+
+  </div>
+
+
+  <div class="col-md-2">
+    <div class="affix">
+      <div class="the-box-landing border-orange-topbottom" id="navbar">
+        <!-- NAV MENU -->
+        <ul class="nav scroll-nav">
+          <li class="active"><a href="#information"><span>1. Information sur le site</span></a></li>
+          <li><a href="#releve"><span>2. Relevés des espèces</span></a></li>
+        </ul>
+        <!-- END NAV MENU -->
+
+      </div>
+      <div class="the-box-landing border-orange-topbottom">
+        <div class="form-actions">
+          <%= f.submit class: 'btn btn-labeled btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function(){
+    $("#gestion_gestion_date").datepicker({
+      language: 'fr',
+      startDate: 'd'
+    });
+  })
+</script>

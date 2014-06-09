@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140524103301) do
+ActiveRecord::Schema.define(version: 20140605131211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,28 @@ ActiveRecord::Schema.define(version: 20140524103301) do
   end
 
   add_index "gestions", ["site_id"], name: "index_gestions_on_site_id", using: :btree
+
+  create_table "observations", force: true do |t|
+    t.boolean  "q0"
+    t.boolean  "q1"
+    t.boolean  "q2"
+    t.boolean  "q3"
+    t.boolean  "q4"
+    t.boolean  "q5"
+    t.boolean  "q6"
+    t.boolean  "q7"
+    t.boolean  "q8"
+    t.boolean  "q9"
+    t.boolean  "q10"
+    t.boolean  "p"
+    t.integer  "espece_id"
+    t.integer  "releve_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "observations", ["espece_id"], name: "index_observations_on_espece_id", using: :btree
+  add_index "observations", ["releve_id"], name: "index_observations_on_releve_id", using: :btree
 
   create_table "ownerships", force: true do |t|
     t.integer  "user_id"

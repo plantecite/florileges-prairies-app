@@ -1,41 +1,49 @@
 <div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
+  <h3>Modifier votre profil</h3>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label "Nom" %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <div>Actuellement en attente de confirmation pour: <%= resource.unconfirmed_email %></div>
       <% end %>
     </div>
+    <div class="form-group">
+      <%= f.label :structure %>
+      <%= f.text_field :structure, :autofocus => true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :fonction %>
+      <%= f.text_field :fonction, :autofocus => true, class: 'form-control' %>
+    </div>
     <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
+      <p>Laissez ce champ vide si vous ne souhaitez pas changer votre mot de passe</p>
       <div class="form-group">
-        <%= f.label :password %>
+        <%= f.label "Nouveau mot de passe" %>
         <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation %>
+        <%= f.label "Confirmation du mot de passe" %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
     </fieldset>
     <fieldset>
-      <p>You must enter your current password to make changes.</p>
+      <p>Vous devez entrer votre mot de passe actuel pour les changements des paramètres de votre profil.</p>
       <div class="form-group">
-        <%= f.label :current_password %>
+        <%= f.label "Mot de passe actuel" %>
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
-    <%= f.submit 'Update', :class => 'button right' %>
+    <%= f.submit 'Mettre à jour', :class => 'button right' %>
   <% end %>
 </div>
 <div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+<h3>Supprimer mon compte</h3>
+<p>Attention! L'action suivante est irréversible et entraine la suppression de toutes les données associées à votre compte (sites d'observations, relevés, etc.)</p>
+<%= button_to "Supprimer mon compte", registration_path(resource_name), :data => { :confirm => "Vous souhaitez supprimer votre compte? Attention cette action est irréversible" }, :method => :delete, :class => 'button right' %>
 </div>

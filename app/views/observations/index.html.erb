@@ -1,0 +1,53 @@
+<h1>Listing observations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Q0</th>
+      <th>Q1</th>
+      <th>Q2</th>
+      <th>Q3</th>
+      <th>Q4</th>
+      <th>Q5</th>
+      <th>Q6</th>
+      <th>Q7</th>
+      <th>Q8</th>
+      <th>Q9</th>
+      <th>Q10</th>
+      <th>P</th>
+      <th>Espece</th>
+      <th>Releve</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @observations.each do |observation| %>
+      <tr>
+        <td><%= observation.q0 %></td>
+        <td><%= observation.q1 %></td>
+        <td><%= observation.q2 %></td>
+        <td><%= observation.q3 %></td>
+        <td><%= observation.q4 %></td>
+        <td><%= observation.q5 %></td>
+        <td><%= observation.q6 %></td>
+        <td><%= observation.q7 %></td>
+        <td><%= observation.q8 %></td>
+        <td><%= observation.q9 %></td>
+        <td><%= observation.q10 %></td>
+        <td><%= observation.p %></td>
+        <td><%= observation.espece %></td>
+        <td><%= observation.releve %></td>
+        <td><%= link_to 'Show', observation %></td>
+        <td><%= link_to 'Edit', edit_observation_path(observation) %></td>
+        <td><%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Observation', new_observation_path %>

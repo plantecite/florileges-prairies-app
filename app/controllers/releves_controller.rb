@@ -1,10 +1,12 @@
 class RelevesController < ApplicationController
-  before_action :set_relefe, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  before_action :set_releve, only: [:show, :edit, :update, :destroy]
 
   # GET /releves
   # GET /releves.json
   def index
-    @releves = Releve.all
+    @site = Site.find(params[:site_id])
+    @releves = @site.releves
   end
 
   # GET /releves/1
@@ -14,7 +16,8 @@ class RelevesController < ApplicationController
 
   # GET /releves/new
   def new
-    @relefe = Releve.new
+    @site = Site.find(params[:site_id])
+    @releve = @site.releves.build
   end
 
   # GET /releves/1/edit
@@ -24,15 +27,16 @@ class RelevesController < ApplicationController
   # POST /releves
   # POST /releves.json
   def create
-    @relefe = Releve.new(relefe_params)
+    @site = Site.find(params[:site_id])
+    @releve = @site.releves.build(gestion_params)
 
     respond_to do |format|
-      if @relefe.save
-        format.html { redirect_to @relefe, notice: 'Releve was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @relefe }
+      if @releve.save
+        format.html { redirect_to site_releves_path, notice: 'Le relevé a été créé avec succès.' }
+        format.json { render action: 'show', status: :created, location: @releve }
       else
         format.html { render action: 'new' }
-        format.json { render json: @relefe.errors, status: :unprocessable_entity }
+        format.json { render json: @releve.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +45,12 @@ class RelevesController < ApplicationController
   # PATCH/PUT /releves/1.json
   def update
     respond_to do |format|
-      if @relefe.update(relefe_params)
-        format.html { redirect_to @relefe, notice: 'Releve was successfully updated.' }
+      if @releve.update(gestion_params)
+        format.html { redirect_to site_releves_path, notice: 'Le relevé a été mis à jour avec succès.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @relefe.errors, status: :unprocessable_entity }
+        format.json { render json: @releve.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +58,7 @@ class RelevesController < ApplicationController
   # DELETE /releves/1
   # DELETE /releves/1.json
   def destroy
-    @relefe.destroy
+    @releve.destroy
     respond_to do |format|
       format.html { redirect_to releves_url }
       format.json { head :no_content }
@@ -63,12 +67,13 @@ class RelevesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_relefe
-      @relefe = Releve.find(params[:id])
+    def set_releve
+      @site = Site.find(params[:site_id])
+      @releve = @site.releves.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def relefe_params
-      params.require(:relefe).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id)
+    def releve_params
+      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id)
     end
 end

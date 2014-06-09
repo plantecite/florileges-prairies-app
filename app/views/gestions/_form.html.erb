@@ -27,7 +27,7 @@
         <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
       </div>
       <div id="itineraire">
-        <div><h3>Intinéraire de culture de la prairie</h3></div>
+        <div><h3>Itinéraire de culture de la prairie</h3></div>
         <%= f.input :it_trav, label: "Travail du sol préalable à la mise en place de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
         <%= f.input :it_trav_freq, label: "Fréquence du travail du sol", collection: ["Aucun","À la mise en place","Régulier"] %>
         <%= f.input :it_trav_freq_reginfo, label: "Si régulier, à quelle fréquence pour le travail du sol" %>
@@ -54,19 +54,18 @@
         <h3>Mise en place de suivis</h3>
         <%= f.input :scp_info, as: :radio_buttons, label: "Avez-vous mise en place d'autres protocoles de suivis de la biodiversité?", collection: [["oui","1"],["non","0"]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'}   %>
         <%= f.input :scp_desc, label: "Si oui, lesquels...", placeholder: "(suivis Vigie Nature, etc.)" %>
-        <%= f.association :site, hidden: true %>
       </div>
     </div>
   </div>
   <div class="col-md-2">
-    <div class="bs-sidebar affix">
-      <div class="the-box-landing border-orange-topbottom" id="navbar"> Navigation
+    <div class="affix">
+      <div class="the-box-landing border-orange-topbottom" id="navbar">
         <!-- NAV MENU -->
         <ul class="nav scroll-nav">
-          <li class="active"><a href="#general"><span>Questions générales</span></a></li>
-          <li><a href="#historique"><span>Historique du site</span></a></li>
-          <li><a href="#itineraire"><span>Itinéraire de gestion</span></a></li>
-          <li><a href="#science-participative"><span>Autres suivis en cours</span></a></li>
+          <li class="active"><a href="#general"><span>1. Questions générales</span></a></li>
+          <li><a href="#historique"><span>2. Historique du site</span></a></li>
+          <li><a href="#itineraire"><span>3. Itinéraire de gestion</span></a></li>
+          <li><a href="#science-participative"><span>4. Autres suivis en cours</span></a></li>
         </ul>
         <!-- END NAV MENU -->
 
@@ -158,9 +157,9 @@ $("#navbar ul li a[href^='#']").on('click', function(e) {
 
    // animate
    $('html, body').animate({
-       scrollTop: $(this.hash).offset().top -500
+       scrollTop: $(this.hash).offset().top -50
      }, 1000, function(){
-       window.location.hash = hash -500
+       window.location.hash = hash -50
      })
 
 })
