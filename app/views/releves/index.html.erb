@@ -1,0 +1,47 @@
+<h1>Listing releves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Structure</th>
+      <th>Fonction</th>
+      <th>Time start</th>
+      <th>Time end</th>
+      <th>Hauteur</th>
+      <th>Milieux</th>
+      <th>User</th>
+      <th>Site</th>
+      <th>Gestion</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @releves.each do |releve| %>
+      <tr>
+        <td><%= releve.date %></td>
+        <td><%= releve.name %></td>
+        <td><%= releve.structure %></td>
+        <td><%= releve.fonction %></td>
+        <td><%= releve.time_start %></td>
+        <td><%= releve.time_end %></td>
+        <td><%= releve.hauteur %></td>
+        <td><%= releve.milieux %></td>
+        <td><%= releve.user %></td>
+        <td><%= releve.site %></td>
+        <td><%= releve.gestion %></td>
+        <td><%= link_to 'Show', releve %></td>
+        <td><%= link_to 'Edit', edit_releve_path(releve) %></td>
+        <td><%= link_to 'Destroy', releve, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Releve', new_releve_path %>

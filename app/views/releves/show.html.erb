@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @releve.date %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @releve.name %>
+</p>
+
+<p>
+  <strong>Structure:</strong>
+  <%= @releve.structure %>
+</p>
+
+<p>
+  <strong>Fonction:</strong>
+  <%= @releve.fonction %>
+</p>
+
+<p>
+  <strong>Time start:</strong>
+  <%= @releve.time_start %>
+</p>
+
+<p>
+  <strong>Time end:</strong>
+  <%= @releve.time_end %>
+</p>
+
+<p>
+  <strong>Hauteur:</strong>
+  <%= @releve.hauteur %>
+</p>
+
+<p>
+  <strong>Milieux:</strong>
+  <%= @releve.milieux %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @releve.user %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @releve.site %>
+</p>
+
+<p>
+  <strong>Gestion:</strong>
+  <%= @releve.gestion %>
+</p>
+
+<%= link_to 'Edit', edit_releve_path(@releve) %> |
+<%= link_to 'Back', releves_path %>

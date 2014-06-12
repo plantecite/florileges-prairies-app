@@ -11,7 +11,7 @@
 # end
 
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.plural 'releve', 'releves'
+  inflect.irregular 'releve', 'releves'
 end
 
 
