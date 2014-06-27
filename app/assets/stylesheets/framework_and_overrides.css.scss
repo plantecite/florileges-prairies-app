@@ -82,6 +82,11 @@ img {
   @extend .img-responsive;
   margin: 0 auto;
   }
+//
+.navbar {
+  min-height: 50px;
+  margin-bottom: 20px;
+}
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
@@ -119,7 +124,7 @@ main {
   background-color: #FFF;
   padding-bottom: 0px;
   width: 100%;
-  /* margin-top: 51px; // accommodate the navbar */
+  margin-top: -20px;
   }
 section {
   @extend .row;
@@ -162,3 +167,27 @@ section {
   @extend .btn-xs;
 }
 
+// Overwrite Nav Pills
+.nav-pills > li {
+  width: 55%;
+  float: relative;
+}
+
+.nav-pills > li > a {
+  border-radius: 50%;
+  width: 60px;
+  height:60px;
+  color: (243, 249, 249, 1); 
+  background-color: rgba(214, 238, 243, 1);
+}
+
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #ffffff;
+  background-color: #428bca;
+}

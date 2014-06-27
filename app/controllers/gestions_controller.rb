@@ -32,7 +32,7 @@
 
     respond_to do |format|
       if @gestion.save
-        format.html { redirect_to site_gestions_path, notice: 'Gestion was successfully created.' }
+        format.html { redirect_to sites_path, notice: 'La fiche de gestion a bien été créée.' }
         format.json { render action: 'show', status: :created, location: @gestion }
       else
         format.html { render action: 'new' }
@@ -46,7 +46,7 @@
   def update
     respond_to do |format|
       if @gestion.update(gestion_params)
-        format.html { redirect_to site_gestions_path, notice: 'Gestion was successfully updated.' }
+        format.html { redirect_to sites_path, notice: 'La fiche de gestion a bien été mise à jour.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

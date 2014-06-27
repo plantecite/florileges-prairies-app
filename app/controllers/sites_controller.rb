@@ -40,7 +40,7 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
     @site = Site.create(site_params)
-    @site.users << current_user
+    @site.ownerships.build(owner: 'true', user_id: current_user.id)
     respond_to do |format|
       if @site.save
         format.html { redirect_to @site, notice: 'Le site de la prairie a été crée avec succès.' }
