@@ -10,4 +10,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
 
+  after_create :assign_default_role
+
+  def assign_default_role
+    add_role(:user)
+  end
+
 end
