@@ -15,31 +15,28 @@
                 <div class="col-sm-6">
                   <h3><%= link_to site.name, site  %></h3>
                   <p><i><%= site.location %></i></p>
-                  <span class="hint"><b>Code: </b><%= site.code %> | <b>Créé par: </b><i>en cours...</i></span><hr>
-                  <% if can? :update, @sites %>
+                  <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
                     <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
                       <i class="glyphicon glyphicon-pencil"></i> Modifier
                     <% end %>
-                  <% end %>
                   
-                  <% if can? :destroy, @sites %>
                    <%= link_to site, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger btn-xs' do %>
                        <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
                     <% end %>
-                  <% end %>
                 </div>
                 <div class="col-sm-4">
-                  <div class="btn btn-warning btn-sm">
-                    <i class="fa fa-users"></i> Co-observateur
-                  </div>
+
                   <div class="btn btn-success btn-sm" data-toggle="modal" data-target="#mesGestions<%=site.id%>">
                     <i class="fa fa-list"></i>Fiche-gestion
                   </div>
-                  <hr>
                   <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
                       <i class="glyphicon glyphicon-pencil"></i> Fiche-relevés
                   </div>
-                  <!-- Modal -->
+                  <hr>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-users"></i> Co-observateur
+                  </div>
+                  <!-- Modal GESTION-->
                   <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -57,9 +54,9 @@
                           <% end %>
                           <div class="action">
                             <% unless site.gestions.empty? %>
-                              <%= link_to "Créer une nouvelle fiche de gestion", new_site_gestion_path(site), class:'btn btn-primary btn-lg center-block' %>
+                              <%= link_to "Créer une nouvelle fiche de gestion", new_site_gestion_path(site), class:'btn btn-success btn-lg center-block' %>
                             <% else %>
-                              <%= link_to "Créer votre première fiche de gestion pour cette prairie", new_site_gestion_path(site), class:'btn btn-primary btn-lg center-block'%>
+                              <%= link_to "Créer votre première fiche de gestion pour cette prairie", new_site_gestion_path(site), class:'btn btn-success btn-lg center-block'%>
                             <% end %>
                           </div>
                           
@@ -71,7 +68,40 @@
                       </div>
                     </div>
                   </div>
-                  <!-- End of Modal -->
+                  <!-- End of Modal GESTION-->
+                  <!-- Modal RELEVÉS-->
+                  <div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.name %></b> </h4>
+                        </div>
+                        <div class="modal-body">
+                          <% site.releves.each do |g| %>
+                          <div class="fields">
+                            <h4>Fiche-relevés en date du <%= g.gestion_date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4> 
+
+                          </div>
+                          <br>
+                          <% end %>
+                          <div class="action">
+                            <% unless site.releves.empty? %>
+                              <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
+                            <% else %>
+                              <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
+                            <% end %>
+                          </div>
+                          
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Modal RELEVÉS-->
                 </div>
               </div>
             </div>

@@ -1,10 +1,12 @@
 class RelevesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_releve, only: [:show, :edit, :update, :destroy]
 
   # GET /releves
   # GET /releves.json
   def index
-    @releves = Releve.all
+    @site = Site.find(params[:site_id])
+    @releves = @site.releves
   end
 
   # GET /releves/1
@@ -14,7 +16,8 @@ class RelevesController < ApplicationController
 
   # GET /releves/new
   def new
-    @releve = Releve.new
+    @site = Site.find(params[:site_id])
+    @releve = @site.releves.build
   end
 
   # GET /releves/1/edit
@@ -24,11 +27,12 @@ class RelevesController < ApplicationController
   # POST /releves
   # POST /releves.json
   def create
-    @releve = Releve.new(releve_params)
+    @site = Site.find(params[:site_id])
+    @releve = @site.releves.build(gestion_params)
 
     respond_to do |format|
       if @releve.save
-        format.html { redirect_to @releve, notice: 'Releve was successfully created.' }
+        format.html { redirect_to sites_path, notice: 'Votre fiche de relevés a bien été créée.' }
         format.json { render action: 'show', status: :created, location: @releve }
       else
         format.html { render action: 'new' }
@@ -42,7 +46,7 @@ class RelevesController < ApplicationController
   def update
     respond_to do |format|
       if @releve.update(releve_params)
-        format.html { redirect_to @releve, notice: 'Releve was successfully updated.' }
+        format.html { redirect_to sites_path, notice: 'Votre fiche de relevés a bien été mise à jour. ' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +68,8 @@ class RelevesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_releve
-      @releve = Releve.find(params[:id])
+      @site = Site.find(params[:site_id])
+      @releve = @site.releves.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

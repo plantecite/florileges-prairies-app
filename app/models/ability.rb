@@ -4,11 +4,11 @@ class Ability
   def initialize(user)
     @user = user || User.new # for guest
 
-    if user.admin?
+    if user.has_role? :admin
       can :manage, :all
     end
 
-    if user.user?
+    if user.has_role? :user
       can :manage, Site
     end
   end 
