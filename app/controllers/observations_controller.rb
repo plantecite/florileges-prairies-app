@@ -15,6 +15,7 @@ class ObservationsController < ApplicationController
   # GET /observations/new
   def new
     @observation = Observation.new
+    @observation.build_espece
   end
 
   # GET /observations/1/edit

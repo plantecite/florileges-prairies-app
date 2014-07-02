@@ -1,21 +1,197 @@
-<%= simple_form_for(@releve) do |f| %>
+<%= simple_form_for([@site, @releve], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
-
+<div class="row">
   <div class="form-inputs">
-    <%= f.input :date %>
-    <%= f.input :name %>
-    <%= f.input :structure %>
-    <%= f.input :fonction %>
-    <%= f.input :time_start %>
-    <%= f.input :time_end %>
-    <%= f.input :hauteur %>
-    <%= f.input :milieux %>
-    <%= f.association :user %>
-    <%= f.association :site %>
-    <%= f.association :gestion %>
+    <div class="col-md-6">
+      <%= f.input :name, label: "Nom de l'observateur", as: :string, input_html: { value: "#{current_user.name}" } %>
+      <div class="row">
+        <div class="col-md-6"><%= f.input :structure, label: "Structure", input_html: { value: "#{current_user.structure}" } %></div>
+        <div class="col-md-6"><%= f.input :fonction, label: "Fonction", input_html: { value: "#{current_user.fonction}" } %></div>
+      </div>
+      <%= f.association :user, as: :hidden %>
+      <%= f.association :site, as: :hidden %>
+      <%= f.input :hauteur, label: "Hauteur moyenne de la végétation:", collection: ["< 20cm","entre 20 et 50 cm","entre 50cm et 1m","> 1m"] %>
+      <%= f.input :milieux, label: "Milieu(x) dominant(s):" %>
+    </div>
+  <div class="col-md-6">
+    <%= f.association :gestion, label: "Associer ce relevé à la fiche gestion en date du:", :label_method => :gestion_date, :value_method => :id %>
+     <%= f.input :date, as: :string, label: "Date du relevé", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
+    <div class="row">
+      <div class="col-md-6"><%= f.input :time_start, label: "Heure de début du relevé", :as => :time_picker %></div>
+      <div class="col-md-6"><%= f.input :time_end, label: "Heure de fin du relevé",  :as => :time_picker %></div>
+    </div>
+
+  </div>
+  </div>
+</div>
+<div class="row">
+  <h3>Plantes du guide</h3>
+  <div class="observations">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            <i class="icon-calendar"></i>
+            Espèce
+          </th>
+          <th>
+            <i class="icon-pencil"></i>
+            Q1
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q2
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q3
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q4
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q5
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q6
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q7
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q8
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q9
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q10
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="observation_events">
+        <%= f.simple_fields_for :observations do |observation| %>
+          <%= render 'observation_fields', :f => observation %>
+        <% end %>
+      </tbody>
+    </table>
+  <hr>
+    <div id="links">
+      <%= link_to_add_association "ajouter une observation", f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" %>
+
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+</div>
+
+<div class="row">
+  <h3>Autres plantes observées</h3>
+  <input type='hidden' name='input' id='test' style="width: 500px;" />
+</div>
+
+<hr>
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
 <% end %>
+
+
+<script>
+  $(document).ready(function(){
+    $("#releve_date").datepicker({
+      language: 'fr',
+      startDate: '15-06-2014',
+      endDate: '15-07-2014'
+    });
+  })
+
+</script>
+
+<script>
+  $(document).ready(function() { 
+    $("#releve_milieux").select2({
+      tags:["Bois","Eau","Pelouse","Prairie","Bâti","Voie ferrée","Route","Chemin (piéton, vélo)","Culture, champs","Friche"],
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes"
+    });
+    $("#releve_hauteur").select2({
+      placeholder: "Sélectionner une valeur",
+      allowClear: true
+    });
+    $("#releve_gestion_id").select2({
+      placeholder: "Sélectionner une valeur",
+      allowClear: true
+    });
+    $("#guide_liste").select2({
+      placeholder: "Sélectionner une valeur",
+      allowClear: true
+    }); 
+  });
+</script>
+
+<script>
+/* setup cocoon nested forms insertion mode */
+$(document).ready(function() {
+  $('form')
+      .bind('cocoon:after-insert', function() {
+        /* ... do something ... */
+        $('select#guide_liste').select2({
+          placeholder: "Choisissez une plante...",
+          allowClear: true
+        });
+      });
+});
+
+</script>
+
+<script>
+var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
+var index = algolia.initIndex('Taxref');
+
+$(document).ready(function() {
+    $('#test').select2({
+        placeholder: 'Rechercher une plante...',
+        ajax: {
+            // Custom transport to call Algolia's API
+            transport: function(params) {
+                var q = params.data.query;
+                delete params.data.query;
+                index.search(q, function(success, content) {
+                    if (success) {
+                        params.success(content);
+                    }
+                }, params.data);
+            },
+            // build Algolia's query parameters
+            data: function(term, page) {
+                return { query: term, hitsPerPage: 10, page: (page - 1) };
+            },
+            // return Algolia's results
+            results: function(data, page) {
+                return { results: data.hits }
+            }
+        },
+        // build result using the highlighted attributes
+        formatResult: function(plante) { 
+            return "<div class='select2-user-result'>" +
+                plante._highlightResult.LB_NOM.value + 
+                '<br />' + 
+                '<small>' + contact._highlightResult.NOM_VERN.value + '</small>' +
+                "</div>"; 
+        },
+        formatSelection: function(plante) { 
+            return plante.LB_NOM; 
+        }
+    });
+});
+
+</script>

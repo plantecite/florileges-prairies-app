@@ -12,9 +12,9 @@ Bienvenue sur l'interface de saisie des données collectées dans le cadre de la
 	<div class="col-md-6 col-sm-6">
 		<div class="the-box-landing border-hover-bottom text-center">
 			<h4>CRÉER UN SITE</h4>
-			<a href="/plantes">
+			<%= link_to new_site_path do %>
 			<img src="http://d3ibatyzauff7b.cloudfront.net/assets/flat/features-geo-7b7de63eee9db38607bf2c14e7fe2bb1.png" class="small-icon" alt="Collections">
-			</a>
+			<% end %>	
 			<p>
 			Créer les prairies suivies avec le protocole FLORILÈGES
 			</p>
@@ -23,9 +23,9 @@ Bienvenue sur l'interface de saisie des données collectées dans le cadre de la
 	<div class="col-md-6 col-sm-6">
 		<div class="the-box-landing border-hover-bottom text-center">
 			<h4>VOIR LES SITES SUIVIS</h4>
-			<a href="/collections">
+			<%= link_to sites_path do %>
 			<img src="http://d3ibatyzauff7b.cloudfront.net/assets/flat/features-geo-7b7de63eee9db38607bf2c14e7fe2bb1.png" class="small-icon" alt="Collections">
-			</a>
+			<% end %>
 			<p>
 			Consulter l'ensemble des sites suivis et renseigner les fiches "Gestion" et "Relevés"
 			</p>

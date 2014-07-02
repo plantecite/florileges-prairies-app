@@ -1,0 +1,38 @@
+<tr class="nested-fields">
+  <td>
+    <%= f.input_field :espece_id, collection: @especes, :label_method => lambda { |espece| "#{espece.nom_sci} ( #{espece.nom_vern} )" }, value_method: :id, id: "guide_liste" %>
+  </td>
+  <td>
+    <%= f.input_field :q1, :as => :boolean, :wrapper => :checkbox %>
+  </td>
+  <td>
+    <%= f.input_field :q2, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q3, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q4, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q5, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q6, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q7, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q8, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q9, :as => :boolean %>
+  </td>
+  <td>
+    <%= f.input_field :q10, :as => :boolean %>
+  </td>
+  <td>
+	<%= link_to_remove_association "supprimer l'observation", f %>
+	</td>
+</tr>

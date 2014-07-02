@@ -18,6 +18,8 @@ class RelevesController < ApplicationController
   def new
     @site = Site.find(params[:site_id])
     @releve = @site.releves.build
+    @releve.observations.build
+    @especes=Espece.all
   end
 
   # GET /releves/1/edit
@@ -28,7 +30,8 @@ class RelevesController < ApplicationController
   # POST /releves.json
   def create
     @site = Site.find(params[:site_id])
-    @releve = @site.releves.build(gestion_params)
+    @releve = @site.releves.build(releve_params)
+    @especes=Espece.all
 
     respond_to do |format|
       if @releve.save
@@ -44,6 +47,7 @@ class RelevesController < ApplicationController
   # PATCH/PUT /releves/1
   # PATCH/PUT /releves/1.json
   def update
+    @especes=Espece.all
     respond_to do |format|
       if @releve.update(releve_params)
         format.html { redirect_to sites_path, notice: 'Votre fiche de relevés a bien été mise à jour. ' }
@@ -74,6 +78,6 @@ class RelevesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def releve_params
-      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id)
+      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id, observations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :espece_id, :releve_id, :_destroy])
     end
 end
