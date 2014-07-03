@@ -1,75 +1,18 @@
-<h1>Listing especes</h1>
+<h1>LISTE DES ESPÈCES DU GUIDE</h1>
+<div class="grid">
+<% @especes.each do |espece| %>
+<figure class="effect-lily">
+    <img src="img/3.jpg">
+  <figcaption>
+    <h2><i><%= espece.nom_sci %></i></h2>
+    <p><%= espece.nom_vern %></p>
+    <%= link_to "voir la fiche", espece_path(espece) %>
+  </figcaption>
+</figure>
+<% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Taxref</th>
-      <th>Bdtfx</th>
-      <th>Famille</th>
-      <th>Nom sci</th>
-      <th>Auteur</th>
-      <th>Annee</th>
-      <th>Nom sci complet</th>
-      <th>Nom vern</th>
-      <th>Avatar</th>
-      <th>Reconnaissance</th>
-      <th>Confusion</th>
-      <th>Habitat desc</th>
-      <th>Faune</th>
-      <th>Flo s</th>
-      <th>Flo i</th>
-      <th>Indic pel</th>
-      <th>Indic pra</th>
-      <th>Indic fri</th>
-      <th>Tol fau</th>
-      <th>Tol pat</th>
-      <th>Tol pie</th>
-      <th>Off nec</th>
-      <th>Off pol</th>
-      <th>Pollen</th>
-      <th>Hauteur</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @especes.each do |espece| %>
-      <tr>
-        <td><%= espece.taxref %></td>
-        <td><%= espece.bdtfx %></td>
-        <td><%= espece.famille %></td>
-        <td><%= espece.nom_sci %></td>
-        <td><%= espece.auteur %></td>
-        <td><%= espece.annee %></td>
-        <td><%= espece.nom_sci_complet %></td>
-        <td><%= espece.nom_vern %></td>
-        <td><%= espece.avatar %></td>
-        <td><%= espece.reconnaissance %></td>
-        <td><%= espece.confusion %></td>
-        <td><%= espece.habitat_desc %></td>
-        <td><%= espece.faune %></td>
-        <td><%= espece.flo_s %></td>
-        <td><%= espece.flo_i %></td>
-        <td><%= espece.indic_pel %></td>
-        <td><%= espece.indic_pra %></td>
-        <td><%= espece.indic_fri %></td>
-        <td><%= espece.tol_fau %></td>
-        <td><%= espece.tol_pat %></td>
-        <td><%= espece.tol_pie %></td>
-        <td><%= espece.off_nec %></td>
-        <td><%= espece.off_pol %></td>
-        <td><%= espece.pollen %></td>
-        <td><%= espece.hauteur %></td>
-        <td><%= link_to 'Show', espece %></td>
-        <td><%= link_to 'Edit', edit_espece_path(espece) %></td>
-        <td><%= link_to 'Destroy', espece, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
-<%= link_to 'New Espece', new_espece_path %>
+<%= link_to 'New Espece', new_espece_path, class: "btn btn-success" %>

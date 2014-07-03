@@ -4,6 +4,8 @@
   <li><%= link_to 'Inscription', new_user_registration_path %></li>
 <% end %>
 <% if user_signed_in? %>
-  <li><%= link_to 'Liste des espèces', especes_path %></li>
-  <li><a href="#">Blog d'entraide</a></li>
+	<% if current_user.has_role? :admin %>
+	  <li><%= link_to 'Liste des espèces', especes_path %></li>
+	  <li><%= link_to 'Liste des utilisateurs', users_path %></li>
+	<% end %>
 <% end %>
