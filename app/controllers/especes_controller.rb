@@ -4,7 +4,7 @@ class EspecesController < ApplicationController
   # GET /especes
   # GET /especes.json
   def index
-    @especes = Espece.all
+    @especes = Espece.all(:order => 'nom_sci ASC')
   end
 
   # GET /especes/1

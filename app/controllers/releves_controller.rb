@@ -19,7 +19,7 @@ class RelevesController < ApplicationController
     @site = Site.find(params[:site_id])
     @releve = @site.releves.build
     @releve.observations.build
-    @especes=Espece.all
+    @especes=Espece.all(:order => 'nom_sci ASC')
   end
 
   # GET /releves/1/edit
@@ -31,7 +31,7 @@ class RelevesController < ApplicationController
   def create
     @site = Site.find(params[:site_id])
     @releve = @site.releves.build(releve_params)
-    @especes=Espece.all
+    @especes=Espece.all(:order => 'nom_sci ASC')
 
     respond_to do |format|
       if @releve.save
@@ -47,7 +47,7 @@ class RelevesController < ApplicationController
   # PATCH/PUT /releves/1
   # PATCH/PUT /releves/1.json
   def update
-    @especes=Espece.all
+    @especes=Espece.all(:order => 'nom_sci ASC')
     respond_to do |format|
       if @releve.update(releve_params)
         format.html { redirect_to sites_path, notice: 'Votre fiche de relevés a bien été mise à jour. ' }
