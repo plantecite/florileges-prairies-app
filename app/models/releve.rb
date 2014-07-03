@@ -5,4 +5,6 @@ class Releve < ActiveRecord::Base
 
   has_many :observations
   accepts_nested_attributes_for :observations, :reject_if => :all_blank, :allow_destroy => true
+
+  validates_presence_of :date
 end

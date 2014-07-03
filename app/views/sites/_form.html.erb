@@ -9,12 +9,15 @@
   <div class="row">
     <div class="col-md-4">
       <div class="well">
-        <%= f.input :code %>
-        <%= f.input :name %>
-        <%= f.input :parc %>
+        <%= f.input :code, label: "Code de suivi" %>
+        <%= f.input :name, label: "Nom de la prairie" %>
         <%= f.hidden_field :latitude %>
         <%= f.hidden_field :longitude %>
-        <%= f.input :location %>
+        <%= f.input :location, label: "Localisation de la prairie" %>
+      </div>
+      <div class="well">
+        <%= f.input :ensoleillement, label: "Ensoleillement", collection: ["Ensoleillé","Ombragé"]  %>
+        <%= f.input :topographie, label: "Topographie", collection: ["Pas de dénivelé","Faible dénivelé","Fort dénivelé (prairie sur talus"]  %>
       </div>
       <div class="well">
         <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
@@ -24,6 +27,10 @@
 
     </div>
     <div class="col-md-8">
+      <div class="well">
+        <span><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
+        <span><p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p></span>
+      </div>
       <input id="pac-input" class="gmcontrols" type="text"
       placeholder="Saisir un lieu ou une adresse">
       <div id="type-selector" class="gmcontrols">
@@ -36,18 +43,30 @@
         <input type="radio" name="type" id="changetype-geocode">
         <label for="changetype-geocode">Adresses</label>
       </div>
-      <div id="map-canvas" style='width: auto; height: 400px;'></div>
+      <div id="map-canvas" style='width: auto; height: 475px;'></div>
             </div>
   </div>
 
   <div>
-    <%= f.submit class: 'btn btn-labeled btn-success' do %>
+    <%= f.submit "Enregistrer les modifications", class: 'btn btn-lg btn-labeled btn-success' do %>
       <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Enregistrer les modifications
     <% end %>
   </div>
   <br>
 <% end %>
 <hr>
+
+<script>
+  $(document).ready(function() { 
+    $("#site_ensoleillement").select2({
+      placeholder: "Sélectionner une valeur"
+    });
+  $(document).ready(function() { 
+    $("#site_topographie").select2({
+      placeholder: "Sélectionner une valeur"
+    });
+</script>
+
 
 <script type="text/javascript">
   handler = Gmaps.build('Google');
