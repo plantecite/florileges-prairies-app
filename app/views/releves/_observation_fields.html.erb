@@ -1,36 +1,36 @@
 <tr class="nested-fields">
   <td>
-    <%= f.input_field :espece_id, collection: @especes, :label_method => lambda { |espece| "#{espece.nom_sci} ( #{espece.nom_vern} )" }, value_method: :id, id: "guide_liste" %>
+    <%= f.select :espece_id, Espece.all.map { |e| ["#{e.nom_sci} ( #{e.nom_vern} )", e.id]}, include_blank: true %>
   </td>
   <td>
-    <%= f.input_field :q1, :as => :boolean, :wrapper => :checkbox %>
+    <%= f.input :q1, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q2, :as => :boolean %>
+    <%= f.input :q2, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q3, :as => :boolean %>
+    <%= f.input :q3, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q4, :as => :boolean %>
+    <%= f.input :q4, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q5, :as => :boolean %>
+    <%= f.input :q5, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q6, :as => :boolean %>
+    <%= f.input :q6, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q7, :as => :boolean %>
+    <%= f.input :q7, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q8, :as => :boolean %>
+    <%= f.input :q8, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q9, :as => :boolean %>
+    <%= f.input :q9, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-    <%= f.input_field :q10, :as => :boolean %>
+    <%= f.input :q10, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
 	<%= link_to_remove_association "supprimer l'observation", f %>

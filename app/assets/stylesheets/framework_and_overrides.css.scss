@@ -207,3 +207,14 @@ section {
             box-shadow: none;
     background: transparent !important;
 }
+.save-bottom {
+    color: #FFF;
+    background: none repeat scroll 0% 0% #33b6c6;
+    font-size: 40px;
+    line-height: 100%;
+    display: inline-block;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    padding: 0.05em;
+}

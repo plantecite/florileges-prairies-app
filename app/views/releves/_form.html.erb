@@ -83,13 +83,12 @@
         <%= f.simple_fields_for :observations do |observation| %>
           <%= render 'observation_fields', :f => observation %>
         <% end %>
+        <td colspan="12">
+          <%= link_to_add_association "ajouter une observation", f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" %>
+        </td>
       </tbody>
     </table>
   <hr>
-    <div id="links">
-      <%= link_to_add_association "ajouter une observation", f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" %>
-
-    </div>
   </div>
 
 </div>
@@ -100,11 +99,11 @@
 </div>
 
 <hr>
-<div class="form-actions">
-  <%= f.button :submit %>
+<div class="row form-actions">
+  <%= f.button :submit, "Enregistrer les modifications", class: "btn btn-danger" %>
 </div>
+<%= f.button :submit, "S", class: "save-bottom" %>
 <% end %>
-
 
 <script>
   $(document).ready(function(){
@@ -131,9 +130,10 @@
       placeholder: "Sélectionner une valeur",
       allowClear: true
     });
-    $("#guide_liste").select2({
-      placeholder: "Sélectionner une valeur",
-      allowClear: true
+    $("[id$=_espece_id]").select2({
+      placeholder: "Sélectionner une plante ...",
+      allowClear: true,
+      width: 'resolve'
     }); 
   });
 </script>
@@ -144,9 +144,10 @@ $(document).ready(function() {
   $('form')
       .bind('cocoon:after-insert', function() {
         /* ... do something ... */
-        $('select#guide_liste').select2({
-          placeholder: "Choisissez une plante...",
-          allowClear: true
+        $('[id$=_espece_id]').select2({
+          placeholder: "Sélectionner une plante ...",
+          allowClear: true,
+          width: 'resolve'
         });
       });
 });
