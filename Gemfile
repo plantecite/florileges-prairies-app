@@ -13,7 +13,7 @@ gem 'devise'
 gem 'figaro'
 gem 'pg'
 gem 'rolify'
-gem 'simple_form', github: 'zlx/simple_form_bootstrap3'
+gem 'simple_form'
 gem 'nested_form'
 gem "cocoon"
 gem 'thin'
