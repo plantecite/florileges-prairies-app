@@ -160,6 +160,7 @@ var index = algolia.initIndex('Taxref');
 
 $(document).ready(function() {
     $('#test').select2({
+        allowClear: true,
         placeholder: 'Rechercher une plante...',
         ajax: {
             // Custom transport to call Algolia's API
@@ -184,14 +185,17 @@ $(document).ready(function() {
         // build result using the highlighted attributes
         formatResult: function(plante) { 
             return "<div class='select2-user-result'>" +
-                plante._highlightResult.LB_NOM.value + 
-                '<br />' + 
-                '<small>' + contact._highlightResult.NOM_VERN.value + '</small>' +
+                '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
+                '<br />' +
+                ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
+                '<br />' +
+                'CD_REF: <small>' + plante.CD_REF + '</small>' +
                 "</div>"; 
         },
         formatSelection: function(plante) { 
             return plante.LB_NOM; 
-        }
+        },
+        id: function(plante) { return plante.CD_REF; }
     });
 });
 

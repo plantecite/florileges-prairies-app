@@ -7,5 +7,6 @@
 	<% if current_user.has_role? :admin %>
 	  <li><%= link_to 'Liste des espèces', especes_path %></li>
 	  <li><%= link_to 'Liste des utilisateurs', users_path %></li>
+	  <li><%= link_to 'Recherche TaxREF', '/recherche-taxref' %></li>
 	<% end %>
 <% end %>
