@@ -1,0 +1,98 @@
+<% content_for :title do %>Recherche instantanée<% end %>
+<% content_for :javascript_head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var index = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>').initIndex('Taxref');
+      var hitTemplate = '<div class="hit-instant-search well">' +
+        '<div class="taxon">'+
+        '<div id="nom-sci"><span>NOM SCIENTIFIQUE:</span> {{{_highlightResult.LB_NOM.value}}}</div>' +
+        '<div id="nom-vern"><span>NOM(S) VERNACULAIRE(S):</span> {{{_highlightResult.NOM_VERN.value}}}</div>' +
+        '<div id="ref"><span>CD_REF:</span> {{{CD_REF}}}  <span>|</span>  <span>NOM VALIDE:</span> {{{_highlightResult.NOM_VALIDE.value}}} </div>' +
+        '<div id="tax"><span>CLASSE:</span> {{{_highlightResult.CLASSE.value}}}  <span>|</span>  <span>FAMILLE:</span> {{{_highlightResult.FAMILLE.value}}}  <span>|</span>  <span>RANG:</span> {{{_highlightResult.RANG.value}}} </div>' +
+      '</div></div>';
+      var hitTemplateCompiled = Hogan.compile(hitTemplate);
+
+      function search(v) {
+        index.search(v, function(success, content) {
+          if (!success) {
+            console.log("Error: " + JSON.stringify(content));
+            return;
+          }
+          $('#process').html('');
+          $('#process').append('<fieldset><div class="processing_time pull-right">Temps de traitement: ' + content.processingTimeMS + 'ms</div>'+'<div class="nb_hits">Nombre de résultats: ' + content.nbHits + '</fieldset></div>');
+          $('#results').html('');
+          for (var i = 0; i < content.hits.length; ++i) {
+            $('#results').append(hitTemplateCompiled.render(content.hits[i]));
+          }
+        }, { hitsPerPage: 10 });
+      }
+
+      $('input#taxon').change(function() {
+        search($(this).val());
+      }).keyup(function(e) {
+        if (e.which == 27) {
+          $(this).val('').change();
+          return;
+        }
+        search($(this).val());
+      }).focus(function(){
+        $(this).attr("placeholder", "");
+      }).blur(function(){
+        $(this).attr("placeholder", "Saisir un nom scientifique ou un nom vernaculaire...");
+      }).focus();
+
+      $('.search-terms a').click(function(e) {
+        $("input#taxon").val($(this).text()).change().focus();
+      });
+
+      search('');
+    });
+  </script>
+
+<% end %>
+<div class="row">
+  <!-- Button trigger modal -->
+  <div class="btn btn-lg pull-centered" data-toggle="modal" data-target="#maDescription">
+    <h1>TAXREF 7 - Recherche instantanée (Plantes vasculaires)</h1>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="maDescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="maDescriptionLabel">Fonctionnement de la recherche instantanée</h4>
+        </div>
+        <div class="modal-body">
+          Une recherche "<code>Google-like</code>" sur le référentiel TAXREF 7: recherche plein-texte, approximation orthographique,...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<br>
+<div class="row">
+	<div class="input-group input-group-lg">
+  	<input type="text" class="form-control" name="taxon" placeholder="Entrez votre recherche ici..." id="taxon" autocomplete="off" spellcheck="false">
+  	<span class="input-group-addon  glyphicon glyphicon-search"></span>
+	</div>
+  <hr>
+
+</div>
+<div class="row"></div>
+
+<div id="process" class="small-3 columns">
+</div>
+
+<div id="results" class="small-9 columns end">
+</div>
+
+
+<script type="text/javascript">
+$('#example').popover(options)
+</script>
+

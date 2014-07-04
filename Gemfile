@@ -21,6 +21,10 @@ gem 'thin'
 gem 'geocoder'
 gem 'gmaps4rails'
 
+# Instant search on Home page
+gem 'algoliasearch-rails'
+gem 'hogan_assets'
+
 gem 'font-awesome-rails'
 gem 'icomoon-rails'
 gem 'bootstrap-datepicker-rails'

@@ -30,5 +30,7 @@
 //= require bootstrap-datetimepicker/locales/bootstrap-datetimepicker.fr.js
 //= require jquery_nested_form
 //= require cocoon
-//= require algoliasearch.min.js
 //= require_tree .
+//= require algolia/algoliasearch.min
+//= require algolia/typeahead.jquery
+//= require hogan

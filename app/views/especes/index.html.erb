@@ -1,4 +1,5 @@
 <h1>LISTE DES ESPÈCES DU GUIDE</h1>
+<%= link_to 'Ajouter une espèce', new_espece_path, class: "btn btn-success" %>
 <div class="grid">
 <% @especes.each do |espece| %>
 <figure class="effect-lily">
@@ -11,8 +12,3 @@
 </figure>
 <% end %>
 </div>
-
-
-<br>
-
-<%= link_to 'New Espece', new_espece_path, class: "btn btn-success" %>

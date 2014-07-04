@@ -14,6 +14,7 @@ PUrb::Application.routes.draw do
   root :to => "home#index"
 
 	get 'menupush', to: 'home#menupush'
+  get 'recherche-taxref', to: 'home#/recherche-taxref'
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
