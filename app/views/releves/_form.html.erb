@@ -84,7 +84,9 @@
           <%= render 'observation_fields', :f => observation %>
         <% end %>
         <td colspan="12">
-          <%= link_to_add_association "ajouter une observation", f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" %>
+          <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" do %>
+          <span class="fa fa-plus-circle"></span> ajouter une observation
+          <% end %>
         </td>
       </tbody>
     </table>
@@ -95,14 +97,19 @@
 
 <div class="row">
   <h3>Autres plantes observées</h3>
-  <input type='hidden' name='input' id='test' style="width: 500px;" />
+  <input type='hidden' name='input' id='test2' style="width: 500px;" />
+</div>
+
+<div class="row">
+  <h3>Encore des plantes</h3>
+  <input type='hidden' name='input' id='test2' style="width: 500px;" />
 </div>
 
 <hr>
 <div class="row form-actions">
-  <%= f.button :submit, "Enregistrer les modifications", class: "btn btn-danger" %>
+  <%= f.button :submit, "Enregistrer les modifications", class: " btn-danger" %>
 </div>
-<%= f.button :submit, "S", class: "save-bottom" %>
+  <%= f.button :submit, "S", class: "save-bottom" %>
 <% end %>
 
 <script>
@@ -159,9 +166,12 @@ var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<
 var index = algolia.initIndex('Taxref');
 
 $(document).ready(function() {
-    $('#test').select2({
+  $('input')
+    .bind('cocoon:after-insert', function() {
+    $("[id$=_espece_id]").select2({
         allowClear: true,
         placeholder: 'Rechercher une plante...',
+        width: 'resolve',
         ajax: {
             // Custom transport to call Algolia's API
             transport: function(params) {
@@ -197,6 +207,57 @@ $(document).ready(function() {
         },
         id: function(plante) { return plante.CD_REF; }
     });
+});
+});
+
+</script>
+
+<script>
+var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
+var index = algolia.initIndex('Taxref');
+
+$(document).ready(function() {
+  $('#test2').each(function() {
+    $(this).select2({
+      allowClear: true,
+      placeholder: 'Rechercher une plante...',
+      width: '700px',
+      ajax: {
+          // Custom transport to call Algolia's API
+          transport: function(params) {
+              var q = params.data.query;
+              delete params.data.query;
+              index.search(q, function(success, content) {
+                  if (success) {
+                      params.success(content);
+                  }
+              }, params.data);
+          },
+          // build Algolia's query parameters
+          data: function(term, page) {
+              return { query: term, hitsPerPage: 10, page: (page - 1) };
+          },
+          // return Algolia's results
+          results: function(data, page) {
+              return { results: data.hits }
+          }
+      },
+      // build result using the highlighted attributes
+      formatResult: function(plante) { 
+          return "<div class='select2-user-result'>" +
+              '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
+              '<br />' +
+              ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
+              '<br />' +
+              'CD_REF: <small>' + plante.FAMILLE + '</small>' +
+              "</div>"; 
+      },
+      formatSelection: function(plante) { 
+          return plante.LB_NOM; 
+      },
+      id: function(plante) { return plante.CD_REF; }
+  });
+});
 });
 
 </script>

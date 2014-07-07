@@ -64,7 +64,7 @@ class RelevesController < ApplicationController
   def destroy
     @releve.destroy
     respond_to do |format|
-      format.html { redirect_to releves_url }
+      format.html { redirect_to site_path(@site) }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,6 @@
 <h1>Saisie des données d'observations de la prairie </h1>
-<%= link_to 'Retourner à la liste des prairies sans enregistrer les modifications', sites_path, :class => "btn btn-primary" %>
+<%= link_to  sites_path, :class => "btn btn-primary" do %>
+<span class="fa fa-backward"> </span> Annuler la création de la fiche
+<% end %>
 <hr>
 <%= render 'form' %>

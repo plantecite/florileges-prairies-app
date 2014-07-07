@@ -390,7 +390,7 @@ a.btn.btn-default.btn-teplok:focus{
   box-shadow: 0px 1px 1px 0px rgba(82,82,82,0.49);
 }
 .section-page-landing.section-light-grey{
-  background: #f3f3f3;
+  background: #e4e4e4;
 }
 .section-page-landing.section-beige{
   background: #f3efe0;
@@ -1242,4 +1242,162 @@ figure.effect-lily:hover p {
   -webkit-transition-duration: 0.35s;
   transition-duration: 0.35s;
 }
+
+// BLOCK-LIST
+
+.list-block {
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+.list-block {
+    *zoom: 1;
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-in;
+    -moz-transition: all 300ms 0ms ease-in;
+    -o-transition: all 300ms 0ms ease-in;
+    transition: all 300ms 0ms ease-in;
+    position: relative;
+    opacity: 1;
+}
+
+// SITE FIGURE STYLE
+
+/* Common style */
+.site-focus figure {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  overflow: hidden;
+  margin: -0.135em;
+  width: 100%;
+  height: 400px;
+  background: #3085a3;
+  text-align: center;
+  cursor: pointer;
+}
+
+.site-focus figure img {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  opacity: 0.8;
+}
+
+.site-focus figure figcaption {
+  padding: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.site-focus figure figcaption::before,
+.site-focus figure figcaption::after {
+  pointer-events: none;
+}
+
+.site-focus figure figcaption,
+.site-focus figure a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.site-focus figure a {
+  z-index: 1000;
+  text-indent: 200%;
+  white-space: nowrap;
+  font-size: 0;
+  opacity: 0;
+}
+
+.site-focus figure h2 {
+  word-spacing: -0.15em;
+  
+  font-weight: 300;
+}
+
+.site-focus figure h2 span {
+  font-weight: 800;
+}
+
+.site-focus figure h2,
+.site-focus figure p {
+  margin: 0;
+}
+
+.site-focus figure p {
+  letter-spacing: 1px;
+  font-size: 68.5%;
+}
+
+/*---------------*/
+/***** Dexter *****/
+/*---------------*/
+
+figure.effect-dexter {
+  background: -webkit-linear-gradient(top, rgba(37,141,200,1) 0%, rgba(104,60,19,1) 100%);
+  background: linear-gradient(to bottom, rgba(37,141,200,1) 0%,rgba(104,60,19,1) 100%); 
+}
+
+figure.effect-dexter img {
+  -webkit-transition: opacity 0.35s;
+  transition: opacity 0.35s;
+}
+
+figure.effect-dexter:hover img {
+  opacity: 0.4;
+}
+
+figure.effect-dexter figcaption::after {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  left: 30px;
+  height: -webkit-calc(50% - 30px);
+  height: calc(50% - 30px);
+  border: 7px solid #fff;
+  content: '';
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+figure.effect-dexter:hover figcaption::after {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+figure.effect-dexter figcaption {
+  padding: 3em;
+  text-align: left;
+}
+
+figure.effect-dexter p {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  left: 60px;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(0,-100px,0);
+  transform: translate3d(0,-100px,0);
+}
+
+figure.effect-dexter:hover p {
+  opacity: 1;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
 

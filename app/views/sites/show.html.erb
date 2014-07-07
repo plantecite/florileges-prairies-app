@@ -6,28 +6,81 @@
 
 <p id="notice"><%= notice %></p>
 
+<!-- FOCUS -->
 <div class="row">
-  <div class="col-md-4">
-    <div class="well">
-      <p><strong>Code: </strong><%= @site.code %></p>
-      <p><strong>Name: </strong><%= @site.name %></p>
-      <p><strong>Parc: </strong><%= @site.parc %></p>
-      <p><strong>Latitude: </strong><%= @site.latitude %></p>
-      <p><strong>Longitude: </strong><%= @site.longitude %></p>
-      <p><strong>Location: </strong><%= @site.location %></p>
-    </div>
-    <hr>
-    <div>
-      <%= link_to new_site_gestion_path(@site), class:'btn btn-success' do %>
-        <i class="glyphicon glyphicon-pencil"></i> Ajouter une fiche de gestion à ce site
-      <% end %>
+  <div class="col-md-6">
+    <div class="site-focus">
+      <figure class="effect-dexter">
+        <%= image_tag @site.photo_url.to_s %>
+        <figcaption>
+          <h2><%= @site.name %></h2>
+          <p><strong>Code: </strong><%= @site.code %> <br>
+            <strong>Adresse: </strong><%= @site.location %> <br>
+            <strong>Coord GPS: </strong><%= @site.longitude %>,<%= @site.latitude %>
+          </p>
+          <%= link_to "edit", edit_site_path(@site) %>
+        </figcaption>
+      </figure>
     </div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-6">
     <div id="map-canvas" style='width: auto; height: 400px;'></div>
   </div>
 </div>
+<br>
+<!-- FICHES -->
+<div class="row">
+  <div class="col-md-4">
+    <div class="the-box-landing border-color-left">
+      <h3>FICHES DE GESTION</h3>
+    </div>
+    <div class="list-block">
+      <ul>
+      <% @site.gestions.each do |g| %>
+        <li>Fiche-gestion du <%= g.gestion_date %>  <%= link_to "edit", edit_site_gestion_path(@site,g) %> | <%= link_to "delete", site_gestion_path(@site,g), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete %> </li> 
+      <% end %>
+      </ul>
+      <br>
+      
+      <div class="action">
+        <% unless @site.gestions.empty? %>
+          <%= link_to "Créer une nouvelle fiche de gestion", new_site_gestion_path(@site), class:'btn btn-success center-block' %>
+        <% else %>
+          <%= link_to "Créer votre première fiche de gestion", new_site_gestion_path(@site), class:'btn btn-success center-block'%>
+        <% end %>
+      </div>
+    </div>  
+  </div>
 
+  <div class="col-md-4">
+    <div class="the-box-landing border-color-left">
+      <h3>FICHES DE RELEVÉS</h3>
+    </div>
+    <div class="list-block">
+      <ul>
+      <% @site.releves.each do |r| %>
+        <li>Fiche-relevés du <%= r.date %>  <%= link_to "edit", edit_site_releve_path(@site,r) %> | <%= link_to "delete", site_releve_path(@site,r), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete %> </li> 
+      <% end %>
+      </ul>
+      <br>
+      
+      <div class="action">
+        <% unless @site.releves.empty? %>
+          <%= link_to "Créer une nouvelle fiche de gestion", new_site_releve_path(@site), class:'btn btn-primary center-block' %>
+        <% else %>
+          <%= link_to "Créer votre première fiche de relevés", new_site_releve_path(@site), class:'btn btn-primary center-block'%>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+  
+  <div class="col-md-4">
+    <div class="the-box-landing border-color-left">
+      <h3>ESPÈCES PRÉSENTES</h3>
+    </div>
+  </div>
+</div>
+<br>
 <%= link_to sites_path, class:'btn btn-primary' do %>
   <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste des sites
 <% end %> 

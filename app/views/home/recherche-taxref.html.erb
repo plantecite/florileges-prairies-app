@@ -3,7 +3,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       var index = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>').initIndex('Taxref');
-      var hitTemplate = '<div class="hit-instant-search well">' +
+      var hitTemplate = '<div class="hit-instant-search list-block">' +
         '<div class="taxon">'+
         '<div id="nom-sci"><span>NOM SCIENTIFIQUE:</span> {{{_highlightResult.LB_NOM.value}}}</div>' +
         '<div id="nom-vern"><span>NOM(S) VERNACULAIRE(S):</span> {{{_highlightResult.NOM_VERN.value}}}</div>' +
