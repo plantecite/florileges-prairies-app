@@ -25,7 +25,7 @@
   </div>
 </div>
 <div class="row">
-  <h3>Plantes du guide</h3>
+  <h3>Plantes observées</h3>
   <div class="observations">
     <table class="table table-bordered">
       <thead>
@@ -92,21 +92,12 @@
 
 </div>
 
-<div class="row">
-  <h3>Autres plantes observées</h3>
-  <input type='hidden' name='input' id='test2' style="width: 500px;" />
-</div>
-
-<div class="row">
-  <h3>Encore des plantes</h3>
-  <input type='hidden' name='input' id='test2' style="width: 500px;" />
-</div>
-
 <hr>
-<div class="row form-actions">
-  <%= f.button :submit, "Enregistrer les modifications", class: " btn-danger" %>
+<div class="row">
+  <div class="col-md-12">
+    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-danger btn-lg' %>
+  </div>
 </div>
-  <%= f.button :submit, "S", class: "save-bottom" %>
 <% end %>
 
 <script>
@@ -178,7 +169,7 @@ $(document).ready(function() {
                 "</div>"; 
         },
         formatSelection: function(plante) { 
-            return plante.LB_NOM; 
+            return plante.NOM_VALIDE; 
         },
         id: function(plante) { return plante.CD_REF; }
     });
@@ -229,7 +220,7 @@ $(document).ready(function() {
                 "</div>"; 
         },
         formatSelection: function(plante) { 
-            return plante.LB_NOM; 
+            return plante.NOM_VALIDE; 
         },
         id: function(plante) { return plante.CD_REF; }
     });
