@@ -1,8 +1,6 @@
 <tr class="nested-fields">
   <td>
-<!--     <%= f.select :espece_id, Espece.all(:order => 'nom_sci ASC').map { |e| ["#{e.nom_sci} ( #{e.nom_vern} )", e.id]}, include_blank: true %>
-    <input type='hidden' name='input' id='test' style="width: 500px;" /> -->
-    <%= f.input :espece_id, as: :hidden %>
+    <%= f.input_field :espece_id %>
   </td>
   <td>
     <%= f.input :q1, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>

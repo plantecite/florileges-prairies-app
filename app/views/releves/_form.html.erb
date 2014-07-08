@@ -83,14 +83,11 @@
         <%= f.simple_fields_for :observations do |observation| %>
           <%= render 'observation_fields', :f => observation %>
         <% end %>
-        <td colspan="12">
-          <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-success" do %>
-          <span class="fa fa-plus-circle"></span> ajouter une observation
-          <% end %>
-        </td>
       </tbody>
     </table>
-  <hr>
+    <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "append", :partial => "observation_fields", :class => "btn btn-success" do %>
+      <span class="fa fa-plus-circle"></span> ajouter une observation
+    <% end %>
   </div>
 
 </div>
@@ -136,42 +133,20 @@
     $("#releve_gestion_id").select2({
       placeholder: "Sélectionner une valeur",
       allowClear: true
-    });
-    $("[id$=_espece_id]").select2({
-      placeholder: "Sélectionner une plante ...",
-      allowClear: true,
-      width: 'resolve'
     }); 
   });
 </script>
 
-<script>
-/* setup cocoon nested forms insertion mode */
-$(document).ready(function() {
-  $('form')
-      .bind('cocoon:after-insert', function() {
-        /* ... do something ... */
-        $('[id$=_espece_id]').select2({
-          placeholder: "Sélectionner une plante ...",
-          allowClear: true,
-          width: 'resolve'
-        });
-      });
-});
-
-</script>
 
 <script>
 var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
 var index = algolia.initIndex('Taxref');
 
 $(document).ready(function() {
-  $('input')
-    .bind('cocoon:after-insert', function() {
     $("[id$=_espece_id]").select2({
         allowClear: true,
         placeholder: 'Rechercher une plante...',
-        width: 'resolve',
+        width: '500px',
         ajax: {
             // Custom transport to call Algolia's API
             transport: function(params) {
@@ -208,56 +183,58 @@ $(document).ready(function() {
         id: function(plante) { return plante.CD_REF; }
     });
 });
-});
 
 </script>
+
 
 <script>
-var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
-var index = algolia.initIndex('Taxref');
+var algoliaNested = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
+var indexNested = algoliaNested.initIndex('Taxref');
 
 $(document).ready(function() {
-  $('#test2').each(function() {
-    $(this).select2({
-      allowClear: true,
-      placeholder: 'Rechercher une plante...',
-      width: '700px',
-      ajax: {
-          // Custom transport to call Algolia's API
-          transport: function(params) {
-              var q = params.data.query;
-              delete params.data.query;
-              index.search(q, function(success, content) {
-                  if (success) {
-                      params.success(content);
-                  }
-              }, params.data);
-          },
-          // build Algolia's query parameters
-          data: function(term, page) {
-              return { query: term, hitsPerPage: 10, page: (page - 1) };
-          },
-          // return Algolia's results
-          results: function(data, page) {
-              return { results: data.hits }
-          }
-      },
-      // build result using the highlighted attributes
-      formatResult: function(plante) { 
-          return "<div class='select2-user-result'>" +
-              '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
-              '<br />' +
-              ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
-              '<br />' +
-              'CD_REF: <small>' + plante.FAMILLE + '</small>' +
-              "</div>"; 
-      },
-      formatSelection: function(plante) { 
-          return plante.LB_NOM; 
-      },
-      id: function(plante) { return plante.CD_REF; }
+  $('form')
+      .bind('cocoon:after-insert', function() {
+    $("[id$=_espece_id]").select2({
+        allowClear: true,
+        placeholder: 'Rechercher une plante...',
+        width: 'resolve',
+        ajax: {
+            // Custom transport to call Algolia's API
+            transport: function(params) {
+                var q = params.data.query;
+                delete params.data.query;
+                indexNested.search(q, function(success, content) {
+                    if (success) {
+                        params.success(content);
+                    }
+                }, params.data);
+            },
+            // build Algolia's query parameters
+            data: function(term, page) {
+                return { query: term, hitsPerPage: 10, page: (page - 1) };
+            },
+            // return Algolia's results
+            results: function(data, page) {
+                return { results: data.hits }
+            }
+        },
+        // build result using the highlighted attributes
+        formatResult: function(plante) { 
+            return "<div class='select2-user-result'>" +
+                '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
+                '<br />' +
+                ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
+                '<br />' +
+                'CD_REF: <small>' + plante.CD_REF + '</small>' +
+                "</div>"; 
+        },
+        formatSelection: function(plante) { 
+            return plante.LB_NOM; 
+        },
+        id: function(plante) { return plante.CD_REF; }
+    });
   });
-});
 });
 
 </script>
+
