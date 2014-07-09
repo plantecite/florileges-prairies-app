@@ -17,6 +17,11 @@ gem 'simple_form'
 gem 'nested_form'
 gem "cocoon"
 gem 'thin'
+gem 'fog'
+gem 'sidekiq'
+gem 'slim', '>= 1.1.0'
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -35,6 +40,8 @@ gem 'acts-as-taggable-on'
 
 gem 'carrierwave'
 gem "mini_magick"
+gem 'carrierwave_backgrounder'
+gem 'carrierwave_direct'
 
 
 gem 'rails_12factor', group: :production
@@ -49,6 +56,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'jazz_hands'
 end
 group :test do
   gem 'capybara'

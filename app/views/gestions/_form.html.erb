@@ -49,6 +49,8 @@
         <%= f.input :it_gestion, label: "Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs", :as => :grouped_select, :collection => [["Fauche", ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]], ["Pâturage", ["Ovin","Caprin","Bovin","Équidé"]]], :group_method => :last, input_html: {:multiple => true} %>
         <%= f.input :it_pat_nb, label: "Pression de pâturage", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif" %>
         <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
+        </div>
+        <div id="calendrier">
         <h3>CALENDRIER DE GESTION</h3>
         <div class="row">
           <div class="col-md-6">
@@ -96,7 +98,7 @@
           <li class="active"><a href="#general"><span>1. Questions générales</span></a></li>
           <li><a href="#historique"><span>2. Historique du site</span></a></li>
           <li><a href="#itineraire"><span>3. Itinéraire de gestion</span></a></li>
-          <li><a href="#science-participative"><span>4. Autres suivis en cours</span></a></li>
+          <li><a href="#calendrier"><span>4. Calendrier et autres suivis</span></a></li>
         </ul>
         <!-- END NAV MENU -->
 
@@ -107,6 +109,12 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-10 btn btn-danger btn-lg' %>
   </div>
 </div>
 

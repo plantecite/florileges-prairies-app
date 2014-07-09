@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 PUrb::Application.routes.draw do
   
   resources :observations
@@ -18,4 +20,7 @@ PUrb::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
+
+  mount Sidekiq::Web => '/sidekiq'
+
 end
