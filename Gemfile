@@ -22,7 +22,7 @@ gem 'sidekiq'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 
-
+# GEO Gems
 gem 'geocoder'
 gem 'gmaps4rails'
 
@@ -30,6 +30,10 @@ gem 'gmaps4rails'
 gem 'algoliasearch-rails'
 gem 'hogan_assets'
 
+# SEARCH gems
+
+
+# DESIGN AND FORMS Gems
 gem 'font-awesome-rails'
 gem 'icomoon-rails'
 gem 'bootstrap-datepicker-rails'
@@ -38,6 +42,7 @@ gem 'bootstrap_form'
 gem 'select2-rails'
 gem 'acts-as-taggable-on'
 
+# IMAGES Gems
 gem 'carrierwave'
 gem "mini_magick"
 gem 'carrierwave_backgrounder'

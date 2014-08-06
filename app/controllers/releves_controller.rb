@@ -24,6 +24,7 @@ class RelevesController < ApplicationController
 
   # GET /releves/1/edit
   def edit
+    @especes=Espece.all(:order => 'nom_sci ASC')
   end
 
   # POST /releves
@@ -78,6 +79,6 @@ class RelevesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def releve_params
-      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id, observations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :espece_id, :releve_id, :_destroy])
+      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id, observations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :espece_id, :releve_id, :_destroy], taxrefobservations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :CD_REF, :CD_NOM, :LB_NOM, :NOM_VALIDE, :releve_id, :_destroy])
     end
 end

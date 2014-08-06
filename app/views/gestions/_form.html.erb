@@ -1,10 +1,12 @@
 <div class="row">
+  <%= link_to  sites_path, :class => "btn btn-danger" do %>
+    <span class="fa fa-backward"> </span> Annuler les modifications
+  <% end %>
   <div class="col-md-10">
   <%= simple_form_for([@site, @gestion], :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
       <div id="general">
-        <br>
         <h3>Questions générales</h3>
         <br>
         <div class="row">
@@ -101,20 +103,19 @@
           <li><a href="#calendrier"><span>4. Calendrier et autres suivis</span></a></li>
         </ul>
         <!-- END NAV MENU -->
-
-      </div>
-      <div class="the-box-landing border-orange-topbottom">
-        <div class="form-actions">
-          <%= f.submit "Enregistrer", class: 'btn btn-labeled btn-success' %>
-        </div>
       </div>
     </div>
   </div>
 </div>
-
+<br>
 <div class="row">
-  <div class="col-md-12">
-    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-10 btn btn-danger btn-lg' %>
+  <div class="col-md-3">
+  <%= link_to  sites_path, :class => "col-md-12 btn btn-danger btn-lg" do %>
+    <span class="fa fa-backward"> </span> Annuler les modifications
+  <% end %>
+  </div>
+  <div class="col-md-9">
+    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-9 btn btn-success btn-lg' %>
   </div>
 </div>
 

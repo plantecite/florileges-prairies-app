@@ -3,8 +3,9 @@
   <script type="text/javascript">
     $(document).ready(function() {
       var index = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>').initIndex('Taxref');
-      var hitTemplate = '<div class="hit-instant-search list-block">' +
+      var hitTemplate = '<div id="hits_{{{CD_NOM}}}" class="hit-instant-search list-block">' +
         '<div class="taxon">'+
+        '<div id="ref"><span>CD_NOM:</span> {{{CD_NOM}}}' +
         '<div id="nom-sci"><span>NOM SCIENTIFIQUE:</span> {{{_highlightResult.LB_NOM.value}}}</div>' +
         '<div id="nom-vern"><span>NOM(S) VERNACULAIRE(S):</span> {{{_highlightResult.NOM_VERN.value}}}</div>' +
         '<div id="ref"><span>CD_REF:</span> {{{CD_REF}}}  <span>|</span>  <span>NOM VALIDE:</span> {{{_highlightResult.NOM_VALIDE.value}}} </div>' +
@@ -83,7 +84,6 @@
   <hr>
 
 </div>
-<div class="row"></div>
 
 <div id="process" class="small-3 columns">
 </div>
@@ -96,3 +96,10 @@
 $('#example').popover(options)
 </script>
 
+<script>
+$("#call").click(function() {
+    var items = document.getElementsByClassName('hit-instant-search');
+    for (var i = 0; i < items.length; i++)
+        alert(items[i].id);
+});
+</script>

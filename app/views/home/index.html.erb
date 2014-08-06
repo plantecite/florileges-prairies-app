@@ -41,7 +41,9 @@ Bienvenue sur l'interface de saisie!
 			<h4>Retrouver l'ensemble des informations saisies depuis cette interface sur votre tableau de bord.</h4>
 		</div>
 		<div class="col-sm-3">
-		<a href="users/sign_up"><button class="btn btn-default btn-teplok btn-block btn-lg btn-purchase"><i class="fa fa-sign-in"></i> Consulter</button></a>
+		<%= link_to sites_path do %>
+		<button class="btn btn-default btn-teplok btn-block btn-lg btn-purchase"><i class="fa fa-sign-in"></i> Consulter</button>
+		<% end %>
 		</div>
 	</div>
 </div>

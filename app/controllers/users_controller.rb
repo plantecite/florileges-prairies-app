@@ -30,4 +30,12 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+
+  def generate_new_password_email
+    user = User.find(params[:user_id])
+    user.send_reset_password_instructions
+    flash[:notice] = "Les instructions de réinitialiation du mot de passe ont transmises à #{user.email}."
+    redirect_to admin_user_path(user)
+  end
+
 end

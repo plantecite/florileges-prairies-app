@@ -24,8 +24,9 @@
   </div>
   </div>
 </div>
+<!-- PLANTES DU GUIDE -->
 <div class="row">
-  <h3>Plantes observées</h3>
+  <h3>Plantes du guide</h3>
   <div class="observations">
     <table class="table table-bordered">
       <thead>
@@ -85,8 +86,79 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "append", :partial => "observation_fields", :class => "btn btn-success" do %>
-      <span class="fa fa-plus-circle"></span> ajouter une observation
+    <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-warning" do %>
+      <span class="fa fa-plus-circle"></span> ajouter une observation du guide
+    <% end %>
+  </div>
+
+</div>
+<!-- END OF PLANTES DU GUIDE -->
+
+
+<!-- AUTRES PLANTES -->
+<div class="row">
+  <h3>Plantes hors guide</h3>
+  <div class="observations">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            <i class="icon-calendar"></i>
+            Espèce
+          </th>
+          <th>
+            <i class="icon-pencil"></i>
+            Q1
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q2
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q3
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q4
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q5
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q6
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q7
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q8
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q9
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q10
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="taxrefobservation_events">
+        <%= f.simple_fields_for :taxrefobservations do |taxref| %>
+          <%= render 'taxrefobservation_fields', :f => taxref %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to_add_association f, :taxrefobservations, :"data-association-insertion-node" => "tbody#taxrefobservation_events", :"data-association-insertion-method" => "prepend", :partial => "taxrefobservation_fields", :class => "btn btn-primary" do %>
+      <span class="fa fa-plus-circle"></span> ajouter une observation TAXREF
     <% end %>
   </div>
 
@@ -95,7 +167,7 @@
 <hr>
 <div class="row">
   <div class="col-md-12">
-    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-danger btn-lg' %>
+    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-success btn-lg' %>
   </div>
 </div>
 <% end %>
@@ -125,58 +197,13 @@
       placeholder: "Sélectionner une valeur",
       allowClear: true
     }); 
-  });
-</script>
-
-
-<script>
-var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
-var index = algolia.initIndex('Taxref');
-
-$(document).ready(function() {
     $("[id$=_espece_id]").select2({
         allowClear: true,
-        placeholder: 'Rechercher une plante...',
-        width: '500px',
-        ajax: {
-            // Custom transport to call Algolia's API
-            transport: function(params) {
-                var q = params.data.query;
-                delete params.data.query;
-                index.search(q, function(success, content) {
-                    if (success) {
-                        params.success(content);
-                    }
-                }, params.data);
-            },
-            // build Algolia's query parameters
-            data: function(term, page) {
-                return { query: term, hitsPerPage: 10, page: (page - 1) };
-            },
-            // return Algolia's results
-            results: function(data, page) {
-                return { results: data.hits }
-            }
-        },
-        // build result using the highlighted attributes
-        formatResult: function(plante) { 
-            return "<div class='select2-user-result'>" +
-                '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
-                '<br />' +
-                ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
-                '<br />' +
-                'CD_REF: <small>' + plante.CD_REF + '</small>' +
-                "</div>"; 
-        },
-        formatSelection: function(plante) { 
-            return plante.NOM_VALIDE; 
-        },
-        id: function(plante) { return plante.CD_REF; }
+        placeholder: 'Sélectionner une plante du guide...',
+        width: '500px'
     });
-});
-
+  });
 </script>
-
 
 <script>
 var algoliaNested = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
@@ -185,10 +212,10 @@ var indexNested = algoliaNested.initIndex('Taxref');
 $(document).ready(function() {
   $('form')
       .bind('cocoon:after-insert', function() {
-    $("[id$=_espece_id]").select2({
+    $("[id$=_LB_NOM]").select2({
         allowClear: true,
-        placeholder: 'Rechercher une plante...',
-        width: 'resolve',
+        placeholder: 'Rechercher une plante parmi le référentiel TaxREF...',
+        width: '500px',
         ajax: {
             // Custom transport to call Algolia's API
             transport: function(params) {
@@ -220,9 +247,14 @@ $(document).ready(function() {
                 "</div>"; 
         },
         formatSelection: function(plante) { 
-            return plante.NOM_VALIDE; 
+            return plante.LB_NOM; 
         },
-        id: function(plante) { return plante.CD_REF; }
+        id: function(plante) { return plante.LB_NOM; }
+    });
+    $("[id$=_espece_id]").select2({
+        allowClear: true,
+        placeholder: 'Sélectionner une plante du guide...',
+        width: '500px'
     });
   });
 });

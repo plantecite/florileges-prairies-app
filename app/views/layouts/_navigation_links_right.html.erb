@@ -6,15 +6,15 @@
 			<span class="glyphicon glyphicon-pencil"></span> Modifier mon compte
 		<% end %>
   	</li>
-  	<li><a href="#">Tableau de bord</a></li>
+  	<!-- <li><a href="#">Tableau de bord</a></li> -->
     <li class="divider"></li>
     <li><%= link_to sites_path do %>
       Consulter mes prairies <span class="badge"><%= current_user.sites.count %> </span>
     <% end %></li>
-    <li><a href="#">Mes Co-observateurs</a></li>
+    <!-- <li><a href="#">Mes Co-observateurs</a></li> -->
     <li class="divider"></li>
-    <li><a href="#">Ajouter des co-observateurs</a></li>
-    <li class="divider"></li>
+    <!-- <li><a href="#">Ajouter des co-observateurs</a></li> -->
+    <!-- <li class="divider"></li> -->
     <li><%= link_to destroy_user_session_path, :method=>'delete' do %>
     	<span class="glyphicon glyphicon-remove-circle"></span> Déconnexion 
     	<% end %>

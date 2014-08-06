@@ -1,6 +1,6 @@
 <tr class="nested-fields">
   <td>
-    <%= f.input_field :espece_id %>
+    <%= f.input :espece_id, :label => false, collection: @especes, :label_method => lambda { |espece| "#{espece.nom_sci} ( #{espece.nom_vern} )" }, value_method: :id %>
   </td>
   <td>
     <%= f.input :q1, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>

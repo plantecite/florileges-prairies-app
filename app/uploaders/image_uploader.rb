@@ -2,12 +2,16 @@
 
 class ImageUploader < CarrierWave::Uploader::Base
 
+  # Background Jobs
+  # include ::CarrierWave::Backgrounder::Delay
+  
+  #Include Direct Uploads
+  # include CarrierWaveDirect::Uploader
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
-  # Background Jobs
-  include ::CarrierWave::Backgrounder::Delay
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
@@ -15,11 +19,15 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  # def store_dir
+  #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  # end
 
   process :resize_to_fit => [800, 800]
+
+  version :medium do
+    process :resize_to_fit => [315,315]
+  end
 
   version :thumb do
     process :resize_to_fill => [150,150]

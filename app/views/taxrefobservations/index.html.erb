@@ -1,0 +1,53 @@
+<h1>Listing taxrefobservations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Q0</th>
+      <th>Q1</th>
+      <th>Q2</th>
+      <th>Q3</th>
+      <th>Q4</th>
+      <th>Q5</th>
+      <th>Q6</th>
+      <th>Q7</th>
+      <th>Q8</th>
+      <th>Q9</th>
+      <th>Q10</th>
+      <th>P</th>
+      <th>Espece</th>
+      <th>Releve</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @taxrefobservations.each do |taxrefobservation| %>
+      <tr>
+        <td><%= taxrefobservation.q0 %></td>
+        <td><%= taxrefobservation.q1 %></td>
+        <td><%= taxrefobservation.q2 %></td>
+        <td><%= taxrefobservation.q3 %></td>
+        <td><%= taxrefobservation.q4 %></td>
+        <td><%= taxrefobservation.q5 %></td>
+        <td><%= taxrefobservation.q6 %></td>
+        <td><%= taxrefobservation.q7 %></td>
+        <td><%= taxrefobservation.q8 %></td>
+        <td><%= taxrefobservation.q9 %></td>
+        <td><%= taxrefobservation.q10 %></td>
+        <td><%= taxrefobservation.p %></td>
+        <td><%= taxrefobservation.espece %></td>
+        <td><%= taxrefobservation.releve %></td>
+        <td><%= link_to 'Show', taxrefobservation %></td>
+        <td><%= link_to 'Edit', edit_taxrefobservation_path(taxrefobservation) %></td>
+        <td><%= link_to 'Destroy', taxrefobservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Taxrefobservation', new_taxrefobservation_path %>

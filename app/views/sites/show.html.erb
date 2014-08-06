@@ -23,9 +23,31 @@
       </figure>
     </div>
   </div>
+  <!-- MAPS AND SKETCH -->
   <div class="col-md-6">
-    <div id="map-canvas" style='width: auto; height: 400px;'></div>
+    <ul class="nav nav-pills nav-justified" id="pillSites">
+      <li class="filter active"><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
+      <li class="filter"><a href="#sketch" data-toggle="pill"><h4 class="glyphicon glyphicon-picture"></h4></a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="carte">
+        <br>
+        <div id="map-canvas" style='width: auto; height: 315px;'></div>
+      </div> 
+      <div class="tab-pane" id="sketch">
+        <br>
+        <% if @site.plan? %>
+          <div class="frame-block">
+          <div style='width: auto; height: 315px;'> <%= image_tag @site.plan_url(:medium).to_s %> </div>
+          </div>
+        <% else %>
+          Pas d'image
+        <% end %>
+      </div>
+    </div>  
+
   </div>
+  <!-- END OF MAPS AND SKETCH -->
 </div>
 <br>
 <!-- FICHES -->
@@ -37,7 +59,14 @@
     <div class="list-block">
       <ul>
       <% @site.gestions.each do |g| %>
-        <li>Fiche-gestion du <%= g.gestion_date %>  <%= link_to "edit", edit_site_gestion_path(@site,g) %> | <%= link_to "delete", site_gestion_path(@site,g), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete %> </li> 
+        <li>
+        <%= link_to edit_site_gestion_path(@site,g) do%>
+         Fiche-gestion du <%= g.gestion_date %>  
+        <% end %> | 
+        <%= link_to site_gestion_path(@site,g), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete, class:'btn btn-danger btn-xs' do %> 
+        <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
+        <% end %>
+        </li> 
       <% end %>
       </ul>
       <br>
@@ -59,7 +88,14 @@
     <div class="list-block">
       <ul>
       <% @site.releves.each do |r| %>
-        <li>Fiche-relevés du <%= r.date %>  <%= link_to "edit", edit_site_releve_path(@site,r) %> | <%= link_to "delete", site_releve_path(@site,r), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete %> </li> 
+        <li>
+          <%= link_to edit_site_releve_path(@site,r) do %>
+          Fiche-relevés du <%= r.date %>
+          <% end %> | 
+          <%= link_to site_releve_path(@site,r), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete, class:'btn btn-danger btn-xs' do %>
+           <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
+          <% end %>  
+        </li> 
       <% end %>
       </ul>
       <br>

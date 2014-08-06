@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 PUrb::Application.routes.draw do
   
+  resources :taxrefobservations
+
   resources :observations
 
   resources :especes
@@ -20,6 +22,12 @@ PUrb::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
+
+  namespace :admin do  
+    resources :users, only: :show do
+       post :generate_new_password_email
+    end
+ end
 
   mount Sidekiq::Web => '/sidekiq'
 

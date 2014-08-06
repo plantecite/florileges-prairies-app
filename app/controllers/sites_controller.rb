@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = current_user.sites
+    @sites = current_user.sites(:order => 'name ASC')
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
@@ -84,6 +84,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:code, :name, :parc, :latitude, :longitude, :location, :password, :topographie, :ensoleillement, :photo, :public, :plan)
+      params.require(:site).permit(:code, :name, :parc, :latitude, :longitude, :location, :password, :topographie, :ensoleillement, :photo, :public, :plan, photo_attributes: [:id, :title, :image])
     end
 end

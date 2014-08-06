@@ -25,19 +25,34 @@ PUrb::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true  
+  # config.assets.debug = true  
 
-    config.action_mailer.smtp_settings = {
-      :address   => "smtp.mandrillapp.com",
-      :port      => 587,
-      :user_name => ENV["MANDRILL_USERNAME"],
-      :password  => ENV["MANDRILL_APIKEY"]
-    }
-  # ActionMailer Config
+  #   config.action_mailer.smtp_settings = {
+  #     :address   => "smtp.mandrillapp.com",
+  #     :port      => 587,
+  #     :user_name => ENV["MANDRILL_USERNAME"],
+  #     :password  => ENV["MANDRILL_APIKEY"]
+  #   }
+  # # ActionMailer Config
+  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.raise_delivery_errors = true
+  # # Send email in development mode?
+  # config.action_mailer.perform_deliveries = true
+
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.raise_delivery_errors = true
-  # Send email in development mode?
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :authentication => :plain,
+    :domain => 'gmail.com',
+    :user_name => 'gduhamel.pc@gmail.com',
+    :password => 'g@et3891'
+  }
 
 end

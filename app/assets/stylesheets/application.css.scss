@@ -455,7 +455,7 @@ a.btn.btn-default.btn-teplok:focus{
 .the-box-landing.border-darkgreen-right{border-right: 5px solid #388a5a;}
 
 .the-box-landing.border-orange-left{border-left: 5px solid #f8c43a;}
-.the-box-landing.border-orange-topbottom{border-top: 5px solid #f8c43a; border-bottom: 5px solid #f8c43a; background: #fde8b0;}
+.the-box-landing.border-orange-topbottom{border-top: 5px solid #f8c43a; border-bottom: 5px solid #f8c43a; background: #fde8b0; padding: 0px;}
 
 .the-box-landing.full{padding: 0px;}
 .the-box-landing.padd{padding: 10px;}
@@ -1263,6 +1263,21 @@ figure.effect-lily:hover p {
     opacity: 1;
 }
 
+.frame-block {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+.frame-block {
+    *zoom: 1;
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-in;
+    -moz-transition: all 300ms 0ms ease-in;
+    -o-transition: all 300ms 0ms ease-in;
+    transition: all 300ms 0ms ease-in;
+    position: relative;
+    opacity: 1;
+}
+
 // SITE FIGURE STYLE
 
 /* Common style */
@@ -1400,4 +1415,24 @@ figure.effect-dexter:hover p {
   transform: translate3d(0,0,0);
 }
 
+// ERROR NOTIFICATIONS
 
+.error-inline {
+  background: #8f1802;
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: 14px;
+  font-style: italic;
+  color: #fff;
+  height: 25px;
+}
+.error-message {
+  background: #8f1802;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}

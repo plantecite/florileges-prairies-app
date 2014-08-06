@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627215530) do
+ActiveRecord::Schema.define(version: 20140711133124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,16 @@ ActiveRecord::Schema.define(version: 20140627215530) do
     t.datetime "updated_at"
   end
 
+  create_table "photos", force: true do |t|
+    t.string   "title"
+    t.string   "image"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photos", ["site_id"], name: "index_photos_on_site_id", using: :btree
+
   create_table "releves", force: true do |t|
     t.date     "date"
     t.text     "name"
@@ -182,6 +192,30 @@ ActiveRecord::Schema.define(version: 20140627215530) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "taxrefobservations", force: true do |t|
+    t.boolean  "q0"
+    t.boolean  "q1"
+    t.boolean  "q2"
+    t.boolean  "q3"
+    t.boolean  "q4"
+    t.boolean  "q5"
+    t.boolean  "q6"
+    t.boolean  "q7"
+    t.boolean  "q8"
+    t.boolean  "q9"
+    t.boolean  "q10"
+    t.boolean  "p"
+    t.integer  "releve_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "CD_REF"
+    t.integer  "CD_NOM"
+    t.string   "LB_NOM"
+    t.string   "NOM_VALIDE"
+  end
+
+  add_index "taxrefobservations", ["releve_id"], name: "index_taxrefobservations_on_releve_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
