@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="row">
-          <p>Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui</p>
+          <div class="col-sm -12"><label>Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui</label></div>
           <div class="col-sm-6">
             <%= f.input :it_gestion_p, label: "Pâturage" %>
           </div>
@@ -78,8 +78,14 @@
             <%= f.input :it_gestion_f, label: "Fauchage" %>
           </div>
         </div>
-        <%= f.input :it_pat_nb, label: "Pression de pâturage (nombre de bêtes)", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif)" %>
-        <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage (en semaines) ", placeholder: "En semaines"%>
+        <div class="row">
+          <div class="col-sm-6">
+            <%= f.input :it_pat_nb, label: "Pression de pâturage (nombre de bêtes)", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif)" %>
+          </div>
+          <div class="col-sm-6">
+            <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage (en semaines) ", placeholder: "En semaines"%>
+          </div>
+        </div>
         </div>
         <div id="calendrier">
         <h3>CALENDRIER DE GESTION</h3>
@@ -195,26 +201,26 @@
       });
       $("#gestion_it_gestion_p").select2({
         placeholder: "Sélectionner une valeur",
-        tags: ["Ovin","Caprin","Bovin","Équidé"]
+        tags: ["Aucun","Ovin","Caprin","Bovin","Équidé"]
       });
       $("#gestion_it_gestion_f").select2({
         placeholder: "Sélectionner une valeur",
-        tags: ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]
+        tags: ["Aucun","Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]
       });
       $("#gestion_it_f_cal_prev").select2({
-        tags:["Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+        tags:["Pas de fauchage","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $("#gestion_it_p_cal_prev").select2({
-        tags:["Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+        tags:["Pas de pâturage","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $("#gestion_it_f_cal_current").select2({
-        tags:["Janvier","Février","Mars","Avril","Mai","Juin"],
+        tags:["Pas de fauchage","Janvier","Février","Mars","Avril","Mai","Juin"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $("#gestion_it_p_cal_current").select2({
-        tags:["Janvier","Février","Mars","Avril","Mai","Juin"],
+        tags:["Pas de pâturage","Janvier","Février","Mars","Avril","Mai","Juin"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $("#gestion_it_phyto_info").select2({
