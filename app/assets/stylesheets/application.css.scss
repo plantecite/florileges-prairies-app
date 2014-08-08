@@ -1100,7 +1100,7 @@ footer .footer{
   box-shadow: 0px -1px 1px 0px rgba(82,82,82,0.29);
 }
 
-// GRID WITH HOOVER EFFECTS
+// GRID WITH HOVER EFFECTS
 
 .grid {
   overflow: hidden;
@@ -1435,4 +1435,54 @@ figure.effect-dexter:hover p {
   font-weight: bold;
   text-align: center;
   color: #fff;
+}
+
+// HOVER HOME PAGE
+
+.hover-mix{
+  display:none;
+  height: 250px;
+  background: #ffffff;
+  text-align: center;
+  margin: 0;
+  float: left;
+  position:relative;
+}
+
+.hover-mix img{
+  height: 180px;
+  border-radius: 50%;
+}
+
+.hover-mix .des{
+  padding: 30px 10px;
+  background: #B3C833;
+  color: #fff;
+  height: 200px;
+  position: absolute;
+  top: -200px;
+  left: 0;
+  right: 0;
+  -webkit-transition:All 0.4s ease;
+  -moz-transition:All 0.4s ease;
+  -o-transition:All 0.4s ease;
+}
+
+.hover-mix .des h4{
+  padding: 0;
+  margin: 5px 0;
+}
+.hover-mix .des a i{
+  padding: 5.5px;
+  margin: 2px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.hover-mix:hover .des{
+  top: 0px;
 }

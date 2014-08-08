@@ -16,10 +16,10 @@
           </div>
           <div class="col-md-6">
             <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
-            <%= f.input :gen_struct, label: "Structure en charge des travaux" %>
+            <%= f.input :gen_struct, label: "Structure en charge des travaux", collection: ["Interne","Externe"] %>
           </div>
         </div>
-        <%= f.input :gen_surface, label: "Surface (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
+        <%= f.input :gen_surface, label: "Surface en m2 (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
         <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
         <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
       </div>
@@ -28,11 +28,32 @@
         <h3>Ce que vous savez de l'historique du site</h3>
         <br>
         <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-        <%= f.input :hist_date, label: "Date de création de la prairie", placeholder: "Février 2005, 2001, ..." %>
+        <div class="row">
+          <div class="col-sm-4" data-original-title="Année au format numérique (ex: 2010) ou plage d'années séparée par un trait d'union (ex: 2010-12 ou 2004-2005)" data-toggle="tooltip" data-placement="right">
+            <%= f.input :hist_date, label: "Année de création de la prairie", placeholder: "Année au format numérique" %>
+          </div>
+          <div class="col-sm-8">
+            <%= f.input :hist_cmt, label: "Commentaire sur création de la prairie", placeholder: "Description sommaire si disponible" %>
+          </div>
+        </div>
+        
         <%= f.input :hist_trav, label: "Travaux effectués sur l'emplacement de la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
-        <%= f.input :hist_trav_info, label: "Date et provenance des apports" %>
-        <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
-        <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:" %>
+        <div class="row">
+          <div class="col-sm-4" data-original-title="Mois et année au format numérique séparée par trait d'union (ex: 02-2013) ou année simple (ex: 2010) ou plage d'année séparée par trait d'union (ex: 2009-2011)" data-toggle="tooltip" data-placement="right">
+            <%= f.input :hist_trav_date, label: "Si apports, date approximative", placeholder: "Mois et année au format numérique" %>
+          </div>
+          <div class="col-sm-8">
+            <%= f.input :hist_trav_cmt, label: "Si apports, commentaire" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <%= f.input :hist_desc, label: "Historique de gestion de la prairie", placeholder: "fauche tardive, rotation sur plusieurs années, anciens traitements phytosanitaires, année de dernier traitement, etc." %>
+          </div>
+          <div class="col-sm-4" data-original-title="Année au format numérique (ex: 1993) ou plage d'année séparée par trait d'union (ex: 2009-2011)" data-toggle="tooltip" data-placement="left">
+            <%= f.input :hist_desc_date, label: "Jusqu'en quelle année:", placeholder: "Année au format numérique" %>
+          </div>
+        </div>
       </div>
       <div id="itineraire">
         <div><h3>Itinéraire de culture de la prairie</h3></div>
@@ -48,9 +69,17 @@
             <%= f.input :it_amend_freq_reginfo, label: "Si régulier, à quelle fréquence pour les amendements" %>
           </div>
         </div>
-        <%= f.input :it_gestion, label: "Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs", :as => :grouped_select, :collection => [["Fauche", ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]], ["Pâturage", ["Ovin","Caprin","Bovin","Équidé"]]], :group_method => :last, input_html: {:multiple => true} %>
-        <%= f.input :it_pat_nb, label: "Pression de pâturage", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif" %>
-        <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage"%>
+        <div class="row">
+          <p>Gestion de la prairie pour cette année, entre le dernier relevé et aujourd'hui</p>
+          <div class="col-sm-6">
+            <%= f.input :it_gestion_p, label: "Pâturage" %>
+          </div>
+          <div class="col-sm-6">
+            <%= f.input :it_gestion_f, label: "Fauchage" %>
+          </div>
+        </div>
+        <%= f.input :it_pat_nb, label: "Pression de pâturage (nombre de bêtes)", placeholder: "Nombre de bêtes (saisir un nombre entier même approximatif)" %>
+        <%= f.input :it_pat_duree, label: "Durée annuelle du pâturage (en semaines) ", placeholder: "En semaines"%>
         </div>
         <div id="calendrier">
         <h3>CALENDRIER DE GESTION</h3>
@@ -95,6 +124,10 @@
   <div class="col-md-2">
     <div class="affix">
       <div class="the-box-landing border-orange-topbottom" id="navbar">
+        <div style="text-align:center">
+          <%= f.submit 'ENREGISTRER', class: 'col-md-9 btn btn-success btn-sm' %>
+        </div>
+        <br>
         <!-- NAV MENU -->
         <ul class="nav scroll-nav">
           <li class="active"><a href="#general"><span>1. Questions générales</span></a></li>
@@ -102,6 +135,7 @@
           <li><a href="#itineraire"><span>3. Itinéraire de gestion</span></a></li>
           <li><a href="#calendrier"><span>4. Calendrier et autres suivis</span></a></li>
         </ul>
+        <br>
         <!-- END NAV MENU -->
       </div>
     </div>
@@ -138,6 +172,9 @@
       $("#gestion_gen_freq").select2({
         placeholder: "Sélectionner une valeur"
       });
+      $("#gestion_gen_struct").select2({
+        placeholder: "Sélectionner une valeur"
+      });
       $("#gestion_hist_occsol").select2({
         tags:["Bâti","Cultures","Industrie","Décharge","Boisement","Friche","Carrière"]
       });
@@ -156,8 +193,13 @@
       $("#gestion_it_amend_freq").select2({
         placeholder: "Sélectionner une valeur"
       });
-      $("#gestion_it_gestion").select2({
-        placeholder: "Sélectionner une valeur"
+      $("#gestion_it_gestion_p").select2({
+        placeholder: "Sélectionner une valeur",
+        tags: ["Ovin","Caprin","Bovin","Équidé"]
+      });
+      $("#gestion_it_gestion_f").select2({
+        placeholder: "Sélectionner une valeur",
+        tags: ["Rotofil","Lame","Tondeuse","Faux","Gyrobroyage","Fauche hippotractée"]
       });
       $("#gestion_it_f_cal_prev").select2({
         tags:["Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
@@ -183,10 +225,7 @@
         tags:["Cueillette","Pâturage et terriers par lapins et rongeurs","Incendies","Travaux sur parcelle"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
-
-      $("#aaa").select2({
-        tags:[]
-      });  
+      $('div').tooltip();  
     });
 </script>
 <script>

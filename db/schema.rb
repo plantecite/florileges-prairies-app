@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711133124) do
+ActiveRecord::Schema.define(version: 20140808120341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20140711133124) do
     t.integer  "gen_surface"
     t.string   "gen_freq",              default: "[]"
     t.string   "hist_date"
-    t.text     "hist_trav_info"
     t.text     "hist_desc"
     t.string   "hist_desc_date"
     t.string   "it_trav"
@@ -82,6 +81,11 @@ ActiveRecord::Schema.define(version: 20140711133124) do
     t.string   "it_amend_freq"
     t.string   "it_amend_freq_reginfo"
     t.string   "it_phyto_info"
+    t.text     "hist_cmt"
+    t.string   "hist_trav_date"
+    t.text     "hist_trav_cmt"
+    t.string   "it_gestion_p"
+    t.string   "it_gestion_f"
   end
 
   add_index "gestions", ["site_id"], name: "index_gestions_on_site_id", using: :btree
