@@ -3,7 +3,7 @@ class Gestion < ActiveRecord::Base
   belongs_to :site
 
   serialize :gen_obj
-	serialize :hist_occsol
+	serialize :hist_occsol 
 	serialize :hist_trav
 	serialize :it_trav_freq
 	serialize :it_trav_freq_reginfo
@@ -15,8 +15,8 @@ class Gestion < ActiveRecord::Base
 	before_save :standardise_date, :unless => :gestion_date?
 
 	validates_presence_of :gestion_date, :gen_surface, :gen_obj, :gen_freq, :hist_date, :it_trav, :it_amend, 
-	:it_f_cal_prev, :it_f_cal_current, :it_p_cal_prev, :it_p_cal_current, :it_phyto_info, 
-	:it_pression, :scp_desc, :site_id, :message => "le champ ci-dessus doit être rempli !"
+	:it_f_cal_prev, :it_f_cal_current, :it_p_cal_prev, :it_p_cal_current, 
+	:it_pression, :site_id, :message => "le champ ci-dessus doit être rempli !"
 
 	validates_inclusion_of :it_f_export,:it_phyto, :scp_info, :in => [TRUE, FALSE], :message => "le champ ci-dessus doit être rempli !"
 

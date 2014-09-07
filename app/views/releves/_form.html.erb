@@ -3,18 +3,18 @@
 <div class="row">
   <div class="form-inputs">
     <div class="col-md-6">
-      <%= f.input :name, label: "Nom de l'observateur", as: :string, input_html: { value: "#{current_user.name}" } %>
+      <%= f.input :name, label: "Nom de l'observateur", :as => :string, placeholder: "Saisir le nom de l'observateur..." %>
       <div class="row">
-        <div class="col-md-6"><%= f.input :structure, label: "Structure", input_html: { value: "#{current_user.structure}" } %></div>
-        <div class="col-md-6"><%= f.input :fonction, label: "Fonction", input_html: { value: "#{current_user.fonction}" } %></div>
+        <div class="col-md-6"><%= f.input :structure, label: "Structure", placeholder: "Saisir la structure de l'observateur..." %></div>
+        <div class="col-md-6"><%= f.input :fonction, label: "Fonction", placeholder: "Saisir sa fonction..." %></div>
       </div>
       <%= f.association :user, as: :hidden %>
       <%= f.association :site, as: :hidden %>
       <%= f.input :hauteur, label: "Hauteur moyenne de la végétation:", collection: ["< 20cm","entre 20 et 50 cm","entre 50cm et 1m","> 1m"] %>
-      <%= f.input :milieux, label: "Milieu(x) dominant(s):" %>
+      <%= f.input :milieux, label: "Milieu(x) bordant la prairie:" %>
     </div>
   <div class="col-md-6">
-    <%= f.association :gestion, label: "Associer ce relevé à la fiche gestion en date du:", :label_method => :gestion_date, :value_method => :id %>
+    <%= f.association :gestion, label: "Associer ce relevé à la fiche gestion en date du:", :label_method => lambda { |gestion| "Fiche-gestion n°#{gestion.id} (#{gestion.gestion_date})" }, :value_method => :id %>
      <%= f.input :date, as: :string, label: "Date du relevé", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
     <div class="row">
       <div class="col-md-6"><%= f.input :time_start, label: "Heure de début du relevé", :as => :time_picker %></div>
@@ -164,6 +164,17 @@
 
 </div>
 
+<!-- LIGNEUX -->
+
+
+<!-- END OF LIGNEUX -->
+
+
+<!-- TYPEAHEAD ALGOLIA TEST -->
+<hr>
+<input class="typeahead" type="text" placeholder="Recherche un plante parmi TaxREF 7...." id="taxref-search" spellcheck="false" />
+
+
 <hr>
 <div class="row">
   <div class="col-md-12">
@@ -176,8 +187,8 @@
   $(document).ready(function(){
     $("#releve_date").datepicker({
       language: 'fr',
-      startDate: '15-06-2014',
-      endDate: '15-07-2014'
+      startDate: '15-05-2014',
+      endDate: '15-08-2014'
     });
   })
 
@@ -198,20 +209,86 @@
       allowClear: true
     }); 
     $("[id$=_espece_id]").select2({
-        allowClear: true,
-        placeholder: 'Sélectionner une plante du guide...',
-        width: '500px'
+      allowClear: true,
+      placeholder: 'Sélectionner une plante du guide...',
+      width: '500px'
     });
   });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+  $('form')
+      .on('cocoon:after-insert', function() {
+      $("[id$=_espece_id]").select2({
+        allowClear: true,
+        placeholder: 'Sélectionner une espèce du guide...',
+        width: '500px'
+    });
+  });
+});
+</script>
+
+
+<!-- SCRIPT DE RECHERCHE TYPEAHEAD-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Replace the following values by your ApplicationID and ApiKey.
+    var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
+    // replace YourIndexName by the name of the index you want to query.
+    var index = algolia.initIndex('Taxref');
+
+    // Mustache templating by Hogan.js (http://mustache.github.io/)
+    var template = Hogan.compile('<div class="hit">' +
+      '<div class="name">' +
+        '{{{ _highlightResult.LB_NOM.value }}} ' +
+      '</div>' +
+      '{{#matchingAttributes}}' +
+        '<div class="attribute"><b>{{ attribute }}</b>: {{{ value }}}</div>' +
+      '{{/matchingAttributes}}' +
+      '</div>');
+
+    // typeahead.js initialization
+    $('form')
+      .on('cocoon:after-insert', function() {
+      $("[id$=_LB_NOM]").typeahead(null, {
+        source: index.ttAdapter({ hitsPerPage: 5 }),
+        displayKey: 'LB_NOM',
+        templates: {
+          suggestion: function(hit) {
+            // select matching attributes only
+            hit.matchingAttributes = [];
+            for (var attribute in hit._highlightResult) {
+              if (attribute === 'LB_NOM') {
+                // already handled by the template
+                continue;
+              }
+              // all others attributes that are matching should be added in the matchingAttributes array
+              // so we can display them in the dropdown menu. Non-matching attributes are skipped.
+              if (hit._highlightResult[attribute].matchLevel !== 'none') {
+                hit.matchingAttributes.push({ attribute: attribute, value: hit._highlightResult[attribute].value });
+              }
+            }
+
+            // render the hit using Hogan.js
+            return template.render(hit);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+
+
+<!-- SCRIPT DE RECHERCHE SELECT2-->
 <script>
-var algoliaNested = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
+// var algoliaNested = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
 var indexNested = algoliaNested.initIndex('Taxref');
 
 $(document).ready(function() {
   $('form')
-      .bind('cocoon:after-insert', function() {
+      .on('cocoon:after-insert', function() {
     $("[id$=_LB_NOM]").select2({
         allowClear: true,
         placeholder: 'Rechercher une plante parmi le référentiel TaxREF...',
@@ -250,11 +327,6 @@ $(document).ready(function() {
             return plante.LB_NOM; 
         },
         id: function(plante) { return plante.LB_NOM; }
-    });
-    $("[id$=_espece_id]").select2({
-        allowClear: true,
-        placeholder: 'Sélectionner une plante du guide...',
-        width: '500px'
     });
   });
 });

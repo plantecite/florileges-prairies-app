@@ -13,13 +13,14 @@
           <div class="col-md-6">
             <%= f.input :gestion_date, as: :string, label: "Date d'écriture de la fiche", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
             <%= f.input :gen_prop, label: "Propriétaire du site", :data => { :behaviour => "datepicker", :provide => "datepicker"}, placeholder: "Nom de la personne physique ou morale" %>
+            <%= f.input :gen_surface, label: "Surface de la prairie (en m2)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2 (même approximativement, donner une fourchette)" %>
           </div>
           <div class="col-md-6">
             <%= f.input :gen_gest, label: "Gestionnaire du site", placeholder: "Nom de la personne physique ou morale" %>
             <%= f.input :gen_struct, label: "Structure en charge des travaux", collection: ["Interne","Externe"] %>
+            <%= f.input :gen_struct_name, label: "Nom de la structure en charge des travaux"%>
           </div>
         </div>
-        <%= f.input :gen_surface, label: "Surface en m2 (même approximativement, donner une fourchette)", placeholder: "Saisir un nombre entier (200, 347,...), surface minimum 130 m2", hint: "en m2" %>
         <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie", placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs" %>
         <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["Nulle","Faible","Forte"] %>
       </div>
@@ -166,7 +167,7 @@
   $(document).ready(function(){
     $("#gestion_gestion_date").datepicker({
       language: 'fr',
-      startDate: 'd'
+      startDate: '15-05-2014'
     });
   })
 </script>
@@ -182,7 +183,7 @@
         placeholder: "Sélectionner une valeur"
       });
       $("#gestion_hist_occsol").select2({
-        tags:["Bâti","Cultures","Industrie","Décharge","Boisement","Friche","Carrière"]
+        tags:["Bâti","Cultures","Industrie","Décharge","Boisement","Friche","Carrière","Pelouse ou gazon"]
       });
       $("#gestion_hist_trav").select2({
         tags:["Aucun travaux","Apport de remblais","Apport de terre végétale"]
@@ -228,7 +229,7 @@
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $("#gestion_it_pression").select2({
-        tags:["Cueillette","Pâturage et terriers par lapins et rongeurs","Incendies","Travaux sur parcelle"],
+        tags:["Aucune pression non contrôlée","Cueillette","Pâturage et terriers par lapins et rongeurs","Incendies","Travaux sur parcelle"],
         placeholder: "Sélectionner une ou plusieurs valeur parmi la liste et/ou ajouter vos propres valeurs"
       });
       $('div').tooltip();  

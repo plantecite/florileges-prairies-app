@@ -11,24 +11,41 @@
       <div class="list-block">
         <%= f.input :code, label: "Code de suivi" %>
         <%= f.input :name, label: "Nom de la prairie" %>
-        <%= f.hidden_field :latitude %>
-        <%= f.hidden_field :longitude %>
+
         <%= f.input :location, label: "Localisation de la prairie" %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.input :latitude, label: "Latitude" %>
+          </div>
+          <div class="col-md-6">
+            <%= f.input :longitude, label: "Longitude" %>
+          </div>
+          </div>
       </div>
       <div class="list-block">
         <%= f.input :ensoleillement, label: "Ensoleillement", collection: ["Ensoleillé","Ombragé"]  %>
         <%= f.input :topographie, label: "Topographie", collection: ["Pas de dénivelé","Faible dénivelé","Fort dénivelé (prairie sur talus)"]  %>
       </div>
-
+      <% if @site.photo? %>
+        <div class="list-block">
+            <%= image_tag @site.photo_url(:thumb).to_s  %>
+            <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
+        </div>
+      <% else %>
       <div class="list-block">
         <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
       </div>
-
+      <% end %>
+      <% if @site.plan? %>
+        <div class="list-block">
+            <%= image_tag @site.plan_url(:thumb).to_s  %>
+            <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
+        </div>
+      <% else %>
       <div class="list-block">
-        <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter le plan du site' %>
+        <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
       </div>
-
-
+      <% end %>
     </div>
     <div class="col-md-8">
       <div class="list-block">
@@ -48,9 +65,8 @@
         <label for="changetype-geocode">Adresses</label>
       </div>
       <div id="map-canvas" style='width: auto; height: 475px;'></div>
-            </div>
+    </div>
   </div>
-
   <br>
   <div class="row">
     <div class="col-md-12">

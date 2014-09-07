@@ -10,4 +10,6 @@ class Releve < ActiveRecord::Base
   accepts_nested_attributes_for :taxrefobservations, :reject_if => :all_blank, :allow_destroy => true
 
   validates_presence_of :date
+
+
 end
