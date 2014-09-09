@@ -233,6 +233,8 @@ $(document).ready(function() {
 <!-- SCRIPT DE RECHERCHE TYPEAHEAD-->
 <script type="text/javascript">
   $(document).ready(function() {
+    $('form')
+      .on('cocoon:after-insert', function() {
     // Replace the following values by your ApplicationID and ApiKey.
     var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
     // replace YourIndexName by the name of the index you want to query.
@@ -249,8 +251,6 @@ $(document).ready(function() {
       '</div>');
 
     // typeahead.js initialization
-    $('form')
-      .on('cocoon:after-insert', function() {
       $("[id$=_LB_NOM]").typeahead(null, {
         source: index.ttAdapter({ hitsPerPage: 5 }),
         displayKey: 'LB_NOM',

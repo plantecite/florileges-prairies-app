@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.typeahead, .tt-query, .tt-hint { width: 500px; padding: 8px 12px; font-size: 24px; border: 2px solid #ccc; outline: none; margin: 0px; }
+.typeahead, .tt-query, .tt-hint { width: 500px; padding: 8px 12px; font-size: 20px; border: 2px solid #ccc; outline: none; margin: 0px; }
 .typeahead { background-color: #fff; }
 .typeahead:focus { border: 2px solid #0097cf; }
 .tt-query { -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
@@ -12,7 +12,7 @@
 .tt-suggestion.tt-cursor { color: #fff; background-color: #0097cf; }
 .tt-suggestion p { margin: 0; }
 .tt-suggestion a { color: #000; text-decoration: none; }
-.tt-suggestion em { font-weight: bold; font-style: normal; }
+.tt-suggestion strong { font-family:"open_sanssemibold"; color: #336ca6; font-style: normal; }
 .tt-suggestion .attribute { margin-left: 10px; }
 .tt-suggestion .attribute b { color: #666; }
 .tt-suggestion.tt-cursor .attribute b { color: white; }
