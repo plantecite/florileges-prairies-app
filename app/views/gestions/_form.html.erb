@@ -131,16 +131,13 @@
   <div class="col-md-2">
     <div class="affix">
       <div class="the-box-landing border-orange-topbottom" id="navbar">
-        <div style="text-align:center">
-          <%= f.submit 'ENREGISTRER', class: 'col-md-9 btn btn-success btn-sm' %>
-        </div>
-        <br>
         <!-- NAV MENU -->
         <ul class="nav scroll-nav">
           <li class="active"><a href="#general"><span>1. Questions générales</span></a></li>
           <li><a href="#historique"><span>2. Historique du site</span></a></li>
           <li><a href="#itineraire"><span>3. Itinéraire de gestion</span></a></li>
           <li><a href="#calendrier"><span>4. Calendrier et autres suivis</span></a></li>
+          <%= f.submit 'ENREGISTRER', class: 'col-md-9 btn btn-success btn-sm' %>
         </ul>
         <br>
         <!-- END NAV MENU -->
@@ -167,7 +164,7 @@
   $(document).ready(function(){
     $("#gestion_gestion_date").datepicker({
       language: 'fr',
-      startDate: '15-05-2014'
+      startDate: '01-01-2014'
     });
   })
 </script>
