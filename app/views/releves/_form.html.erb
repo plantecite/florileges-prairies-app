@@ -98,8 +98,8 @@
 <!-- AUTRES PLANTES -->
 <div class="row">
   <h3>Plantes hors guide</h3>
-  <div class="observations">
-    <table class="table table-bordered">
+  <div class="taxrefobservations">
+    <table class="table table-bordered" id="taxref-table">
       <thead>
         <tr>
           <th>
@@ -157,7 +157,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to_add_association f, :taxrefobservations, :"data-association-insertion-node" => "tbody#taxrefobservation_events", :"data-association-insertion-method" => "prepend", :partial => "taxrefobservation_fields", :class => "btn btn-primary" do %>
+    <%= link_to_add_association f, :taxrefobservations, :"data-association-insertion-node" => "tbody#taxrefobservation_events", :"data-association-insertion-method" => "append", :partial => "taxrefobservation_fields", :class => "btn btn-primary", :id => "add-taxref" do %>
       <span class="fa fa-plus-circle"></span> ajouter une observation TAXREF
     <% end %>
   </div>
@@ -168,11 +168,6 @@
 
 
 <!-- END OF LIGNEUX -->
-
-
-<!-- TYPEAHEAD ALGOLIA TEST -->
-<hr>
-<input class="typeahead" type="text" placeholder="Recherche un plante parmi TaxREF 7...." id="taxref-search" spellcheck="false" />
 
 
 <hr>
@@ -230,11 +225,10 @@ $(document).ready(function() {
 </script>
 
 
-<!-- SCRIPT DE RECHERCHE TYPEAHEAD-->
+
+<!-- AUTOCOMPLETE TAXREF ON LOAD-->
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('form')
-      .on('cocoon:after-insert', function() {
+  $('document').ready(function() {
     // Replace the following values by your ApplicationID and ApiKey.
     var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
     // replace YourIndexName by the name of the index you want to query.
@@ -243,15 +237,17 @@ $(document).ready(function() {
     // Mustache templating by Hogan.js (http://mustache.github.io/)
     var template = Hogan.compile('<div class="hit">' +
       '<div class="name">' +
-        '{{{ _highlightResult.LB_NOM.value }}} ' +
+        '<i>{{{ _highlightResult.LB_NOM.value }}}</i> ' +
+      '</div>' +
+      '<div class="name">' +
+        '{{{ _highlightResult.NOM_VERN.value }}} ' +
       '</div>' +
       '{{#matchingAttributes}}' +
         '<div class="attribute"><b>{{ attribute }}</b>: {{{ value }}}</div>' +
       '{{/matchingAttributes}}' +
       '</div>');
-
     // typeahead.js initialization
-      $("[id$=_LB_NOM]").typeahead(null, {
+      $(".typeahead").typeahead(null, {
         source: index.ttAdapter({ hitsPerPage: 5 }),
         displayKey: 'LB_NOM',
         templates: {
@@ -259,7 +255,7 @@ $(document).ready(function() {
             // select matching attributes only
             hit.matchingAttributes = [];
             for (var attribute in hit._highlightResult) {
-              if (attribute === 'LB_NOM') {
+              if (attribute === 'LB_NOM' || attribute === 'NOM_VERN') {
                 // already handled by the template
                 continue;
               }
@@ -275,61 +271,10 @@ $(document).ready(function() {
           }
         }
       });
-    });
-  });
-</script>
-
-
-
-<!-- SCRIPT DE RECHERCHE SELECT2-->
-<script>
-// var algoliaNested = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
-var indexNested = algoliaNested.initIndex('Taxref');
-
-$(document).ready(function() {
-  $('form')
-      .on('cocoon:after-insert', function() {
-    $("[id$=_LB_NOM]").select2({
-        allowClear: true,
-        placeholder: 'Rechercher une plante parmi le référentiel TaxREF...',
-        width: '500px',
-        ajax: {
-            // Custom transport to call Algolia's API
-            transport: function(params) {
-                var q = params.data.query;
-                delete params.data.query;
-                indexNested.search(q, function(success, content) {
-                    if (success) {
-                        params.success(content);
-                    }
-                }, params.data);
-            },
-            // build Algolia's query parameters
-            data: function(term, page) {
-                return { query: term, hitsPerPage: 10, page: (page - 1) };
-            },
-            // return Algolia's results
-            results: function(data, page) {
-                return { results: data.hits }
-            }
-        },
-        // build result using the highlighted attributes
-        formatResult: function(plante) { 
-            return "<div class='select2-user-result'>" +
-                '<i>'+plante._highlightResult.LB_NOM.value + '</i>'+
-                '<br />' +
-                ' <small>' + plante._highlightResult.NOM_VERN.value + '</small>' +
-                '<br />' +
-                'CD_REF: <small>' + plante.CD_REF + '</small>' +
-                "</div>"; 
-        },
-        formatSelection: function(plante) { 
-            return plante.LB_NOM; 
-        },
-        id: function(plante) { return plante.LB_NOM; }
-    });
-  });
 });
-
 </script>
+
+
+<!-- AUTOCOMPLETE TAXREF AFTER INSERT IN PROGRES-->
+
 
