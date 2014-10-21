@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907130937) do
+ActiveRecord::Schema.define(version: 20141021105620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,5 +250,24 @@ ActiveRecord::Schema.define(version: 20140907130937) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "woods", force: true do |t|
+    t.integer  "q1"
+    t.integer  "q2"
+    t.integer  "q3"
+    t.integer  "q4"
+    t.integer  "q5"
+    t.integer  "q6"
+    t.integer  "q7"
+    t.integer  "q8"
+    t.integer  "q9"
+    t.integer  "q10"
+    t.integer  "total"
+    t.integer  "releve_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "woods", ["releve_id"], name: "index_woods_on_releve_id", using: :btree
 
 end

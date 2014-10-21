@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 PUrb::Application.routes.draw do
   
+  resources :woods
+
   resources :taxrefobservations
 
   resources :observations

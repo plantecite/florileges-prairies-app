@@ -84,11 +84,13 @@
         <%= f.simple_fields_for :observations do |observation| %>
           <%= render 'observation_fields', :f => observation %>
         <% end %>
+        <span>
+          <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-warning" do %>
+            <span class="fa fa-plus-circle"></span> ajouter une observation du guide
+          <% end %> 
+        </span>
       </tbody>
     </table>
-    <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-warning" do %>
-      <span class="fa fa-plus-circle"></span> ajouter une observation du guide
-    <% end %>
   </div>
 
 </div>
@@ -155,19 +157,83 @@
         <%= f.simple_fields_for :taxrefobservations do |taxref| %>
           <%= render 'taxrefobservation_fields', :f => taxref %>
         <% end %>
+        <span>
+          <%= link_to_add_association f, :taxrefobservations, :"data-association-insertion-node" => "tbody#taxrefobservation_events", :"data-association-insertion-method" => "prepend", :partial => "taxrefobservation_fields", :class => "btn btn-primary", :id => "add-taxref" do %>
+            <span class="fa fa-plus-circle"></span> ajouter une observation TAXREF
+          <% end %>
+        </span>
       </tbody>
     </table>
-    <%= link_to_add_association f, :taxrefobservations, :"data-association-insertion-node" => "tbody#taxrefobservation_events", :"data-association-insertion-method" => "append", :partial => "taxrefobservation_fields", :class => "btn btn-primary", :id => "add-taxref" do %>
-      <span class="fa fa-plus-circle"></span> ajouter une observation TAXREF
-    <% end %>
+
   </div>
 
 </div>
 
 <!-- LIGNEUX -->
+<div class="row">
+  <h3>Présence de ligneux</h3>
+  <div class="taxrefobservations">
+    <table class="table table-bordered" id="taxref-table">
+      <thead>
+        <tr>
+          <th>
+            <i class="icon-calendar"></i>
+            
+          </th>
+          <th>
+            <i class="icon-pencil"></i>
+            Q1
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q2
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q3
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q4
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q5
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q6
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q7
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q8
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q9
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q10
+          </th>
+        </tr>
+      </thead>
+      <tbody id="wood_events">
+        <%= f.simple_fields_for :woods do |w| %>
+          <%= render 'wood_fields', :f => w %>
+        <% end %>
+      </tbody>
+    </table>
 
+  </div>
 
-<!-- END OF LIGNEUX -->
+</div>
+
+<!-- /LIGNEUX -->
 
 
 <hr>
@@ -212,22 +278,23 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+  // Will accure at document load
+  autocomplete();
+  alert('Document loaded');
+  // Will accure at every cocoon insertion
   $('form')
-      .on('cocoon:after-insert', function() {
-      $("[id$=_espece_id]").select2({
-        allowClear: true,
-        placeholder: 'Sélectionner une espèce du guide...',
-        width: '500px'
+  .on('cocoon:after-insert', function() {
+    alert('Cocoon Insertion');
+    autocomplete();
+    $("[id$=_espece_id]").select2({
+      allowClear: true,
+      placeholder: 'Sélectionner une espèce du guide...',
+      width: '500px'
     });
   });
 });
-</script>
 
-
-
-<!-- AUTOCOMPLETE TAXREF ON LOAD-->
-<script type="text/javascript">
-  $('document').ready(function() {
+function autocomplete() {
     // Replace the following values by your ApplicationID and ApiKey.
     var algolia = new AlgoliaSearch('<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>', '<%= ENV['ALGOLIASEARCH_SEARCH_ONLY_API_KEY'] %>');
     // replace YourIndexName by the name of the index you want to query.
@@ -246,7 +313,7 @@ $(document).ready(function() {
       '{{/matchingAttributes}}' +
       '</div>');
     // typeahead.js initialization
-      $(".typeahead").typeahead(null, {
+      $("[id$=_LB_NOM]").typeahead(null, {
         source: index.ttAdapter({ hitsPerPage: 5 }),
         displayKey: 'LB_NOM',
         templates: {
@@ -270,10 +337,6 @@ $(document).ready(function() {
           }
         }
       });
-});
+}
 </script>
-
-
-<!-- AUTOCOMPLETE TAXREF AFTER INSERT IN PROGRES-->
-
 

@@ -355,6 +355,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  algoliasearch
   algoliasearch-rails
   better_errors
   binding_of_caller

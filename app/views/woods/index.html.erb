@@ -1,0 +1,51 @@
+<h1>Listing woods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Q1</th>
+      <th>Q2</th>
+      <th>Q2</th>
+      <th>Q3</th>
+      <th>Q4</th>
+      <th>Q5</th>
+      <th>Q6</th>
+      <th>Q7</th>
+      <th>Q8</th>
+      <th>Q9</th>
+      <th>Q10</th>
+      <th>Total</th>
+      <th>Releve</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @woods.each do |wood| %>
+      <tr>
+        <td><%= wood.q1 %></td>
+        <td><%= wood.q2 %></td>
+        <td><%= wood.q2 %></td>
+        <td><%= wood.q3 %></td>
+        <td><%= wood.q4 %></td>
+        <td><%= wood.q5 %></td>
+        <td><%= wood.q6 %></td>
+        <td><%= wood.q7 %></td>
+        <td><%= wood.q8 %></td>
+        <td><%= wood.q9 %></td>
+        <td><%= wood.q10 %></td>
+        <td><%= wood.total %></td>
+        <td><%= wood.releve %></td>
+        <td><%= link_to 'Show', wood %></td>
+        <td><%= link_to 'Edit', edit_wood_path(wood) %></td>
+        <td><%= link_to 'Destroy', wood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Wood', new_wood_path %>

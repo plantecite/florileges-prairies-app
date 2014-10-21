@@ -33,7 +33,7 @@ gem 'algoliasearch-rails'
 gem 'hogan_assets'
 
 # SEARCH gems
-
+gem 'algoliasearch'
 
 # DESIGN AND FORMS Gems
 gem 'font-awesome-rails'

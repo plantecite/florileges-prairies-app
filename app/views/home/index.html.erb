@@ -10,23 +10,14 @@ Bienvenue sur l'interface de saisie!
 <!-- FEATURES COLUMN -->
 <div class="row" style="width:870px; margin:0 auto;">
 	<div class="col-md-6 col-sm-6">
-		<div class="the-box-landing" style="height:300px;">
-			<h4>CRÉER UNE PRAIRIE</h4>
-			<%= link_to new_site_path do %>
-				<img src="http://d3ibatyzauff7b.cloudfront.net/assets/flat/features-geo-7b7de63eee9db38607bf2c14e7fe2bb1.png" alt="praires-parc-sausset-lehane-2014">
-			<% end %>	
-		</div>
+		<%= link_to new_site_path, { :class => 'caption', :data => { :title => 'AJOUT PRAIRIE', :description => "Créer une nouvelle prairie suivie dans le cadre du volet 'Prairies urbaines' " } } do %>
+			<img src="images/prairies_add.jpg" alt="Ajout d'une prairie"/>
+		<% end %>	
 	</div>
 	<div class="col-md-6 col-sm-6">
-		<div class="the-box-landing border-hover-bottom text-center">
-			<h4>MES PRAIRIES SUIVIES</h4>
-			<%= link_to sites_path do %>
-			<img src="http://d3ibatyzauff7b.cloudfront.net/assets/flat/features-geo-7b7de63eee9db38607bf2c14e7fe2bb1.png" class="small-icon" style="margin:20px auto;" alt="Collections">
-			<% end %>
-			<p>
-			Consulter l'ensemble des sites suivis et renseigner les fiches "Gestion" et "Relevés"
-			</p>
-		</div>
+		<%= link_to sites_path, { :class => 'caption', :data => { :title => 'PRAIRIES SUIVIES', :description => "Consulter l'ensemble des sites suivis et renseigner les fiches 'Gestion' et 'Relevés'" } } do %>
+			<img src="images/prairies_search.jpg" alt="Consultations des prairies"/>
+		<% end %>	
 	</div>
 </div>
 <!-- END FEATURES COLUMN -->
