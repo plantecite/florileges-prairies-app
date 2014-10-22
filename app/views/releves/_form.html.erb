@@ -280,11 +280,11 @@
 $(document).ready(function() {
   // Will accure at document load
   autocomplete();
-  alert('Document loaded');
+  // alert('Document loaded');
   // Will accure at every cocoon insertion
   $('form')
   .on('cocoon:after-insert', function() {
-    alert('Cocoon Insertion');
+    // alert('Cocoon Insertion');
     autocomplete();
     $("[id$=_espece_id]").select2({
       allowClear: true,

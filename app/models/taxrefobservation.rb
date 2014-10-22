@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'algoliasearch'
-require 'JSON'
+require 'json'
 
 class Taxrefobservation < ActiveRecord::Base
   belongs_to :releve
