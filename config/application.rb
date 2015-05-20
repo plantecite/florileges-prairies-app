@@ -23,6 +23,18 @@ module FlorilegesPrairies
    config.assets.enabled = true  
    config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
+   console do
+     require "pry"
+     config.console = Pry
+     unless defined? Pry::ExtendCommandBundle
+       Pry::ExtendCommandBundle = Module.new
+     end
+     require "rails/console/app"
+     require "rails/console/helpers"
+     TOPLEVEL_BINDING.eval('self').extend ::Rails::ConsoleMethods
+   end
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
