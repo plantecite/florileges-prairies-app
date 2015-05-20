@@ -5,11 +5,11 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = current_user.sites(:order => 'name ASC')
+    @sites = current_user.sites(:order => 'code ASC')
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
-      marker.infowindow site.name
+      marker.infowindow site.code
     end
 
     @all_sites = Site.all
@@ -23,7 +23,6 @@ class SitesController < ApplicationController
           coordinates: [site.longitude.to_f, site.latitude.to_f]
         },
         properties: {
-          :name => site.name,
           :code => site.code,
           :'marker-color' => '#00607d',
           :'marker-symbol' => 'circle',
@@ -48,7 +47,7 @@ class SitesController < ApplicationController
     @hash = Gmaps4rails.build_markers(@site) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
-      marker.infowindow site.name
+      marker.infowindow site.code
     end
   end
 

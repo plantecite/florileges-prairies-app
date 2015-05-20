@@ -10,7 +10,6 @@
     <div class="col-md-4">
       <div class="list-block">
         <%= f.input :code, label: "Code de suivi" %>
-        <%= f.input :name, label: "Nom de la prairie" %>
 
         <%= f.input :location, label: "Adresse de la prairie" %>
         <div class="row">
@@ -21,10 +20,6 @@
             <%= f.input :longitude, label: "Longitude" %>
           </div>
           </div>
-      </div>
-      <div class="list-block">
-        <%= f.input :ensoleillement, label: "Ensoleillement", collection: ["Ensoleillé","Ombragé"]  %>
-        <%= f.input :topographie, label: "Topographie", collection: ["Pas de dénivelé","Faible dénivelé","Fort dénivelé (prairie sur talus)"]  %>
       </div>
       <% if @site.photo? %>
         <div class="list-block">

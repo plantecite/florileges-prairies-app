@@ -13,7 +13,7 @@
             <%= image_tag site.photo_url(:thumb).to_s, class: 'img-responsive img-circle'  %>
           </div>
           <div class="col-sm-6">
-            <h3><%= link_to site.name, site  %></h3>
+            <h3><%= link_to site.code, site  %></h3>
             <p><i><%= site.location %></i></p>
             <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
               <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
@@ -42,24 +42,9 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.name %></b> <i> (<%= site.parc %>) </i></h4>
+                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
                   </div>
                   <div class="modal-body">
-                    <% site.gestions.each do |g| %>
-                    <div class="fields">
-                      <h4>Fiche-gestion de l'année <%= g.gestion_date %> | <%= link_to "Modifier la fiche", edit_site_gestion_path(site,g) %> </h4> 
-
-                    </div>
-                    <br>
-                    <% end %>
-                    <div class="action">
-                      <% unless site.gestions.empty? %>
-                        <%= link_to "Créer une nouvelle fiche de gestion", new_site_gestion_path(site), class:'btn btn-success btn-lg center-block' %>
-                      <% else %>
-                        <%= link_to "Créer votre première fiche de gestion pour cette prairie", new_site_gestion_path(site), class:'btn btn-success btn-lg center-block'%>
-                      <% end %>
-                    </div>
-                    
 
                   </div>
                   <div class="modal-footer">
@@ -75,7 +60,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.name %></b> </h4>
+                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
                   </div>
                   <div class="modal-body">
                     <% site.releves.each do |g| %>
