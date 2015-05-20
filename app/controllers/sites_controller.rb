@@ -11,7 +11,36 @@ class SitesController < ApplicationController
       marker.lng site.longitude
       marker.infowindow site.name
     end
+
+    @all_sites = Site.all
+    @features = Array.new
+
+    @all_sites.each do |site|
+      @features << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [site.longitude.to_f, site.latitude.to_f]
+        },
+        properties: {
+          :name => site.name,
+          :code => site.code,
+          :'marker-color' => '#00607d',
+          :'marker-symbol' => 'circle',
+          :'marker-size' => 'medium'
+        }
+      }
+    end
+
+    @geojson = {type: "FeatureCollection", features: @features}
+
+    respond_to do |format|
+      format.html
+      format.geojson { render json: @geojson }
+    end
   end
+
+
 
   # GET /sites/1
   # GET /sites/1.json

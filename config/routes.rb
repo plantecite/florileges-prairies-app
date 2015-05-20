@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-PUrb::Application.routes.draw do
+FlorilegesPrairies::Application.routes.draw do
   
   resources :woods
 

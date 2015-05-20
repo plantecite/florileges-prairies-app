@@ -22,6 +22,8 @@ gem 'sidekiq'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'seed_dump'
+gem 'rename'
+gem 'rails-erd'
 
 
 # GEO Gems

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PUrb::Application.load_tasks
+FlorilegesPrairies::Application.load_tasks
