@@ -70,6 +70,6 @@ class ObservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def observation_params
-      params.require(:observation).permit(:q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :espece_id, :releve_id)
+      params.require(:observation).permit(:q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :releve_id, :created_at, :updated_at, :CD_NOM, :CD_REF, :LB_NOM, :NOM_VALIDE, :florileges, :TAXREF_V)
     end
 end

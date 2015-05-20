@@ -80,6 +80,6 @@ class RelevesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def releve_params
-      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :gestion_id, observations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :espece_id, :releve_id, :_destroy], taxrefobservations_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :CD_REF, :CD_NOM, :LB_NOM, :NOM_VALIDE, :releve_id, :_destroy], woods_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :total, :releve_id])
+      params.require(:releve).permit(:date, :name, :structure, :fonction, :time_start, :time_end, :hauteur, :milieux, :user_id, :site_id, :created_at, :updated_at, :semis, :fauche, :fauche_periode, :fauche_freq, :fauche_export, :paturage, :paturage_pression, :paturage_duree, :traitement, :pression, observations_attributes: [:q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :releve_id, :created_at, :updated_at, :CD_NOM, :CD_REF, :LB_NOM, :NOM_VALIDE, :florileges, :TAXREF_V, :_destroy], woods_attributes: [:id, :q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :total, :releve_id])
     end
 end

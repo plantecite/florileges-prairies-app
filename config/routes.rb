@@ -4,8 +4,6 @@ FlorilegesPrairies::Application.routes.draw do
   
   resources :woods
 
-  resources :taxrefobservations
-
   resources :observations
 
   resources :especes
