@@ -11,36 +11,44 @@
       <div class="list-block">
         <%= f.input :code, label: "Code de suivi" %>
 
-        <%= f.input :location, label: "Adresse de la prairie" %>
+        <% if @site.photo? %>
+          <%= image_tag @site.photo_url(:thumb).to_s  %>
+          <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
+        <% else %>
+          <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
+        <% end %>
+
+        <% if @site.plan? %>
+          <%= image_tag @site.plan_url(:thumb).to_s  %>
+          <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
+        <% else %>
+          <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
+        <% end %>
+
+        <%= f.input :location, label: "Adresse de la prairie", as: :hidden  %>
         <div class="row">
           <div class="col-md-6">
-            <%= f.input :latitude, label: "Latitude" %>
+            <%= f.input :latitude, label: "Latitude", as: :hidden %>
           </div>
           <div class="col-md-6">
-            <%= f.input :longitude, label: "Longitude" %>
+            <%= f.input :longitude, label: "Longitude", as: :hidden  %>
           </div>
           </div>
       </div>
-      <% if @site.photo? %>
-        <div class="list-block">
-            <%= image_tag @site.photo_url(:thumb).to_s  %>
-            <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
-        </div>
-      <% else %>
       <div class="list-block">
-        <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Questions générales</div>
+        <%= f.input :gen_gest, label: "Gestionaire du site (nom)" %>
+        <%= f.input :gen_surface, label: "Surface, même approximative (en m2)" %>
+        <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie" %>
       </div>
-      <% end %>
-      <% if @site.plan? %>
-        <div class="list-block">
-            <%= image_tag @site.plan_url(:thumb).to_s  %>
-            <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
-        </div>
-      <% else %>
       <div class="list-block">
-        <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Ce que vous savez de l'historique du site</div>
+
       </div>
-      <% end %>
+      <div class="list-block">
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Itinéraire de culture de la prairie</div>
+
+      </div>
     </div>
     <div class="col-md-8">
       <div class="list-block">
@@ -71,6 +79,69 @@
 <% end %>
 <hr>
 
+
+<script>
+  var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                    '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+  $('#site_gen_obj').selectize({
+        persist: false,
+        maxItems: null,
+        valueField: 'email',
+        labelField: 'name',
+        searchField: ['name', 'email'],
+        options: [
+            {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
+            {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
+            {email: 'someone@gmail.com'}
+        ],
+        render: {
+            item: function(item, escape) {
+                return '<div>' +
+                    (item.name ? '<span>' + escape(item.name) + '</span>' : '') +
+                    (item.email ? '<span>' + escape(item.email) + '</span>' : '') +
+                '</div>';
+            },
+            option: function(item, escape) {
+                var label = item.name || item.email;
+                var caption = item.name ? item.email : null;
+                return '<div>' +
+                    '<span>' + escape(label) + '</span>' +
+                    (caption ? '<span>' + escape(caption) + '</span>' : '') +
+                '</div>';
+            }
+        },
+        createFilter: function(input) {
+            var match, regex;
+
+            // email@address.com
+            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+            match = input.match(regex);
+            if (match) return !this.options.hasOwnProperty(match[0]);
+
+            // name <email@address.com>
+            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+            match = input.match(regex);
+            if (match) return !this.options.hasOwnProperty(match[2]);
+
+            return false;
+        },
+        create: function(input) {
+            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                return {email: input};
+            }
+            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+            if (match) {
+                return {
+                    email : match[2],
+                    name  : $.trim(match[1])
+                };
+            }
+            alert('Invalid email address.');
+            return false;
+        }
+    });
+</script>
+
 <script>
   $(document).ready(function() { 
     $("#site_ensoleillement").select2({
@@ -80,6 +151,11 @@
     $("#site_topographie").select2({
       allowClear: true,
       placeholder: "Sélectionner une valeur"
+    });
+    $("#site_gen_objs").select2({
+      allowClear: true,
+      placeholder: "Sélectionner une valeur",
+      tags:["Bois","Eau","Pelouse","Prairie","Bâti","Voie ferrée","Route","Chemin (piéton, vélo)","Culture, champs","Friche"]
     });
   });
 </script>
@@ -128,7 +204,7 @@
       position: myLatlng,
       map: map,
       draggable: true,
-      title: 'Cliquer pour zoomer sur <%= @site.name %>'
+      title: 'Cliquer pour zoomer sur <%= @site.code %>'
     });
     <% else  %>
       var site = new google.maps.Marker({

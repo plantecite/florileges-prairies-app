@@ -1,6 +1,6 @@
 <tr class="nested-fields">
   <td>
-    <%= f.input :espece_id, :label => false, collection: @especes, :label_method => lambda { |espece| "#{espece.nom_sci} ( #{espece.nom_vern} )" }, value_method: :id %>
+    <%= f.input_field :LB_NOM, placeholder: "Sélectionner une espèce parmi TaxRef 8...", :class => 'typeahead' %>
   </td>
   <td>
     <%= f.input :q1, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
@@ -33,6 +33,6 @@
     <%= f.input :q10, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>
   </td>
   <td>
-	<%= link_to_remove_association "supprimer l'observation", f %>
-	</td>
+  <%= link_to_remove_association "supprimer l'observation", f %>
+  </td>
 </tr>
