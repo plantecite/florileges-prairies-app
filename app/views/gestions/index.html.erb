@@ -1,8 +1,0 @@
-<h1>Liste des fiches de gestion</h1>
-
-<% @gestions.each do |gestion| %>
-  <p><%= gestion.id %> | <a href=<%= site_gestion_path(@site, gestion) %> > <%= gestion.gen_prop %> </a> </p>
-  <% end %>
-
-
-<%= link_to 'Ajouter une fiche de gestion', new_site_gestion_path(@site) %>

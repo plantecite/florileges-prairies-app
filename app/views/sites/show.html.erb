@@ -13,9 +13,8 @@
       <figure class="effect-dexter">
         <%= image_tag @site.photo_url.to_s %>
         <figcaption>
-          <h2><%= @site.name %></h2>
-          <p><strong>Code: </strong><%= @site.code %> <br>
-            <strong>Adresse: </strong><%= @site.location %> <br>
+          <h2><%= @site.code %></h2>
+          <p><strong>Adresse: </strong><%= @site.location %> <br>
             <strong>Coord GPS: </strong><%= @site.longitude %>,<%= @site.latitude %>
           </p>
           <%= link_to "edit", edit_site_path(@site) %>
@@ -57,27 +56,7 @@
       <h3>FICHES DE GESTION</h3>
     </div>
     <div class="list-block">
-      <ul>
-      <% @site.gestions.each do |g| %>
-        <li>
-        <%= link_to edit_site_gestion_path(@site,g) do%>
-         Fiche-gestion du <%= g.gestion_date %>  
-        <% end %> | 
-        <%= link_to site_gestion_path(@site,g), :data => { :confirm => "Attention cette action est irréversible! Confirmez-vous la suppresion de la fiche?" }, :method => :delete, class:'btn btn-danger btn-xs' do %> 
-        <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
-        <% end %>
-        </li> 
-      <% end %>
-      </ul>
-      <br>
-      
-      <div class="action">
-        <% unless @site.gestions.empty? %>
-          <%= link_to "Créer une nouvelle fiche de gestion", new_site_gestion_path(@site), class:'btn btn-success center-block' %>
-        <% else %>
-          <%= link_to "Créer votre première fiche de gestion", new_site_gestion_path(@site), class:'btn btn-success center-block'%>
-        <% end %>
-      </div>
+
     </div>  
   </div>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021105620) do
+ActiveRecord::Schema.define(version: 20150520212155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,52 +44,11 @@ ActiveRecord::Schema.define(version: 20141021105620) do
     t.integer  "hauteur"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "list_pra"
+    t.integer  "list_fri"
+    t.integer  "list_pel"
+    t.integer  "indic_nitro"
   end
-
-  create_table "gestions", force: true do |t|
-    t.date     "gestion_date"
-    t.string   "gen_prop"
-    t.string   "gen_gest"
-    t.string   "gen_struct"
-    t.integer  "gen_surface"
-    t.string   "gen_freq",              default: "[]"
-    t.string   "hist_date"
-    t.text     "hist_desc"
-    t.string   "hist_desc_date"
-    t.string   "it_trav"
-    t.string   "it_amend"
-    t.string   "it_gestion"
-    t.integer  "it_pat_nb"
-    t.string   "it_pat_duree"
-    t.string   "it_f_cal_prev"
-    t.string   "it_f_cal_current"
-    t.string   "it_p_cal_prev"
-    t.string   "it_p_cal_current"
-    t.boolean  "it_f_export"
-    t.boolean  "it_phyto"
-    t.string   "it_pression"
-    t.boolean  "scp_info"
-    t.text     "scp_desc"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "gen_obj"
-    t.string   "hist_occsol"
-    t.string   "hist_trav"
-    t.string   "it_trav_freq"
-    t.string   "it_trav_freq_reginfo"
-    t.string   "it_amend_freq"
-    t.string   "it_amend_freq_reginfo"
-    t.string   "it_phyto_info"
-    t.text     "hist_cmt"
-    t.string   "hist_trav_date"
-    t.text     "hist_trav_cmt"
-    t.string   "it_gestion_p"
-    t.string   "it_gestion_f"
-    t.string   "gen_struct_name"
-  end
-
-  add_index "gestions", ["site_id"], name: "index_gestions_on_site_id", using: :btree
 
   create_table "observations", force: true do |t|
     t.boolean  "q0"
@@ -104,13 +63,17 @@ ActiveRecord::Schema.define(version: 20141021105620) do
     t.boolean  "q9"
     t.boolean  "q10"
     t.boolean  "p"
-    t.integer  "espece_id"
     t.integer  "releve_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "CD_NOM"
+    t.integer  "CD_REF"
+    t.string   "LB_NOM"
+    t.string   "NOM_VALIDE"
+    t.boolean  "florileges"
+    t.string   "TAXREF_V"
   end
 
-  add_index "observations", ["espece_id"], name: "index_observations_on_espece_id", using: :btree
   add_index "observations", ["releve_id"], name: "index_observations_on_releve_id", using: :btree
 
   create_table "ownerships", force: true do |t|
@@ -142,12 +105,20 @@ ActiveRecord::Schema.define(version: 20141021105620) do
     t.string   "milieux"
     t.integer  "user_id"
     t.integer  "site_id"
-    t.integer  "gestion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "semis"
+    t.text     "fauche",            default: [], array: true
+    t.text     "fauche_periode",    default: [], array: true
+    t.text     "fauche_freq",       default: [], array: true
+    t.boolean  "fauche_export"
+    t.text     "paturage",          default: [], array: true
+    t.integer  "paturage_pression"
+    t.integer  "paturage_duree"
+    t.text     "traitement",        default: [], array: true
+    t.text     "pression",          default: [], array: true
   end
 
-  add_index "releves", ["gestion_id"], name: "index_releves_on_gestion_id", using: :btree
   add_index "releves", ["site_id"], name: "index_releves_on_site_id", using: :btree
   add_index "releves", ["user_id"], name: "index_releves_on_user_id", using: :btree
 
@@ -164,19 +135,29 @@ ActiveRecord::Schema.define(version: 20141021105620) do
 
   create_table "sites", force: true do |t|
     t.string   "code"
-    t.string   "name"
-    t.string   "parc"
     t.decimal  "latitude"
     t.decimal  "longitude"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password"
-    t.string   "topographie"
-    t.string   "ensoleillement"
     t.string   "photo"
     t.boolean  "public"
     t.string   "plan"
+    t.boolean  "propage"
+    t.string   "gen_freq"
+    t.string   "gen_gest"
+    t.text     "gen_obj",            default: [], array: true
+    t.integer  "gen_surface"
+    t.datetime "gestion_date"
+    t.string   "hist_date"
+    t.text     "hist_occsol",        default: [], array: true
+    t.text     "hist_trav",          default: [], array: true
+    t.text     "cult_amend",         default: [], array: true
+    t.text     "cult_amend_freq",    default: [], array: true
+    t.text     "cult_trav",          default: [], array: true
+    t.text     "cult_trav_freq",     default: [], array: true
+    t.text     "cult_trav_freqinfo", default: [], array: true
   end
 
   create_table "taggings", force: true do |t|
@@ -197,30 +178,6 @@ ActiveRecord::Schema.define(version: 20141021105620) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
-  create_table "taxrefobservations", force: true do |t|
-    t.boolean  "q0"
-    t.boolean  "q1"
-    t.boolean  "q2"
-    t.boolean  "q3"
-    t.boolean  "q4"
-    t.boolean  "q5"
-    t.boolean  "q6"
-    t.boolean  "q7"
-    t.boolean  "q8"
-    t.boolean  "q9"
-    t.boolean  "q10"
-    t.boolean  "p"
-    t.integer  "releve_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "CD_REF"
-    t.integer  "CD_NOM"
-    t.string   "LB_NOM"
-    t.string   "NOM_VALIDE"
-  end
-
-  add_index "taxrefobservations", ["releve_id"], name: "index_taxrefobservations_on_releve_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

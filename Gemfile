@@ -44,7 +44,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git'
 gem 'bootstrap_form'
 gem 'select2-rails'
-gem 'acts-as-taggable-on'
+gem "selectize-rails"
+gem 'acts-as-taggable-array-on'
 gem 'twitter-typeahead-rails'
 
 # IMAGES Gems
