@@ -1,121 +1,12 @@
-P Urb
+Florilèges - prairies
 =========
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+Cette application permet la saisie des données dans le cadre du volet "Prairies urbaines" du programme de sciences participatives naturalistes [Florilèges](http://www.florileges.info)
 
-Diagnostics
+Documentation
 -----------
 
-This application was built with recipes that are known to work together.
-
-This application was built with preferences that are NOT known to work
-together.
-
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include these diagnostics:
-
-We’d also like to know if you’ve found combinations of recipes or
-preferences that do work together.
-
-Recipes:
-
-* apps4
-* controllers
-* core
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* models
-* prelaunch
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* views
-
-Preferences:
-
-* git: true
-* apps4: none
-* dev_webserver: thin
-* prod_webserver: thin
-* database: postgresql
-* templates: erb
-* unit_test: rspec
-* integration: cucumber
-* continuous_testing: none
-* fixtures: factory_girl
-* frontend: bootstrap3
-* email: mandrill
-* authentication: devise
-* devise_modules: default
-* authorization: cancan
-* form_builder: simple_form
-* starter_app: admin_app
-* rvmrc: true
-* quiet_assets: true
-* local_env_file: figaro
-* better_errors: true
-* ban_spiders: true
-* github: true
-
-Ruby on Rails
--------------
-
-This application requires:
-
--   Ruby
--   Rails
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Database
---------
-
-This application uses PostgreSQL with ActiveRecord.
-
-Development
------------
-
--   Template Engine: ERB
--   Testing Framework: RSpec and Factory Girl and Cucumber
--   Front-end Framework: Bootstrap 3.0 (Sass)
--   Form Builder: SimpleForm
--   Authentication: Devise
--   Authorization: CanCan
--   Admin: None
-
-Email
------
-
-The application is configured to send email using a Mandrill account.
-
-Email delivery is disabled in development.
-
-Getting Started
----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Documentation and Support
--------------------------
-
-This is the only documentation.
-
-#### Issues
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Similar Projects
-----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+La documentation de cette application est cours de réalisation...
 
 Contributing
 ------------
@@ -134,9 +25,8 @@ me and I’ll add a note to the README so that others can find your work.
 Credits
 -------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Cette application a été réalisée par [Plante & Cité](http://www.plante-et-cite.fr)
 
 License
 -------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+GNU GENERAL PUBLIC LICENSE v2.0
