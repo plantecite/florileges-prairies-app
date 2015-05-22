@@ -91,8 +91,10 @@
       placeholder: "Sélectionner une valeur"
     });
     $("#site_gen_obj").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
       allowClear: true,
-      placeholder: "Sélectionner une valeur",
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
       tags:["Bois","Eau","Pelouse","Prairie","Bâti","Voie ferrée","Route","Chemin (piéton, vélo)","Culture, champs","Friche"]
     });
   });
