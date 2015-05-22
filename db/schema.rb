@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520212155) do
+ActiveRecord::Schema.define(version: 20150522090312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,15 +108,15 @@ ActiveRecord::Schema.define(version: 20150520212155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "semis"
-    t.text     "fauche",            default: [], array: true
-    t.text     "fauche_periode",    default: [], array: true
-    t.text     "fauche_freq",       default: [], array: true
     t.boolean  "fauche_export"
-    t.text     "paturage",          default: [], array: true
     t.integer  "paturage_pression"
     t.integer  "paturage_duree"
-    t.text     "traitement",        default: [], array: true
-    t.text     "pression",          default: [], array: true
+    t.string   "fauche"
+    t.string   "fauche_periode"
+    t.string   "fauche_freq"
+    t.string   "paturage"
+    t.string   "traitement"
+    t.string   "pression"
   end
 
   add_index "releves", ["site_id"], name: "index_releves_on_site_id", using: :btree
@@ -147,17 +147,17 @@ ActiveRecord::Schema.define(version: 20150520212155) do
     t.boolean  "propage"
     t.string   "gen_freq"
     t.string   "gen_gest"
-    t.text     "gen_obj",            default: [], array: true
     t.integer  "gen_surface"
     t.datetime "gestion_date"
     t.string   "hist_date"
-    t.text     "hist_occsol",        default: [], array: true
-    t.text     "hist_trav",          default: [], array: true
-    t.text     "cult_amend",         default: [], array: true
-    t.text     "cult_amend_freq",    default: [], array: true
-    t.text     "cult_trav",          default: [], array: true
-    t.text     "cult_trav_freq",     default: [], array: true
-    t.text     "cult_trav_freqinfo", default: [], array: true
+    t.string   "gen_obj"
+    t.string   "hist_occsol"
+    t.string   "hist_trav"
+    t.string   "cult_amend"
+    t.string   "cult_amend_freq"
+    t.string   "cult_trav"
+    t.string   "cult_trav_freq"
+    t.string   "cult_trav_freqinfo"
   end
 
   create_table "taggings", force: true do |t|

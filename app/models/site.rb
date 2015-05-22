@@ -10,9 +10,6 @@ class Site < ActiveRecord::Base
 
   accepts_nested_attributes_for :ownerships
 
-  acts_as_taggable_array_on :gen_obj
-  serialize :gen_obj, Array
-
   
 
 	# geocoded_by :location
