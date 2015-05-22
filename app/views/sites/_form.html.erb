@@ -7,7 +7,7 @@
 <%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="list-block">
         <%= f.input :code, label: "Code de suivi" %>
 
@@ -50,7 +50,7 @@
 
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="list-block">
         <span><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
         <span><p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p></span>
