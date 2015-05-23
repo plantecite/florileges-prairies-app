@@ -15,6 +15,8 @@ FlorilegesPrairies::Application.routes.draw do
 
   resources :sites
 
+  get 'tous-les-sites', to: 'sites#all'
+
   root :to => "home#index"
 
 	get 'menupush', to: 'home#menupush'

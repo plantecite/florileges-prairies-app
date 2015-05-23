@@ -39,6 +39,11 @@ class SitesController < ApplicationController
     end
   end
 
+  def all
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    @sites = Site.all
+    render json: @sites
+  end
 
 
   # GET /sites/1
