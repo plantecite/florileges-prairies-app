@@ -192,7 +192,7 @@ section {
   background-color: #428bca;
 }
 
-// Overwrite SELECT2 CSS input fields
+// Overwrite SELECT2 CSS 
 
 .select2-container-multi .select2-choices .select2-search-field input {
     padding: 5px;
@@ -218,3 +218,13 @@ section {
     bottom: 0px;
     padding: 0.05em;
 }
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: Century gothic;
+}
+
+
+// end of Overwrite SELECT2 CSS 

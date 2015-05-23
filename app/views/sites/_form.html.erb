@@ -7,24 +7,28 @@
 <%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="list-block">
         <%= f.input :code, label: "Code de suivi" %>
 
-        <% if @site.photo? %>
-          <%= image_tag @site.photo_url(:thumb).to_s  %>
-          <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
-        <% else %>
-          <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
-        <% end %>
-
-        <% if @site.plan? %>
-          <%= image_tag @site.plan_url(:thumb).to_s  %>
-          <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
-        <% else %>
-          <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
-        <% end %>
-
+        <div class="row">
+          <div class="col-md-6">
+            <% if @site.photo? %>
+              <%= image_tag @site.photo_url(:thumb).to_s  %>
+              <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
+            <% else %>
+              <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
+            <% end %>
+          </div>
+          <div class="col-md-6">
+            <% if @site.plan? %>
+              <%= image_tag @site.plan_url(:thumb).to_s  %>
+              <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
+            <% else %>
+              <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
+            <% end %>
+          </div>
+        </div>
         <%= f.input :location, label: "Adresse de la prairie", as: :hidden  %>
         <div class="row">
           <div class="col-md-6">
@@ -40,39 +44,53 @@
         <%= f.input :gen_gest, label: "Gestionaire du site (nom)" %>
         <%= f.input :gen_surface, label: "Surface, même approximative (en m2)" %>
         <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie" %>
-      </div>
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Ce que vous savez de l'historique du site</div>
-
-      </div>
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Itinéraire de culture de la prairie</div>
+        <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["nulle","faible","forte"] %>
 
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="list-block">
-        <span><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
+        <span style="font-size: 10px; color: #5B5B5B00"><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
         <span><p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p></span>
       </div>
       <input id="pac-input" class="gmcontrols" type="text"
       placeholder="Saisir un lieu ou une adresse">
-      <div id="type-selector" class="gmcontrols">
-        <input type="radio" name="type" id="changetype-all" checked="checked">
-        <label for="changetype-all">Tout</label>
 
-        <input type="radio" name="type" id="changetype-establishment">
-        <label for="changetype-establishment">Lieux</label>
-
-        <input type="radio" name="type" id="changetype-geocode">
-        <label for="changetype-geocode">Adresses</label>
-      </div>
       <div id="map-canvas" style='width: auto; height: 475px;'></div>
     </div>
   </div>
-  <br>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="list-block">
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Ce que vous savez de l'historique du site</div>
+          <%= f.input :hist_date, label: "Date de création de la prairie" %>
+          <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie" %>
+          <%= f.input :hist_trav, label: "Travaux préalables à la création de la prairie" %>
+      </div>
+      <div class="list-block">
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Lien avec les papillons</div>
+         <%= f.input :propage, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?" %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="list-block">
+        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Itinéraire de culture de la prairie</div>
+        <%= f.input :cult_trav, label: "Travail du sol préalable à la mise ne place de la prairie" %>
+        <%= f.input :cult_trav_freq, label: "Fréquence du travail du sol" %>
+        <%= f.input :cult_trav_freqinfo, label: "Si régulier, à quelle fréquence" %>
+        <%= f.input :cult_amend, label: "Amendement de la prairie" %>
+        <%= f.input :cult_amend_freq, label: "Fréquence de l'amendement" %>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to sites_path, class: "col-md-12 btn btn-danger btn-lg" do %>
+      <span class="fa fa-backward"></span> ANNULER
+      <% end %>
+    </div>
+    <div class="col-md-10">
       <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-success btn-lg' %>
     </div>
   </div>
@@ -97,21 +115,56 @@
       placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
       tags:["Bois","Eau","Pelouse","Prairie","Bâti","Voie ferrée","Route","Chemin (piéton, vélo)","Culture, champs","Friche"]
     });
+    $("#site_gen_freq").select2({
+      allowClear: true,
+      placeholder: "Sélectionner une valeur"
+    });
+    $("#site_hist_occsol").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["bâti","culture","industrie","décharge","boisement","friche","carrière","gazon"]
+    });
+    $("#site_hist_trav").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["aucun travaux","apport de remblais","apport de terre végétale"]
+    });
+    $("#site_cult_trav").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["aucun","labour","hersage","étrépage"]
+    });
+    $("#site_cult_trav_freq").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["aucun","à la mise en place","régulier"]
+    });
+    $("#site_cult_amend").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["aucun","fumier","compost","engrais organique","engrais chimique"]
+    });
+    $("#site_cult_amend_freq").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      allowClear: true,
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      tags:["aucun","à la mise en place","régulier"]
+    });
+
   });
 </script>
 
-
-<script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>, {draggable: true});
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
-
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
 
 <script>
   function initialize() {
