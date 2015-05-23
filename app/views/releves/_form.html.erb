@@ -2,7 +2,19 @@
   <%= f.error_notification %>
 <div class="row">
   <div class="form-inputs">
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <%= f.input :date, as: :string, label: "Date du relevé", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :time_start, label: "Heure de début du relevé", :as => :time_picker %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :time_end, label: "Heure de fin du relevé",  :as => :time_picker %>
+      </div>
+    </div>
     <div class="col-md-6">
+    <h3>Observateurs</h3>
       <%= f.input :name, label: "Nom de l'observateur", :as => :string, placeholder: "Saisir le nom de l'observateur..." %>
       <div class="row">
         <div class="col-md-6"><%= f.input :structure, label: "Structure", placeholder: "Saisir la structure de l'observateur..." %></div>
@@ -10,90 +22,38 @@
       </div>
       <%= f.association :user, as: :hidden %>
       <%= f.association :site, as: :hidden %>
-      <%= f.input :hauteur, label: "Hauteur moyenne de la végétation:", collection: ["< 20cm","entre 20 et 50 cm","entre 50cm et 1m","> 1m"] %>
-      <%= f.input :milieux, label: "Milieu(x) bordant la prairie:" %>
     </div>
   <div class="col-md-6">
-     <%= f.input :date, as: :string, label: "Date du relevé", placeholder: "Sélectionner une date dans le calendrier", :data => { :behaviour => "datepicker"} %>
-    <div class="row">
-      <div class="col-md-6"><%= f.input :time_start, label: "Heure de début du relevé", :as => :time_picker %></div>
-      <div class="col-md-6"><%= f.input :time_end, label: "Heure de fin du relevé",  :as => :time_picker %></div>
-    </div>
-
+    <h3>Informations sur la prairie</h3>
+      <%= f.input :hauteur, label: "Hauteur moyenne de la végétation:", collection: ["< 20cm","entre 20 et 50 cm","entre 50cm et 1m","> 1m"] %>
+      <%= f.input :milieux, label: "Milieu(x) bordant la prairie:" %>
   </div>
   </div>
 </div>
-<!-- PLANTES DU GUIDE -->
+<!-- INFORMATIONS DE GESTIONS -->
+<!-- !!! TODO: SELECT2 SCRIPT TO UPDATE... -->
 <div class="row">
-  <h3>Plantes du guide</h3>
-  <div class="observations">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>
-            <i class="icon-calendar"></i>
-            Espèce
-          </th>
-          <th>
-            <i class="icon-pencil"></i>
-            Q1
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q2
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q3
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q4
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q5
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q6
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q7
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q8
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q9
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-            Q10
-          </th>
-          <th>
-            <i class="icon-cog"></i>
-          </th>
-        </tr>
-      </thead>
-      <tbody id="observation_events">
-        <%= f.simple_fields_for :observations do |observation| %>
-          <%= render 'observation_fields', :f => observation %>
-        <% end %>
-        <span>
-          <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-warning" do %>
-            <span class="fa fa-plus-circle"></span> ajouter une observation du guide
-          <% end %> 
-        </span>
-      </tbody>
-    </table>
+  <div class="col-md-12">
+    <h3>Gestion de la prairie</h3>
+    <%= f.input :semis, label: "Semis ou sursemis"%>
   </div>
-
+  <div class="col-md-6">
+    <%= f.input :fauche, label: "Type de fauche", collection: ["pas de fauche","fauche coupée (lame, faux, tondeuse)","fauche broyée (rotofil, gyrobroyage)"] %>
+    <%= f.input :fauche_periode, label: "Période des fauches" %>
+    <%= f.input :fauche_freq, label: "Fréquence des fauches", collection: ["+2/an","2/an","1/an","-1/an"] %>
+    <%= f.input :fauche_export, label: "Exportation des résidus"%>
+  </div>
+  <div class="col-md-6">
+    <%= f.input :paturage, label: "Type de fauche", collection: ["Pas de pâturage","Ovin","Caprin","Bovin","Équidé"] %>
+    <%= f.input :paturage_pression, label: "Pression de pâturage (en nombre d'animaux)" %>
+    <%= f.input :paturage_duree, label: "Durée annuelle du pâturage" %>
+  </div>
+  <div class="col-md-12">
+    <%= f.input :traitement, label: "Traitement phytosanitaire", collection: ["aucun","insecticides","herbicide","fongicide","anti-mousses","anti-limaces"] %>
+    <%= f.input :pression, label: "TPression de gestion non-contrôlée", collection: ["cueillette","pâturage et terriers par les lapins et rongeurs","incendie","travaux sur la parcelle"] %>
+  </div>
 </div>
-<!-- END OF PLANTES DU GUIDE -->
+<!-- END OF INFORMATIONS DE GESTIONS -->
 
 
 
@@ -162,11 +122,95 @@
 </div>
 
 <!-- /LIGNEUX -->
+<!-- PLANTES DU GUIDE -->
+<div class="row">
+  <h3>Plantes observées</h3>
+  <div class="observations">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            <i class="icon-calendar"></i>
+            Espèce
+          </th>
+          <th>
+            <i class="icon-pencil"></i>
+            Q1
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q2
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q3
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q4
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q5
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q6
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q7
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q8
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q9
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            Q10
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+            +
+          </th>
+          <th>
+            <i class="icon-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="observation_events">
+        <%= f.simple_fields_for :observations do |observation| %>
+          <%= render 'observation_fields', :f => observation %>
+        <% end %>
+        <span>
+          <%= link_to_add_association f, :observations, :"data-association-insertion-node" => "tbody#observation_events", :"data-association-insertion-method" => "prepend", :partial => "observation_fields", :class => "btn btn-warning" do %>
+            <span class="fa fa-plus-circle"></span> ajouter une observation du guide
+          <% end %> 
+        </span>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<!-- END OF PLANTES DU GUIDE -->
+
+
+
+
 
 
 <hr>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-2">
+    <%= link_to  sites_path, :class => "'col-md-12 btn btn-danger btn-lg" do %>
+    <span class="fa fa-backward"> </span> ANNULER
+    <% end %>
+  </div>
+  <div class="col-md-10">
     <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-success btn-lg' %>
   </div>
 </div>
