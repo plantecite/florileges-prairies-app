@@ -38,19 +38,19 @@
     <%= f.input :semis, label: "Semis ou sursemis"%>
   </div>
   <div class="col-md-6">
-    <%= f.input :fauche, label: "Type de fauche", collection: ["pas de fauche","fauche coupée (lame, faux, tondeuse)","fauche broyée (rotofil, gyrobroyage)"] %>
+    <%= f.input :fauche, label: "Fauche", collection: ["pas de fauche","fauche coupée (lame, faux, tondeuse)","fauche broyée (rotofil, gyrobroyage)"] %>
     <%= f.input :fauche_periode, label: "Période des fauches" %>
     <%= f.input :fauche_freq, label: "Fréquence des fauches", collection: ["+2/an","2/an","1/an","-1/an"] %>
     <%= f.input :fauche_export, label: "Exportation des résidus"%>
   </div>
   <div class="col-md-6">
-    <%= f.input :paturage, label: "Type de fauche", collection: ["Pas de pâturage","Ovin","Caprin","Bovin","Équidé"] %>
+    <%= f.input :paturage, label: "Pâturage" %>
     <%= f.input :paturage_pression, label: "Pression de pâturage (en nombre d'animaux)" %>
-    <%= f.input :paturage_duree, label: "Durée annuelle du pâturage" %>
+    <%= f.input :paturage_duree, label: "Durée annuelle du pâturage (en nombre de mois)" %>
   </div>
   <div class="col-md-12">
-    <%= f.input :traitement, label: "Traitement phytosanitaire", collection: ["aucun","insecticides","herbicide","fongicide","anti-mousses","anti-limaces"] %>
-    <%= f.input :pression, label: "TPression de gestion non-contrôlée", collection: ["cueillette","pâturage et terriers par les lapins et rongeurs","incendie","travaux sur la parcelle"] %>
+    <%= f.input :traitement, label: "Traitement phytosanitaire" %>
+    <%= f.input :pression, label: "Pression de gestion non-contrôlée" %>
   </div>
 </div>
 <!-- END OF INFORMATIONS DE GESTIONS -->
@@ -246,6 +246,42 @@
       allowClear: true,
       placeholder: 'Sélectionner une plante du guide...',
       width: '500px'
+    });
+    $("#releve_fauche").select2({
+      placeholder: "Sélectionner une valeur",
+      allowClear: true
+    });
+    $("#releve_fauche_periode").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      tags:["précoce(janvier-mai)","estivale(juin-août)","tardive(septembre-décembre)"],
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      allowClear: true
+    });
+    $("#releve_fauche_freq").select2({
+      placeholder: "Sélectionner une valeur",
+      allowClear: true
+    });
+    $("#releve_paturage").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      tags:["Pas de pâturage","Ovin","Caprin","Bovin","Équidé"],
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      allowClear: true
+    });
+    $("#releve_traitement").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      tags:["aucun","insecticides","herbicide","fongicide","anti-mousses","anti-limaces"],
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      allowClear: true
+    });
+    $("#releve_pression").select2({
+      separator: "|",
+      tokenSeparators:["|", " "],
+      tags:["cueillette","pâturage et terriers par les lapins et rongeurs","incendie","travaux sur la parcelle"],
+      placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
+      allowClear: true
     });
   });
 </script>
