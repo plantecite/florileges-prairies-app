@@ -1,37 +1,27 @@
-<!-- SECTION TITLE -->
-<h2 class="text-center">FLORILÈGES "Prairies urbaines"</h2>
+<div style="margin: 30px;">
+	<!-- SECTION TITLE -->
+	<h2 class="text-center">FLORILÈGES "Prairies urbaines"</h2>
 
-<!-- WRITE SOMETHING ABOUT FEATURES HERE -->
-<h4 class="text-center">
-Bienvenue sur l'interface de saisie!
-</h4>
-<!-- END FEATURES DESCRIPTION -->
+	<!-- WRITE SOMETHING ABOUT FEATURES HERE -->
+	<h4 class="text-center">
+	Bienvenue sur l'interface de saisie!
+	</h4>
+	<!-- END FEATURES DESCRIPTION -->	
+</div>
 
 <!-- FEATURES COLUMN -->
-<div class="row" style="width:870px; margin:0 auto;">
-	<div class="col-md-6 col-sm-6">
-		<%= link_to new_site_path, { :class => 'caption', :data => { :title => 'AJOUT PRAIRIE', :description => "Créer une nouvelle prairie suivie dans le cadre du volet 'Prairies urbaines' " } } do %>
-			<img src="images/prairies_add.jpg" alt="Ajout d'une prairie"/>
-		<% end %>	
-	</div>
-	<div class="col-md-6 col-sm-6">
-		<%= link_to sites_path, { :class => 'caption', :data => { :title => 'PRAIRIES SUIVIES', :description => "Consulter l'ensemble des sites suivis et renseigner les fiches 'Gestion' et 'Relevés'" } } do %>
-			<img src="images/prairies_search.jpg" alt="Consultations des prairies"/>
-		<% end %>	
+<div class="row" style="width:950px; height: 550px; margin:0 auto;">
+	<div style="margin: 100px 0 50px 0;">
+		<div class="col-md-6 col-sm-6">
+				<%= link_to new_site_path, { :class => 'caption', :data => { :title => 'AJOUT PRAIRIE', :description => "Créer une nouvelle prairie et renseigner les fiches « localisation & historique » et « relevé & gestion » " } } do %>
+					<img src="images/prairies_add.jpg" alt="Ajout d'une prairie"/>
+				<% end %>	
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<%= link_to sites_path, { :class => 'caption', :data => { :title => 'PRAIRIES SUIVIES', :description => "Consulter l'ensemble des sites suivis et renseigner la fiche «  relevé & gestion »" } } do %>
+					<img src="images/prairies_search.jpg" alt="Consultations des prairies"/>
+				<% end %>	
+			</div>
 	</div>
 </div>
 <!-- END FEATURES COLUMN -->
-
-
-<div class="the-box-landing border-color-left">
-	<div class="row">
-		<div class="col-sm-9">
-			<h4>Retrouver l'ensemble des informations saisies depuis cette interface sur votre tableau de bord.</h4>
-		</div>
-		<div class="col-sm-3">
-		<%= link_to sites_path do %>
-		<button class="btn btn-default btn-teplok btn-block btn-lg btn-purchase"><i class="fa fa-sign-in"></i> Consulter</button>
-		<% end %>
-		</div>
-	</div>
-</div>

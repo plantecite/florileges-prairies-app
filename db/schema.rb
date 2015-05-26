@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523080731) do
+ActiveRecord::Schema.define(version: 20150526135833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20150523080731) do
     t.string   "cult_trav"
     t.string   "cult_trav_freq"
     t.string   "cult_trav_freqinfo"
+    t.string   "propage_identifier"
   end
 
   create_table "taggings", force: true do |t|

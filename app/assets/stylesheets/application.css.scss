@@ -1266,6 +1266,24 @@ figure.effect-lily:hover p {
     opacity: 1;
 }
 
+.info-block {
+    background: #515151;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.info-block {
+    *zoom: 1;
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-in;
+    -moz-transition: all 300ms 0ms ease-in;
+    -o-transition: all 300ms 0ms ease-in;
+    transition: all 300ms 0ms ease-in;
+    position: relative;
+    opacity: 1;
+}
+
 .frame-block {
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
