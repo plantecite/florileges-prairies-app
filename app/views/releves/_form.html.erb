@@ -311,8 +311,9 @@ function autocomplete() {
     var index = algolia.initIndex('Taxref');
 
     // Mustache templating by Hogan.js (http://mustache.github.io/)
-    var template = Hogan.compile('<div class="hit">' +
-      '<div class="name">' +
+    var template = Hogan.compile('<div class="row">' +
+      '<span >' +
+        '<img style="float: left; margin: 0px 15px 15px 0px;" src="{{{avatar_url}}}" alt="truc" width="25">'+
         '<i>{{{ _highlightResult.LB_NOM.value }}}</i> ' +
       '</div>' +
       '<div class="name">' +
