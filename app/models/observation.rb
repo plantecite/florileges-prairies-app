@@ -19,6 +19,7 @@ class Observation < ActiveRecord::Base
       self.CD_REF = res[0]['CD_REF'].to_i
       self.NOM_VALIDE = res[0]['NOM_VALIDE'].to_s
       self.CD_NOM = res[0]['CD_NOM'].to_i
+      self.florileges = res[0]['florileges'].to_s
     else
       self.CD_REF = nil
       self.NOM_VALIDE = nil

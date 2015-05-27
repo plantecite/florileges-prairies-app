@@ -35,13 +35,13 @@
 <div class="row">
   <div class="col-md-12">
     <h3>Gestion de la prairie</h3>
-    <%= f.input :semis, label: "Semis ou sursemis"%>
+    <%= f.input :semis, as: :radio_buttons, label: "Semis ou sursemis?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
   </div>
   <div class="col-md-6">
     <%= f.input :fauche, label: "Fauche", collection: ["pas de fauche","fauche coupée (lame, faux, tondeuse)","fauche broyée (rotofil, gyrobroyage)"] %>
     <%= f.input :fauche_periode, label: "Période des fauches" %>
     <%= f.input :fauche_freq, label: "Fréquence des fauches", collection: ["+2/an","2/an","1/an","-1/an"] %>
-    <%= f.input :fauche_export, label: "Exportation des résidus"%>
+      <%= f.input :fauche_export, as: :radio_buttons, label: "Exportation des résidus?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
   </div>
   <div class="col-md-6">
     <%= f.input :paturage, label: "Pâturage" %>

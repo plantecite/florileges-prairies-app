@@ -9,32 +9,30 @@
       <% for site in @sites %>
       <div class="the-box-landing border-color-left">
         <div class="row">
-          <div class="col-sm-2">
+          <div class="col-sm-3">
             <%= image_tag site.photo_url(:thumb).to_s, class: 'img-responsive img-circle'  %>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-7">
             <h3><%= link_to site.code, site  %></h3>
             <p><i><%= site.location %></i></p>
             <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
+
+            <div>Vous avez <strong><%= site.releves.length %></strong> fiche de relevés et de gestion associée à ce site</div>
+            <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
+                <i class="glyphicon glyphicon-pencil"></i> Fiche de relevés et de gestion
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div>
               <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
                 <i class="glyphicon glyphicon-pencil"></i> Modifier
               <% end %>
-            
-             <%= link_to site, method: :delete, data: { confirm: "Cette action est définitive. Êtes-vous sûr de vouloir supprimer le site?" }, class:'btn btn-danger btn-xs' do %>
-                 <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
-              <% end %>
-          </div>
-          <div class="col-sm-4">
-
-            <div class="btn btn-success btn-sm" data-toggle="modal" data-target="#mesGestions<%=site.id%>">
-              <i class="fa fa-list"></i>Fiche-gestion
             </div>
-            <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
-                <i class="glyphicon glyphicon-pencil"></i> Fiche-relevés
-            </div>
-            <hr>
-            <div class="btn btn-warning btn-sm">
-              <i class="fa fa-users"></i> Co-observateur
+            <div></div>
+            <div>
+              <%= link_to site, method: :delete, data: { confirm: "Cette action est définitive. Êtes-vous sûr de vouloir supprimer le site?" }, class:'btn btn-danger btn-xs' do %>
+                  <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
+               <% end %>
             </div>
             <!-- Modal GESTION-->
             <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

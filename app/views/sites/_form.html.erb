@@ -69,7 +69,8 @@
       </div>
       <div class="list-block">
         <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Lien avec les papillons</div>
-         <%= f.input :propage, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?" %>
+         <%= f.input :propage, as: :radio_buttons, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
+
          <%= f.input :propage_identifier, label: "Si oui, quel est votre identifiant PROPAGE?" %>
       </div>
     </div>
