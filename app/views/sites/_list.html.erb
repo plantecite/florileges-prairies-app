@@ -2,8 +2,10 @@
   <ul class="nav nav-pills nav-justified" id="pillSites">
     <li class="filter active"><a href="#liste" data-toggle="pill"><h4 class="glyphicon glyphicon-th-list"></h4></a></li>
     <li class="filter"><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
+    <!-- <li class="filter"><a href="#stats" data-toggle="pill"><h4 class="glyphicon glyphicon-stats"></h4></a></li> -->
   </ul>
   <div class="tab-content">
+    <!-- SITES LIST TAB -->
     <div class="tab-pane active" id="liste">
       <br>
       <% for site in @sites %>
@@ -17,7 +19,7 @@
             <p><i><%= site.location %></i></p>
             <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
 
-            <div>Vous avez <strong><%= site.releves.length %></strong> fiche de relevés et de gestion associée à ce site</div>
+            <div>Vous avez <strong><%= site.releves.length %> fiche de relevés et de gestion</strong> associée à ce site</div>
             <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
                 <i class="glyphicon glyphicon-pencil"></i> Fiche de relevés et de gestion
             </div>
@@ -91,24 +93,35 @@
 
         <% end %>
     </div>
+    <!-- MAP OF SITES -->
     <div class="tab-pane" id="carte">
       <br>
       <div style="width: auto">
         <div id="map" style="width: auto; height: 400px"></div>
       </div>
     </div>
+    <!-- STATS OF SITES -->
+<!--     <div class="tab-pane" id="stats">
+      <br>
+      <div style="width: auto">
+        <div style="width: auto; height: 400px; background: #0000">STATS</div>
+      </div>
+    </div> -->
+
   </div><!-- tab content -->
 </div>
 <div class="col-sm-3">
   <div class="the-box-landing border-orange-topbottom">
-    <h3>AJOUTER UN SITE</h3>
+    <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
     <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
       <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
     </div>
   </div>
-
-<!--   <div class="the-box-landing border-orange-topbottom">
-    <h3>FILTER LA LISTE</h3>
-  </div> -->
+  <div class="the-box-landing border-orange-topbottom">
+    <h3 style="text-align: center; padding: 10px 0 0 0;">EXPORTER VOS DONNÉES</h3>
+    <div style="text-align: center; margin: 10px 10px 10px 20px;">
+      <button type="button" class="btn btn-default" disabled="disabled">En cours de réalisation...</button>
+    </div>
+  </div>
   
 </div>
