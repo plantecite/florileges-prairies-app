@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526135833) do
+ActiveRecord::Schema.define(version: 20150526162028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150526135833) do
     t.integer  "CD_REF"
     t.string   "LB_NOM"
     t.string   "NOM_VALIDE"
-    t.boolean  "florileges"
+    t.string   "florileges"
     t.string   "TAXREF_V"
   end
 

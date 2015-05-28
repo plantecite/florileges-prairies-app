@@ -8,7 +8,7 @@
 
 <!-- FOCUS -->
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div class="site-focus">
       <figure class="effect-dexter">
         <%= image_tag @site.photo_url.to_s %>
@@ -23,7 +23,7 @@
     </div>
   </div>
   <!-- MAPS AND SKETCH -->
-  <div class="col-md-6">
+  <div class="col-md-7">
     <ul class="nav nav-pills nav-justified" id="pillSites">
       <li class="filter active"><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
       <li class="filter"><a href="#sketch" data-toggle="pill"><h4 class="glyphicon glyphicon-picture"></h4></a></li>
@@ -51,18 +51,20 @@
 <br>
 <!-- FICHES -->
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="the-box-landing border-color-left">
-      <h3>FICHES DE GESTION</h3>
+      <h3>RÉSUMÉ DU SITE</h3>
     </div>
     <div class="list-block">
-
+      <div style="text-align: center; margin: 10px 10px 10px 20px;">
+        <button type="button" class="btn btn-default btn-lg" disabled="disabled">En cours de réalisation...</button>
+      </div>
     </div>  
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="the-box-landing border-color-left">
-      <h3>FICHES DE RELEVÉS</h3>
+      <h3>FICHES DE RELEVÉS ET DE GESTION</h3>
     </div>
     <div class="list-block">
       <ul>
@@ -87,16 +89,6 @@
         <% end %>
       </div>
     </div> 
-  </div>
-  
-  <div class="col-md-4">
-    <div class="the-box-landing border-color-left">
-      <h3>ESPÈCES PRÉSENTES</h3>
-    </div>
-    <div class="list-block">
-      <div class=""></div>
-      <h3>espèces observées</h3>
-    </div>
   </div>
 </div>
 <br>
