@@ -54,7 +54,7 @@ gem "mini_magick"
 gem 'carrierwave_backgrounder'
 gem 'carrierwave_direct'
 
-
+gem 'pry'
 gem 'rails_12factor', group: :production
 
 group :development do
@@ -67,7 +67,6 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'pry'
   gem 'hirb'
 end
 group :test do
