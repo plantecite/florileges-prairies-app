@@ -11,6 +11,9 @@ class SitesController < ApplicationController
       marker.lng site.longitude
       marker.infowindow site.code
     end
+    email = current_user.email
+    @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
+
 
     @all_sites = Site.all
     @features = Array.new
@@ -35,6 +38,10 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"site-list\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
       format.geojson { render json: @geojson }
     end
   end

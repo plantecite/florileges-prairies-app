@@ -1,0 +1,15 @@
+<%- headers = ['site_id',
+	'site_code',
+	'site_location',
+	'site_latitude',
+	'site_longitude',
+	'site_upadted_at'] -%>
+<%= CSV.generate_line headers, {:row_sep => ''} %>
+<%- @sites.each do |site| -%>
+  <%= CSV.generate_line([site.id,
+  		site.code,
+  		site.location,
+  		site.latitude,
+  		site.longitude,
+  		site.updated_at]), {:row_sep => ''} %>
+<%- end -%>

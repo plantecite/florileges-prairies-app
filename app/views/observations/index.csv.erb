@@ -1,0 +1,16 @@
+<% headers = [
+  'site_id',
+	'releve_id',
+	'releve_date',
+	'obs_LBNOM',
+	'obs_florileges_list',
+	'site_upadted_at'] %>
+<%= CSV.generate_line headers, {:row_sep => ''} %>
+<% @observations.each do |obs| %>
+<%= CSV.generate_line([
+    obs.releve.site.id,
+		obs.releve.id,
+		obs.releve.date,
+		obs.LB_NOM,
+		obs.florileges], {:row_sep => ''}) %>
+<% end %>

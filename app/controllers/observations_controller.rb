@@ -1,10 +1,24 @@
 class ObservationsController < ApplicationController
+  before_filter :authenticate_user!
+
   before_action :set_observation, only: [:show, :edit, :update, :destroy]
 
   # GET /observations
   # GET /observations.json
   def index
-    @observations = Observation.all
+    # @observations = Observation.all
+    email = current_user.email
+    @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
+    # @observations = Observation.joins{releve.site.users}.where{updated_at >= 10.months.ago}
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"observation-list.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+
   end
 
   # GET /observations/1

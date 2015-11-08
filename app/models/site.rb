@@ -23,5 +23,14 @@ class Site < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude, :address => :location
 	after_validation :reverse_geocode  # auto-fetch address
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |product|
+        csv << product.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 
 end
