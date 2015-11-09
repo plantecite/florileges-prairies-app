@@ -1,5 +1,6 @@
 <% headers = [
 	'site_id',
+	'site_code',
 	'releve_date',
 	'releve_name',
 	'releve_structure',
@@ -27,7 +28,6 @@
 	'obs_CD_REF',
 	'obs_florileges',
 	'obs_TAXREF_V',
-	'obs_q0',
 	'obs_q1',
 	'obs_q2',
 	'obs_q3',
@@ -38,13 +38,14 @@
 	'obs_q8',
 	'obs_q9',
 	'obs_q10',
-	'obs_p',
+	'obs_hors_q',
 	'obs_created_at',
 	'obs_updated_at'] %>
 <%= CSV.generate_line(headers, {:row_sep => ''}).html_safe %>
 <% @observations.each do |obs| %>
 <%= CSV.generate_line([
 	obs.releve.site_id,
+	obs.releve.site.code,
 	obs.releve.date,
 	obs.releve.name,
 	obs.releve.structure,
@@ -72,7 +73,6 @@
 	obs.CD_REF,
 	obs.florileges,
 	obs.TAXREF_V,
-	obs.q0,
 	obs.q1,
 	obs.q2,
 	obs.q3,
@@ -83,7 +83,7 @@
 	obs.q8,
 	obs.q9,
 	obs.q10,
-	obs.p,
+	obs.q0,
 	obs.created_at,
 	obs.updated_at], {:row_sep => ''}).html_safe %>
 <% end %>

@@ -5,8 +5,9 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    # @sites = current_user.sites(:order => 'code ASC')
-    @sites = Site.where{updated_at >= 10.months.ago}
+    @sites = current_user.sites(:order => 'code ASC')
+    # @sites = Site.where{updated_at >= 10.months.ago}
+    # @sites = Site.joins{releves}.where{releves.date >= 7.months.ago}.all(:order => "id ASC")
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
@@ -37,7 +38,7 @@ class SitesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"site-list.csv\""
+        headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-sites.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
       format.geojson { render json: @geojson }
