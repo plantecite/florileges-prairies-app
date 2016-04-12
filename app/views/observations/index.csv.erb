@@ -1,4 +1,5 @@
 <% headers = [
+	'obs_id',
 	'site_id',
 	'site_code',
 	'releve_date',
@@ -44,6 +45,7 @@
 <%= CSV.generate_line(headers, {:row_sep => ''}).html_safe %>
 <% @observations.each do |obs| %>
 <%= CSV.generate_line([
+	obs.id,
 	obs.releve.site_id,
 	obs.releve.site.code,
 	obs.releve.date,
