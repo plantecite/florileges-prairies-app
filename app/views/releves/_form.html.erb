@@ -229,11 +229,21 @@
 
 <script>
    function repoFormatResult(taxon) {
-      var markup = '<div class="row-fluid">' +
-         '<div class="span10">' +
-            '<div class="row-fluid">' +
-               '<div class="span6">' + taxon.lb_nom + '</div>' +
-            '</div>';
+      var markup = '<div class="row">';
+      if (taxon.florileges) {
+         markup += '<div class="col-md-2"><img src="/images/fallback/florileges_default.png" /></div>';
+      } else {
+        markup += '<div class="col-md-2"><img src="/images/fallback/taxref_default.png" /></div>';
+      }
+      markup += '<div class="col-md-10">';
+      markup +=  '<div class="row">';
+      markup +=     '<div class="col-md-6">'+taxon.nom_complet_html+'</div>';
+      // markup += taxon.nom_complet_html;
+      // markup +='</div>';
+      markup +=     '<div class="col-md-6">';
+      markup += taxon.nom_vern;
+      markup +='</div>';
+      markup +=  '</div>';
       markup += '</div></div>';
       return markup;
    }

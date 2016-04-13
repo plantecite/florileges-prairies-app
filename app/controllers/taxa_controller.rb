@@ -5,9 +5,9 @@ class TaxaController < ApplicationController
   def index
     if params[:q].present?
       @query = params[:q].gsub("+", " ")
-      @taxa = Taxon.search(@query).limit(params[:max_results])
+      @taxa = Taxon.search(@query).limit(params[:max_results]).order(index_ranking: :desc)
     else
-      @taxa = Taxon.all.limit(params[:max_results])
+      @taxa = Taxon.all.limit(params[:max_results]).order(index_ranking: :desc)
     end
   end
 

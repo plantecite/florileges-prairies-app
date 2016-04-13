@@ -16,10 +16,15 @@ class Taxon < ActiveRecord::Base
     end
   end
 
+  def self.florileges
+    where do
+      (florileges == true)
+    end
+  end
+
   def self.search(query)
     where do
-      ((fr == 'P')) & 
-      ((rang == 'ES') | (rang == 'GN')) & 
+      # (fr == 'P') &  
       (lb_nom =~ "%#{query}%")
     end
   end
