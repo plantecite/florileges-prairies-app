@@ -6,6 +6,8 @@ FlorilegesPrairies::Application.routes.draw do
 
   resources :observations
 
+  resources :taxa, defaults: {format: :json}
+
   resources :especes
 
   resources :sites do

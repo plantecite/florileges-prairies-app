@@ -1,7 +1,9 @@
 <tr class="nested-fields">
   <td>
     <%= f.input_field :LB_NOM, placeholder: "Sélectionner une espèce parmi TaxRef 8...", :class => 'typeahead' %>
-    <%= f.association :releve, placeholder: "Sélectionner un site", label_method: :date, value_method: :id, include_blank: false%>
+    <div>
+      <%= f.input_field(:taxon_id) %>
+    </div>
   </td>
   <td>
     <%= f.input :q1, as: :boolean, :label => false, inline: true, :wrapper_html => {:class => ''}, :input_html => { :class => 'checkbox'} %>

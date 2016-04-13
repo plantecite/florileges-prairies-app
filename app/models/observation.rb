@@ -4,6 +4,7 @@ require 'json'
 
 class Observation < ActiveRecord::Base
   belongs_to :releve
+  belongs_to :taxon
   
   # #from former Taxrefobservation Model
   # #####################################
