@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526162028) do
+ActiveRecord::Schema.define(version: 20160413114712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,9 +72,11 @@ ActiveRecord::Schema.define(version: 20150526162028) do
     t.string   "NOM_VALIDE"
     t.string   "florileges"
     t.string   "TAXREF_V"
+    t.integer  "taxon_id"
   end
 
   add_index "observations", ["releve_id"], name: "index_observations_on_releve_id", using: :btree
+  add_index "observations", ["taxon_id"], name: "index_observations_on_taxon_id", using: :btree
 
   create_table "ownerships", force: true do |t|
     t.integer  "user_id"
@@ -179,6 +181,49 @@ ActiveRecord::Schema.define(version: 20150526162028) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "taxa", force: true do |t|
+    t.text     "regne"
+    t.text     "phylum"
+    t.text     "classe"
+    t.text     "ordre"
+    t.text     "famille"
+    t.text     "group1_inpn"
+    t.text     "group2_inpn"
+    t.integer  "cd_nom"
+    t.integer  "cd_taxsup"
+    t.integer  "cd_ref"
+    t.string   "rang"
+    t.text     "lb_nom"
+    t.text     "lb_auteur"
+    t.text     "nom_complet"
+    t.text     "nom_complet_html"
+    t.text     "nom_valide"
+    t.text     "nom_vern"
+    t.text     "nom_vern_eng"
+    t.string   "habitat"
+    t.string   "fr"
+    t.string   "gf"
+    t.string   "mar"
+    t.string   "gua"
+    t.string   "sm"
+    t.string   "sb"
+    t.string   "spm"
+    t.string   "may"
+    t.string   "epa"
+    t.string   "reu"
+    t.string   "taaf"
+    t.string   "pf"
+    t.string   "nc"
+    t.string   "wf"
+    t.string   "cli"
+    t.string   "url"
+    t.integer  "taxref_v"
+    t.boolean  "florileges"
+    t.integer  "index_ranking"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

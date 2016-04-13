@@ -12,6 +12,7 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'releve', 'releves'
+  inflect.irregular 'taxon', 'taxa'
 end
 
 

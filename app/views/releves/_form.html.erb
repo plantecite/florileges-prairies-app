@@ -242,9 +242,9 @@
       placeholder: "Sélectionner une valeur",
       allowClear: true
     }); 
-    $("[id$=_espece_id]").select2({
+    $("[id$=_releve_id]").select2({
       allowClear: true,
-      placeholder: 'Sélectionner une plante du guide...',
+      placeholder: 'Sélectionner un site...',
       width: '500px'
     });
     $("#releve_fauche").select2({
@@ -296,7 +296,7 @@ $(document).ready(function() {
   .on('cocoon:after-insert', function() {
     // alert('Cocoon Insertion');
     autocomplete();
-    $("[id$=_espece_id]").select2({
+    $("[id$=_releve_id]").select2({
       allowClear: true,
       placeholder: 'Sélectionner une espèce du guide...',
       width: '500px'
