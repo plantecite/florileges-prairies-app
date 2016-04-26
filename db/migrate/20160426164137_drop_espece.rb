@@ -1,5 +1,9 @@
-class CreateEspeces < ActiveRecord::Migration
+class DropEspece < ActiveRecord::Migration
   def self.up
+    drop_table :especes
+  end
+
+  def self.down
     create_table :especes do |t|
       t.integer :taxref
       t.integer :bdtfx
@@ -30,9 +34,4 @@ class CreateEspeces < ActiveRecord::Migration
       t.timestamps
     end
   end
-
-  def self.down
-    drop_table :especes
-  end
-
 end

@@ -8,8 +8,6 @@ FlorilegesPrairies::Application.routes.draw do
 
   resources :taxa, defaults: {format: :json}
 
-  resources :especes
-
   resources :sites do
   	resources :gestions
     resources :releves
