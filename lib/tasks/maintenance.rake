@@ -102,28 +102,45 @@ namespace :maintenance do
     #Init Dictionnary with TAXA_ID
     fixes_with_TAXA_ID = init_dictionnary("data/np_fixes_with_TAXA_ID.csv")
 
-
-
-    
-
+    counter = 0
     #Recherche de présence
+    Observation.find_each do |obs|
+      q = obs.LB_NOM
+      if q.blank? #aucune valeur saisie
+        obs.taxon_id = 1
+        obs.save!
+        puts "Aucune valeur pour l'observation #{obs.id}"
+        counter += 1
+        next
+      else
+        if fixes_with_CD_NOM[q]
+          taxon = Taxon.find_by_cd_nom(fixes_with_CD_NOM[q])
+          obs.taxon_id = taxon.id
+          obs.save!
+          puts "CD_NOM: Observation avec input #{q} est #{taxon.nom_complet} - #{taxon.id}"
+          counter += 1
+          puts counter
+        else
+          if fixes_with_TAXA_ID[q]
+            taxon = Taxon.find(fixes_with_TAXA_ID[q])
+            obs.taxon_id = taxon.id
+            obs.save!
+            puts "TAXA_ID: Observation avec input #{q} est #{taxon.nom_complet} - #{taxon.id}"
+            counter += 1
+            puts counter
+          else
+            taxon = Taxon.search(q).limit(10).order(index_ranking: :desc)[0]
+            obs.taxon_id = taxon.id
+            obs.save!
+            puts "TAXREF SEARCH: Observation avec input #{q} est #{taxon.lb_nom} - #{taxon.id}"
+            counter += 1
+            puts counter
 
-    q = "Plantago major"
-    if fixes_with_CD_NOM[q].nil?
-      puts "#{q} n'est pas dans le dictionnaire de correction"
-    else
-      puts "#{q} est présent dans le dictionnaire et sa valeur est #{fixes_with_CD_NOM[q]}"
+          end
+        end
+      end
     end
 
-
-
-    #Check for taxon presence
-
-    #Parse NP coorections
-
-
-
-
   end
-  
+
 end

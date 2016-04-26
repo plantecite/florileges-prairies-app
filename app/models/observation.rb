@@ -5,10 +5,16 @@ require 'json'
 class Observation < ActiveRecord::Base
   belongs_to :releve
   belongs_to :taxon
+
+  def self.has_no_taxon?
+    where do
+      ((taxon_id == nil))
+    end
+  end
   
   # #from former Taxrefobservation Model
   # #####################################
-  before_save :taxref_update
+  # before_save :taxref_update
 
   def taxref_update
     Algolia.init :application_id => ENV['ALGOLIASEARCH_APPLICATION_ID'], :api_key => ENV['ALGOLIASEARCH_API_KEY']

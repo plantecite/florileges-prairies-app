@@ -16,10 +16,10 @@ namespace :ranking do
           score-=10
         end
         if taxon.rang == 'ES'
-          score += 30
+          score += 10
         end
         if taxon.rang == 'GN'
-          score += 10
+          score += 30
         end
         if taxon.florileges
           score += 50
