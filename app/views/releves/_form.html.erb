@@ -226,6 +226,113 @@
 
 </script>
 
+
+<script>
+   function repoFormatResult(taxon) {
+      var markup = '<div class="row">';
+      if (taxon.florileges) {
+         markup += '<div class="col-md-2"><img src="/images/fallback/florileges_default.png" /></div>';
+      } else {
+        markup += '<div class="col-md-2"><img src="/images/fallback/taxref_default.png" /></div>';
+      }
+      markup += '<div class="col-md-10">';
+      markup +=  '<div class="row">';
+      markup +=     '<div class="col-md-6">'+taxon.nom_complet_html+'</div>';
+      // markup += taxon.nom_complet_html;
+      // markup +='</div>';
+      markup +=     '<div class="col-md-6">';
+      markup += taxon.nom_vern;
+      markup +='</div>';
+      markup +=  '</div>';
+      markup += '</div></div>';
+      return markup;
+   }
+   function repoFormatSelection(taxon) {
+      return taxon.nom_complet_html;
+   }
+</script>
+
+<script id="select_taxa_after_insert">
+$(document).ready(function() {
+  $('form')
+  .on('cocoon:after-insert', function() {
+    $("[id$=_taxon_id]").select2({
+        placeholder: "Sélectionner un taxon",
+        minimumInputLength: 1,
+        ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+            url: "/taxa",
+            dataType: 'json',
+            quietMillis: 250,
+            data: function (term, page) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function (data, page) { // parse the results into the format expected by Select2.
+                // since we are using custom formatting functions we do not need to alter the remote JSON data
+                return { results: data.taxa };
+            },
+            cache: true
+        },
+        initSelection: function(element, callback) {
+            // the input tag has a value attribute preloaded that points to a preselected repository's id
+            // this function resolves that id attribute to an object that select2 can render
+            // using its formatResult renderer - that way the repository name is shown preselected
+            var id = $(element).val();
+            if (id !== "") {
+                $.ajax("/taxa/" + id, {
+                    dataType: "json"
+                }).done(function(data) { callback(data); });
+            }
+        },
+        formatResult: repoFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
+        dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+        escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+    });
+  });
+});
+</script>
+
+<script id="select_taxa">
+$(document).ready(function() {
+$("[id$=_taxon_id]").select2({
+    placeholder: "Sélectionner un taxon",
+    minimumInputLength: 1,
+    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+        url: "/taxa",
+        dataType: 'json',
+        quietMillis: 250,
+        data: function (term, page) {
+            return {
+                q: term, // search term
+            };
+        },
+        results: function (data, page) { // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to alter the remote JSON data
+            return { results: data.taxa };
+        },
+        cache: true
+    },
+    initSelection: function(element, callback) {
+        // the input tag has a value attribute preloaded that points to a preselected repository's id
+        // this function resolves that id attribute to an object that select2 can render
+        // using its formatResult renderer - that way the repository name is shown preselected
+        var id = $(element).val();
+        if (id !== "") {
+            $.ajax("/taxa/" + id, {
+                dataType: "json"
+            }).done(function(data) { callback(data); });
+        }
+    },
+    formatResult: repoFormatResult, // omitted for brevity, see the source of this page
+    formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+});
+});
+</script>
+
 <script>
   $(document).ready(function() { 
     $("#releve_milieux").select2({
@@ -242,11 +349,11 @@
       placeholder: "Sélectionner une valeur",
       allowClear: true
     }); 
-    $("[id$=_espece_id]").select2({
-      allowClear: true,
-      placeholder: 'Sélectionner une plante du guide...',
-      width: '500px'
-    });
+    // $("[id$=_taxon_id]").select2({
+    //   allowClear: true,
+    //   placeholder: 'Sélectionner un site...',
+    //   width: '500px'
+    // });
     $("#releve_fauche").select2({
       placeholder: "Sélectionner une valeur",
       allowClear: true
@@ -296,7 +403,7 @@ $(document).ready(function() {
   .on('cocoon:after-insert', function() {
     // alert('Cocoon Insertion');
     autocomplete();
-    $("[id$=_espece_id]").select2({
+    $("[id$=_releve_id]").select2({
       allowClear: true,
       placeholder: 'Sélectionner une espèce du guide...',
       width: '500px'

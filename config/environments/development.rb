@@ -40,19 +40,13 @@ FlorilegesPrairies::Application.configure do
   # # Send email in development mode?
   # config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => 'florileges-prairies.dev' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
-  ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :authentication => :plain,
-    :domain => 'gmail.com',
-    :user_name => 'gduhamel.pc@gmail.com',
-    :password => 'g@et3891'
-  }
 
 end

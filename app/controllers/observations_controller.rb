@@ -11,6 +11,8 @@ class ObservationsController < ApplicationController
     @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
     # @observations = Observation.joins{releve.site.users}.where{created_at >= 7.months.ago}
     # @observations = Observation.joins{releve.site.users}.where{releve.date >= 7.months.ago}
+    # @observations = Observation.joins{releve.site.users}.where{releve.site.users.email != 'gaetan@florileges.info'}.order{ releve.date.asc  }
+    
 
 
     respond_to do |format|
@@ -31,7 +33,6 @@ class ObservationsController < ApplicationController
   # GET /observations/new
   def new
     @observation = Observation.new
-    @observation.build_espece
   end
 
   # GET /observations/1/edit
@@ -86,6 +87,6 @@ class ObservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def observation_params
-      params.require(:observation).permit(:q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :releve_id, :created_at, :updated_at, :CD_NOM, :CD_REF, :LB_NOM, :NOM_VALIDE, :florileges, :TAXREF_V)
+      params.require(:observation).permit(:q0, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10, :p, :releve_id, :taxon_id, :created_at, :updated_at, :CD_NOM, :CD_REF, :LB_NOM, :NOM_VALIDE, :florileges, :TAXREF_V)
     end
 end

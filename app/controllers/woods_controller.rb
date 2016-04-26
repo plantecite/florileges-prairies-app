@@ -1,10 +1,31 @@
 class WoodsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_wood, only: [:show, :edit, :update, :destroy]
 
   # GET /woods
   # GET /woods.json
   def index
     @woods = Wood.all
+  end
+
+  def index
+    # @observations = Observation.all
+    email = current_user.email
+    # @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
+    # @observations = Observation.joins{releve.site.users}.where{created_at >= 7.months.ago}
+    # @observations = Observation.joins{releve.site.users}.where{releve.date >= 7.months.ago}
+    @woods = Wood.joins{releve.site}.order{ releve.date.asc  }
+    
+
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-woods.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+
   end
 
   # GET /woods/1

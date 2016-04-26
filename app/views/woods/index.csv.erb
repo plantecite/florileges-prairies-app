@@ -1,0 +1,41 @@
+<% headers = [
+	'site_id',
+	'site_code',
+	'releve_date',
+	'woods_id',
+	'woods_q1',
+	'woods_q2',
+	'woods_q3',
+	'woods_q4',
+	'woods_q5',
+	'woods_q6',
+	'woods_q7',
+	'woods_q8',
+	'woods_q9',
+	'woods_q10',
+	'woods_total',
+	'woods_created_at',
+	'woods_updated_at'] %>
+<%= CSV.generate_line(headers, {:row_sep => ''}).html_safe %>
+<% @woods.each do |wood| %>
+<%= CSV.generate_line([
+	wood.releve.site_id,
+	wood.releve.site.code,
+	wood.releve.date,
+	wood.id,
+	wood.q1,
+	wood.q2,
+	wood.q3,
+	wood.q4,
+	wood.q5,
+	wood.q6,
+	wood.q7,
+	wood.q8,
+	wood.q9,
+	wood.q10,
+	wood.total,
+	wood.created_at,
+	wood.updated_at], {:row_sep => ''}).html_safe %>
+<% end %>
+
+
