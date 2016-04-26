@@ -24,7 +24,7 @@
 
   # GET /releves/1/edit
   def edit
-    @especes=Espece.all(:order => 'nom_sci ASC')
+    
   end
 
   # POST /releves
