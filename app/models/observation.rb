@@ -6,11 +6,6 @@ class Observation < ActiveRecord::Base
   belongs_to :releve
   belongs_to :taxon
 
-  def self.has_no_taxon?
-    where do
-      ((taxon_id == nil))
-    end
-  end
   
   # #from former Taxrefobservation Model
   # #####################################
