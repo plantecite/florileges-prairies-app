@@ -1,3 +1,5 @@
+require 'csv'
+
 namespace :maintenance do 
 
   desc "Set Florileges List default to false"
@@ -80,8 +82,46 @@ namespace :maintenance do
   end
 
   desc "Set Florileges Species List"
-  task set_taxon_id_from_natureparif: :environment do
-    #Configure here!
+  task set_taxon_id: :environment do
+    #Setting NP corrections dictionnary
+
+    def init_dictionnary(filepath)
+      filename = File.join Rails.root, filepath
+      dic = Hash.new
+      CSV.foreach(filename, {:col_sep => ",", :headers => true}) do |row|
+        # puts "#{row['KEY']} est #{row['VALUE']}"
+        k, v = row['KEY'], row['VALUE']
+        #puts "#{k} is #{v}"
+        dic[k] = v
+      end
+      return dic
+    end
+
+    #Init Dictionnary with CD_NOM
+    fixes_with_CD_NOM = init_dictionnary("data/np_fixes_with_CD_NOM.csv")
+    #Init Dictionnary with TAXA_ID
+    fixes_with_TAXA_ID = init_dictionnary("data/np_fixes_with_TAXA_ID.csv")
+
+
+
+    
+
+    #Recherche de présence
+
+    q = "Plantago major"
+    if fixes_with_CD_NOM[q].nil?
+      puts "#{q} n'est pas dans le dictionnaire de correction"
+    else
+      puts "#{q} est présent dans le dictionnaire et sa valeur est #{fixes_with_CD_NOM[q]}"
+    end
+
+
+
+    #Check for taxon presence
+
+    #Parse NP coorections
+
+
 
 
   end

@@ -1,7 +1,9 @@
 <tr class="nested-fields">
   <td>
-    <%= f.input_field :LB_NOM, placeholder: "Sélectionner une espèce parmi TaxRef 8...", :class => 'typeahead' %>
+    <div>OLD (DISABLED)</div>
+    <%= f.input_field :LB_NOM, disabled: true, placeholder: "Sélectionner une espèce parmi TaxRef 8...", :class => 'typeahead' %>
     <div>
+      <div>NEW (ACTIVE)</div>
       <%= f.input_field(:taxon_id) %>
     </div>
   </td>
