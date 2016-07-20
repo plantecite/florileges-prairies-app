@@ -21,6 +21,7 @@ class ObservationsController < ApplicationController
         headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-observations.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
+      format.xlsx
     end
 
   end

@@ -42,6 +42,7 @@ class SitesController < ApplicationController
         headers['Content-Type'] ||= 'text/csv'
       end
       format.geojson { render json: @geojson }
+      format.xlsx
     end
   end
 

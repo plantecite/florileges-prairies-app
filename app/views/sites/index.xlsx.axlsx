@@ -1,0 +1,43 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Observations") do |sheet|
+  sheet.add_row [
+    'site_id',
+    'site_code',
+    'site_latitude',
+    'site_longitude',
+    'site_location',
+    'site_frequentation',
+    'site_gestionnaire',
+    'site_surface',
+    'site_objectifs',
+    'site_date_creation',
+    'site_ancien_usage',
+    'site_hist_trav',
+    'site_amendement',
+    'site_amendement_freq',
+    'site_travaux',
+    'site_travaux_freq',
+    'site_propage',
+    'id_PROPAGE'
+  ]
+  @sites.each do |site|
+    sheet.add_row [site.id,
+    site.code,
+    site.latitude,
+    site.longitude,
+    site.location,
+    site.gen_freq,
+    site.gen_gest,
+    site.gen_surface,
+    site.gen_obj.to_s.split('|'),
+    site.hist_date,
+    site.hist_occsol,
+    site.hist_trav,
+    site.cult_amend,
+    site.cult_amend_freq,
+    site.cult_trav,
+    site.cult_trav_freq,
+    site.propage,
+    site.propage_identifier]
+  end
+end

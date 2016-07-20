@@ -24,7 +24,8 @@
 
   # GET /releves/1/edit
   def edit
-    
+    @observations = @releve.observations
+
   end
 
   # POST /releves

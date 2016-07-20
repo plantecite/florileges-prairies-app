@@ -55,6 +55,11 @@ gem "mini_magick"
 gem 'carrierwave_backgrounder'
 gem 'carrierwave_direct'
 
+# XLSX
+gem 'rubyzip', '= 1.0.0'
+gem 'axlsx', '= 2.0.1'
+gem 'axlsx_rails'
+
 gem 'pry'
 gem 'rails_12factor', group: :production
 

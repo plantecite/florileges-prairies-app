@@ -183,7 +183,7 @@
         </tr>
       </thead>
       <tbody id="observation_events">
-        <%= f.simple_fields_for :observations do |observation| %>
+        <%= f.simple_fields_for :observations, f.object.observations.joins(:taxon).order('taxa.lb_nom').references(:all) do |observation| %>
           <%= render 'observation_fields', :f => observation %>
         <% end %>
         <span>
