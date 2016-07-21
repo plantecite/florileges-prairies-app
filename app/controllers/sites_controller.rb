@@ -1,11 +1,16 @@
 class SitesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_filter :set_export_mode, :only => [:index]
 
   # GET /sites
   # GET /sites.json
   def index
-    @sites = current_user.sites(:order => 'code ASC')
+    if params[:content]=='user'
+      @sites = current_user.sites(:order => 'code ASC')
+    elsif params[:content]=='all' 
+      @sites = Site.all
+    end
     # @sites = Site.where{updated_at >= 10.months.ago}
     # @sites = Site.joins{users}.where{id >= 39}.order('id ASC')
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
@@ -118,6 +123,11 @@ class SitesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_export_mode
+      params[:content] ||= 'user'
+    end
+
     def set_site
       @site = Site.find(params[:id])
     end
