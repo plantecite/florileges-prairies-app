@@ -12,7 +12,9 @@ class ObservationsController < ApplicationController
     if params[:content]=='user'
       @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
     elsif params[:content]=='all'
-      @observations = Observation.where('taxon_id IS NOT NULL').joins{releve.site.users}.where{releve.site.users.email != 'gaetan@florileges.info'}.order{releve.date.asc}
+      @valid_obs = Observation.where('taxon_id IS NOT NULL')
+      @observations = @valid_obs
+      # @observations = @valid_obs.joins{releve.site.users}.where{releve.site.users.email != 'gaetan@florileges.info'}.order{releve.date.asc}
     end
     # @observations = Observation.joins{releve.site.users}.where{created_at >= 7.months.ago}
     # @observations = Observation.joins{releve.site.users}.where{releve.date >= 7.months.ago}
