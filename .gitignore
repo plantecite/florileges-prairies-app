@@ -87,3 +87,6 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+
+#Ignore database dump
+florileges-prairies-latest.dump
