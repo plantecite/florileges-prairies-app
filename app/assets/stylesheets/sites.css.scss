@@ -2,13 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#map label { width: auto; display:inline; }
-#map  img { max-width: none; }
+#map label {
+  width: auto;
+  display: inline;
+}
+#map img {
+  max-width: none;
+}
 
+// radio checkbox overrides
+input {
+  margin: 4px 0 !important;
+}
+
+.checkbox-inline input[type="checkbox"] {
+  position: absolute;
+  margin-top: 4px \9;
+  margin-left: 0px;
+}
 /* Google Maps Places Autocomplete */
 
-#map-canvas label { width: auto; display:inline; }
-#map-canvas  img { max-width: none; }
+#map-canvas label {
+  width: auto;
+  display: inline;
+}
+#map-canvas img {
+  max-width: none;
+}
 
 .gmcontrols {
   margin-top: 16px;
@@ -24,7 +44,7 @@
 #pac-input {
   background-color: #fff;
   padding: 0 11px 0 13px;
-  width: 350px;
+  width: 40%;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
@@ -34,8 +54,8 @@
 #pac-input:focus {
   border-color: #4d90fe;
   margin-left: -1px;
-  padding-left: 14px;  /* Regular padding-left + 1. */
-  width: 401px;
+  padding-left: 14px; /* Regular padding-left + 1. */
+  width: 45%;
 }
 
 .pac-container {

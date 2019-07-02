@@ -2,67 +2,77 @@
 @import "bootstrap";
 
 @font-face {
-    font-family: 'open_sansregular';
-    src: url('/assets/OpenSans-Regular-webfont.eot');
-    src: url('/assets/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/OpenSans-Regular-webfont.svg#open_sansregular') format('svg'),
-         url('/assets/OpenSans-Regular-webfont.woff') format('woff'),
-         url('/assets/OpenSans-Regular-webfont.ttf') format('truetype');        
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "open_sansregular";
+  src: url("/assets/OpenSans-Regular-webfont.eot");
+  src: url("/assets/OpenSans-Regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/OpenSans-Regular-webfont.svg#open_sansregular") format("svg"),
+    url("/assets/OpenSans-Regular-webfont.woff") format("woff"),
+    url("/assets/OpenSans-Regular-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'open_sanslight';
-    src: url('/assets/OpenSans-Light-webfont.eot');
-    src: url('/assets/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/OpenSans-Light-webfont.svg#open_sanslight') format('svg'),
-         url('/assets/OpenSans-Light-webfont.woff') format('woff'),
-         url('/assets/OpenSans-Light-webfont.ttf') format('truetype');        
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "open_sanslight";
+  src: url("/assets/OpenSans-Light-webfont.eot");
+  src: url("/assets/OpenSans-Light-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/OpenSans-Light-webfont.svg#open_sanslight") format("svg"),
+    url("/assets/OpenSans-Light-webfont.woff") format("woff"),
+    url("/assets/OpenSans-Light-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'open_sanssemibold';
-    src: url('/assets/OpenSans-Semibold-webfont.eot');
-    src: url('/assets/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg'),
-         url('/assets/OpenSans-Semibold-webfont.woff') format('woff'),
-         url('/assets/OpenSans-Semibold-webfont.ttf') format('truetype');        
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "open_sanssemibold";
+  src: url("/assets/OpenSans-Semibold-webfont.eot");
+  src: url("/assets/OpenSans-Semibold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/OpenSans-Semibold-webfont.svg#open_sanssemibold") format("svg"),
+    url("/assets/OpenSans-Semibold-webfont.woff") format("woff"),
+    url("/assets/OpenSans-Semibold-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'open_sansbold';
-    src: url('/assets/OpenSans-Bold-webfont.eot');
-    src: url('/assets/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/OpenSans-Bold-webfont.svg#open_sansbold') format('svg'),
-         url('/assets/OpenSans-Bold-webfont.woff') format('woff'),
-         url('/assets/OpenSans-Bold-webfont.ttf') format('truetype');        
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "open_sansbold";
+  src: url("/assets/OpenSans-Bold-webfont.eot");
+  src: url("/assets/OpenSans-Bold-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/OpenSans-Bold-webfont.svg#open_sansbold") format("svg"),
+    url("/assets/OpenSans-Bold-webfont.woff") format("woff"),
+    url("/assets/OpenSans-Bold-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-body{
-  font-family: 'open_sansregular', 'open_sansregular', Arial, sans-serif;
+body {
+  font-family: "open_sansregular", "open_sansregular", Arial, sans-serif;
   line-height: 170%;
 }
-h1,h2,.h1,.h2 {
-  font-family: 'open_sansbold', 'open_sansbold', Arial, sans-serif;
+h1,
+h2,
+.h1,
+.h2 {
+  font-family: "open_sansbold", "open_sansbold", Arial, sans-serif;
   font-weight: 400;
   line-height: 1.1;
   color: inherit;
   font-weight: 400;
   line-height: 140%;
 }
-h3,h4,h5,h6,.h3,.h4,.h5,.h6 {
-  font-family: 'open_sanssemibold', 'open_sanssemibold', Arial, sans-serif;
+h3,
+h4,
+h5,
+h6,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "open_sanssemibold", "open_sanssemibold", Arial, sans-serif;
   font-weight: 400;
   line-height: 1.1;
   color: inherit;
@@ -70,7 +80,13 @@ h3,h4,h5,h6,.h3,.h4,.h5,.h6 {
   line-height: 140%;
 }
 
-.alert, #error_explanation {
+// input margin ovverides
+input {
+  margin: 4px 0 !important;
+}
+
+.alert,
+#error_explanation {
   padding: 15px;
   margin: 20px;
   border: 1px solid transparent;
@@ -81,7 +97,7 @@ h3,h4,h5,h6,.h3,.h4,.h5,.h6 {
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
+}
 //
 .navbar {
   min-height: 50px;
@@ -90,9 +106,10 @@ img {
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
 //overide for Telpok CSS
-.container, main {
+.container,
+main {
   margin-right: auto;
   margin-left: auto;
   padding-left: 0px;
@@ -104,32 +121,32 @@ img {
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .form {
   @extend .col-md-6;
-  }
+}
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #FFF;
+  background-color: #fff;
   padding-bottom: 0px;
   width: 100%;
   margin-top: -20px;
-  }
+}
 section {
   @extend .row;
   margin-top: 0px;
-  }
+}
 
 // Styles for Devise views
 // using Bootstrap
@@ -176,10 +193,11 @@ section {
 .nav-pills > li > a {
   border-radius: 50%;
   width: 60px;
-  height:60px;
-  color: #C87E05; 
-  background-color: #F8C43A;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+  height: 60px;
+  color: #c87e05;
+  background-color: #f8c43a;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .nav-pills > li + li {
@@ -190,73 +208,74 @@ section {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #ffffff;
-  background-color: #C87E05;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);
-
+  background-color: #c87e05;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 
-// Overwrite SELECT2 CSS 
+// Overwrite SELECT2 CSS
 
 .select2-container-multi .select2-choices .select2-search-field input {
-    padding: 5px;
-    margin: 1px 0;
+  padding: 5px;
+  margin: 1px 0;
 
-    font-family: "open_sansregular","open_sansregular",Arial,sans-serif;
-    font-size: 100%;
-    color: #666;
-    outline: 0;
-    border: 0;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    background: transparent !important;
+  font-family: "open_sansregular", "open_sansregular", Arial, sans-serif;
+  font-size: 100%;
+  color: #666;
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent !important;
 }
 .save-bottom {
-    color: #FFF;
-    background: none repeat scroll 0% 0% #33b6c6;
-    font-size: 40px;
-    line-height: 100%;
-    display: inline-block;
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    padding: 0.05em;
+  color: #fff;
+  background: none repeat scroll 0% 0% #33b6c6;
+  font-size: 40px;
+  line-height: 100%;
+  display: inline-block;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  padding: 0.05em;
 }
 
 label {
   display: inline-block;
   margin-bottom: 5px;
   font-weight: bold;
-  font-family: Century gothic;
+  font-family: "open_sansregular", "open_sansregular", Arial, sans-serif;
 }
 
-
-// end of Overwrite SELECT2 CSS 
+// end of Overwrite SELECT2 CSS
 
 // Rewrite Bootstrap Navbar default
 /* line 503, /Users/gaetan/.rvm/gems/ruby-2.0.0-p643@florileges-prairies/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse {
   height: 55px;
-  background-color: #C87E05;
-  border-color: #C87E05;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12);
+  background-color: #c87e05;
+  border-color: #c87e05;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 /* line 507, /Users/gaetan/.rvm/gems/ruby-2.0.0-p643@florileges-prairies/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-brand {
-  color: #28231E;
+  color: #28231e;
 }
 /* line 510, /Users/gaetan/.rvm/gems/ruby-2.0.0-p643@florileges-prairies/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
   color: white;
   background-color: transparent;
 }
 /* line 516, /Users/gaetan/.rvm/gems/ruby-2.0.0-p643@florileges-prairies/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-text {
-  color: #28231E;
+  color: #28231e;
 }
 /* line 521, /Users/gaetan/.rvm/gems/ruby-2.0.0-p643@florileges-prairies/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a {
-  color: #28231E;
-  font-family: 'open_sanssemibold', 'open_sanssemibold', Arial, sans-serif;
+  color: #28231e;
+  font-family: "open_sanssemibold", "open_sanssemibold", Arial, sans-serif;
   font-weight: 400;
   line-height: 140%;
   font-size: 14px;

@@ -4,7 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Prairies urbaines" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "P Urb" %>">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= yield :style_head %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= yield :javascript_head %>
     <%= csrf_meta_tags %>
@@ -24,6 +26,6 @@
       </div>
       <%= render 'layouts/footer' %>
     </main>
-    <%= javascript_include_tag "uservoice" %>
+    <%= yield :javascript_body %>
   </body>
 </html>
