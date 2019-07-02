@@ -25,7 +25,7 @@
     <div class="tab-content">
       <div class="tab-pane active" id="carte">
         <br>
-        <div id="map" style='width: 300px; height: 315px;'></div>
+        <div id="map" style='width: auto; height: 315px;background: white'></div>
       </div> 
       <div class="tab-pane" id="sketch">
         <br>
@@ -94,14 +94,13 @@
   <i class="glyphicon glyphicon-pencil"></i> Modifier
 <% end %>
 
+<script>
 
-    <script>
-
-      function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
+      function initializeMap() {
+        var myLatLng = {lat: <%= @site.latitude %>, lng: <%= @site.longitude %>};
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 13,
           center: myLatLng
         });
 
@@ -111,7 +110,6 @@
           title: 'Hello World!'
         });
       }
-    </script>
-<script type="text/javascript">
-  $('.navmenu').offcanvas()
 </script>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap", {defer: true, async: true} %>
+

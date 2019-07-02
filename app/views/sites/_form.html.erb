@@ -47,7 +47,7 @@
         <span style="font-size: 12px; color: #fff"><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
         <span style="font-size: 10px; color: #fff"><p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p></span>
       </div>
-      <input id="pac-input" class="gmcontrols" type="text" placeholder="Saisir un lieu">
+      <input id="pac-input" class="gmcontrols" type="text" placeholder="Saisir un lieu ou une adresse">
       <div id="map-canvas" style='width: auto; height: 420px;'></div>
           <div class="pac-card" id="pac-card">
       </div>
@@ -164,7 +164,7 @@
 
 
 <script>
-  function initialize() {
+  function initializeMap() {
     <% if @site.latitude? %>
       var myLatlng = new google.maps.LatLng(<%= @site.latitude %>, <%= @site.longitude %>);
     <% else %>
@@ -280,7 +280,7 @@
   
 
   google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
 
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap&libraries=places", {defer: true, async: true} %>
 
