@@ -44,8 +44,9 @@ gem 'font-awesome-rails'
 gem 'icomoon-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git'
+
 gem 'bootstrap_form'
-gem 'select2-rails'
+gem 'select2-rails', '~>3.5'
 gem "selectize-rails"
 gem 'acts-as-taggable-array-on'
 gem 'twitter-typeahead-rails'
