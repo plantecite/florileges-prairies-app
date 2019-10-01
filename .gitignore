@@ -93,3 +93,5 @@ pickle-email-*.html
 
 #Ignore database dump
 florileges-prairies-latest.dump
+
+.vscode/
