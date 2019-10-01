@@ -2,25 +2,31 @@ class ObservationsController < ApplicationController
   before_filter :authenticate_user!
 
   before_action :set_observation, only: [:show, :edit, :update, :destroy]
+  before_filter :set_export_mode, only: [:index]
 
   # GET /observations
   # GET /observations.json
   def index
     # @observations = Observation.all
     email = current_user.email
-    @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
+    if params[:content]=='user'
+      @observations = Observation.joins{releve.site.users}.where{{releve.site.users.email => email}}
+    elsif params[:content]=='all'
+      @valid_obs = Observation.where('taxon_id IS NOT NULL')
+      @observations = @valid_obs.joins{releve.site.users}.order{ releve.date.asc  }
+      # @observations = @valid_obs.joins{releve.site.users}.where{releve.site.users.email != 'gaetan@florileges.info'}.order{releve.date.asc}
+    end
     # @observations = Observation.joins{releve.site.users}.where{created_at >= 7.months.ago}
     # @observations = Observation.joins{releve.site.users}.where{releve.date >= 7.months.ago}
     # @observations = Observation.joins{releve.site.users}.where{releve.site.users.email != 'gaetan@florileges.info'}.order{ releve.date.asc  }
     
-
-
     respond_to do |format|
       format.html
       format.csv do
         headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-observations.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
+      format.xlsx
     end
 
   end
@@ -81,8 +87,8 @@ class ObservationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_observation
-      @observation = Observation.find(params[:id])
+    def set_export_mode
+      params[:content] ||= 'user'
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

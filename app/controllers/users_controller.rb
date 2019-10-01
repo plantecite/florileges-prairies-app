@@ -4,6 +4,15 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.all
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-users.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+      format.xlsx
+    end
   end
 
   def show

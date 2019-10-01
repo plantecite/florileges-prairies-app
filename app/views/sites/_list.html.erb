@@ -121,11 +121,20 @@
     <h3 style="text-align: center; padding: 10px 0 0 0;">EXPORTER VOS DONNÉES</h3>
     <div style="text-align: center; margin: 10px 10px 10px 20px">
       <%= link_to  sites_path(format: :csv), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites
+        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>(CSV - UTF8)</br>
       <% end %>
       <div style="margin-top: 10px;"></div>
+      <%= link_to  sites_path(format: :xlsx), class:'btn btn-default' do %>
+        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>(XLSX)</br>
+      <% end %>
+      <div style="margin-top: 10px;"></div>
+
       <%= link_to  observations_path(format: :csv), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations
+        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>(CSV - UTF8)</br>
+      <% end %>
+      <div style="margin-top: 10px;"></div>
+      <%= link_to  observations_path(format: :xlsx), class:'btn btn-default' do %>
+        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>(XLSX)</br>
       <% end %>
     </div>
   </div>

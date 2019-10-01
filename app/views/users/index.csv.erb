@@ -1,0 +1,17 @@
+	<% headers = [
+	'email',
+	'name',
+	'organization',
+	'position'
+] %>
+<%= CSV.generate_line(headers, {:row_sep => ''}).html_safe %>
+<% @users.each do |user| %>
+<%= CSV.generate_line([
+	user.email,
+	user.name,
+	user.structure,
+	user.fonction
+	], {:row_sep => ''}).html_safe %>
+<% end %>
+
+
