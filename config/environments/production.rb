@@ -1,4 +1,4 @@
-  FlorilegesPrairies::Application.configure do
+FlorilegesPrairies::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -11,7 +11,7 @@
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -33,7 +33,7 @@
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
+  config.assets.version = "1.0"
 
   #
 
@@ -72,24 +72,23 @@
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify  
+  config.active_support.deprecation = :notify
 
   config.action_mailer.smtp_settings = {
     :user_name => ENV["SENDGRID_USERNAME"],
     :password => ENV["SENDGRID_PASSWORD"],
     # :domain => 'vegebase.io',
-    :address => 'smtp.sendgrid.net',
+    :address => "smtp.sendgrid.net",
     :port => 587,
     :authentication => :plain,
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
   }
-  
+
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'florileges-prairies.herokuapp.com' }
+  config.action_mailer.default_url_options = {:host => "prairies.florileges.info"}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
