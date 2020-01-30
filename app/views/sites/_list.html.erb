@@ -136,7 +136,53 @@
       <%= link_to  observations_path(format: :xlsx), class:'btn btn-default' do %>
         <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>(XLSX)</br>
       <% end %>
+      
+      <!-- Button trigger export modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
+        <i class="glyphicon glyphicon-send"></i> Export des données </br>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="exportModalLabel">Export de vos données</h4>
+            </div>
+            <div class="modal-body tl ">
+              <p>Vos données seront rassemblés dans 2 tableurs au format XLSX:</p>
+              <ul>
+                <li>le premier tableur contiendra l'ensemble de vos sites et les données d'historique associées à ces derniers</li>
+                <li>le second tableur contiendra l'ensemble des observations, données de gestion par relevé comprises</li>
+              </ul>
+              <p>Ces 2 fichiers vous seront envoyés à l'adresse électronique associée à votre profil Florilèges, à savoir <<%= @current_user.email %>> </p>
+              <p>Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil</p>
+            </div>
+            <div class="modal-footer">
+              <div class='inline-block'>
+                <button type="button" class="btn btn-default inline-block" data-dismiss="modal">Annuler l'export</button>
+              </div>
+              <div class='inline-block'>
+                <%= button_to export_path, class:'btn btn-primary inline-block' do %>
+                  <i class="glyphicon glyphicon-send"></i> Envoyer les données </br>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal -->
+
+
+
     </div>
   </div>
   
 </div>
+
+<script>
+$('#exportModal').on('show.bs.modal', function (e) {
+  console.log(e);
+})
+</script>

@@ -6,9 +6,9 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    if params[:content]=='user'
-      @sites = current_user.sites(:order => 'code ASC')
-    elsif params[:content]=='all' 
+    if params[:content] == "user"
+      @sites = current_user.sites(:order => "code ASC")
+    elsif params[:content] == "all"
       @sites = Site.all
     end
     # @sites = Site.where{updated_at >= 10.months.ago}
@@ -24,17 +24,17 @@ class SitesController < ApplicationController
 
     @all_sites.each do |site|
       @features << {
-        type: 'Feature',
+        type: "Feature",
         geometry: {
-          type: 'Point',
-          coordinates: [site.longitude.to_f, site.latitude.to_f]
+          type: "Point",
+          coordinates: [site.longitude.to_f, site.latitude.to_f],
         },
         properties: {
           :code => site.code,
-          :'marker-color' => '#00607d',
-          :'marker-symbol' => 'circle',
-          :'marker-size' => 'medium'
-        }
+          :'marker-color' => "#00607d",
+          :'marker-symbol' => "circle",
+          :'marker-size' => "medium",
+        },
       }
     end
 
@@ -43,8 +43,8 @@ class SitesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"florileges-prairies-export-sites.csv\""
-        headers['Content-Type'] ||= 'text/csv'
+        headers["Content-Disposition"] = "attachment; filename=\"florileges-prairies-export-sites.csv\""
+        headers["Content-Type"] ||= "text/csv"
       end
       format.geojson { render json: @geojson }
       format.xlsx
@@ -52,11 +52,10 @@ class SitesController < ApplicationController
   end
 
   def all
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    authorize! :index, @user, :message => "Not authorized as an administrator."
     @sites = Site.all
     render json: @sites
   end
-
 
   # GET /sites/1
   # GET /sites/1.json
@@ -78,20 +77,20 @@ class SitesController < ApplicationController
     @hash = Gmaps4rails.build_markers(@site) do |site, marker|
       marker.lat site.latitude
       marker.lng site.longitude
-    end 
+    end
   end
 
   # POST /sites
   # POST /sites.json
   def create
     @site = Site.create(site_params)
-    @site.ownerships.build(owner: 'true', user_id: current_user.id)
+    @site.ownerships.build(owner: "true", user_id: current_user.id)
     respond_to do |format|
       if @site.save
-        format.html { redirect_to @site, notice: 'Le site de la prairie a été crée avec succès.' }
-        format.json { render action: 'show', status: :created, location: @site }
+        format.html { redirect_to @site, notice: "Le site de la prairie a été crée avec succès." }
+        format.json { render action: "show", status: :created, location: @site }
       else
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
         format.json { render json: @site.errors, status: :unprocessable_entity }
       end
     end
@@ -102,10 +101,10 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update(site_params)
-        format.html { redirect_to sites_url, notice: 'Le site a bien été mis à jour.' }
+        format.html { redirect_to sites_url, notice: "Le site a bien été mis à jour." }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @site.errors, status: :unprocessable_entity }
       end
     end
@@ -121,19 +120,29 @@ class SitesController < ApplicationController
     end
   end
 
+  # POST /sites/export
+  # DELETE /sites/export
+  def export
+    respond_to do |format|
+      format.html { redirect_to sites_url, notice: "L'export est en cours d'envoi à l'adresse <....>" }
+      format.json { head :no_content }
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
 
-    def set_export_mode
-      params[:content] ||= 'user'
-    end
+  # Use callbacks to share common setup or constraints between actions.
 
-    def set_site
-      @site = Site.find(params[:id])
-    end
+  def set_export_mode
+    params[:content] ||= "user"
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def site_params
-      params.require(:site).permit(:code, :latitude, :longitude, :location, :created_at, :updated_at, :password, :photo, :public, :plan, :propage, :propage_identifier, :gen_freq, :gen_gest, :gen_obj, :gen_surface, :gestion_date, :hist_date, :hist_occsol, :hist_trav, :cult_amend, :cult_amend_freq, :cult_trav, :cult_trav_freq, :cult_trav_freqinfo, photo_attributes: [:id, :title, :image])
-    end
+  def set_site
+    @site = Site.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def site_params
+    params.require(:site).permit(:code, :latitude, :longitude, :location, :created_at, :updated_at, :password, :photo, :public, :plan, :propage, :propage_identifier, :gen_freq, :gen_gest, :gen_obj, :gen_surface, :gestion_date, :hist_date, :hist_occsol, :hist_trav, :cult_amend, :cult_amend_freq, :cult_trav, :cult_trav_freq, :cult_trav_freqinfo, photo_attributes: [:id, :title, :image])
+  end
 end
