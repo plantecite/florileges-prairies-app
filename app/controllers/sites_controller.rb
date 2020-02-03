@@ -123,8 +123,11 @@ class SitesController < ApplicationController
   # POST /sites/export
   # DELETE /sites/export
   def export
+    export = DataExporterService.new(current_user.id)
+    export.call
+    AdminMailer.export_process_complete(export.user, export.attachment).deliver_now
     respond_to do |format|
-      format.html { redirect_to sites_url, notice: "L'export est en cours d'envoi à l'adresse <....>" }
+      format.html { redirect_to sites_url, notice: "L'export est en cours d'envoi à l'adresse <#{current_user.email}>" }
       format.json { head :no_content }
     end
   end
