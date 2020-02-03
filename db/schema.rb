@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426164137) do
+ActiveRecord::Schema.define(version: 20200203152204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "observations", force: true do |t|
+  create_table "observations", force: :cascade do |t|
     t.boolean  "q0"
     t.boolean  "q1"
     t.boolean  "q2"
@@ -34,27 +34,31 @@ ActiveRecord::Schema.define(version: 20160426164137) do
     t.datetime "updated_at"
     t.integer  "CD_NOM"
     t.integer  "CD_REF"
-    t.string   "LB_NOM"
-    t.string   "NOM_VALIDE"
-    t.string   "florileges"
-    t.string   "TAXREF_V"
+    t.string   "LB_NOM",              limit: 255
+    t.string   "NOM_VALIDE",          limit: 255
+    t.string   "florileges",          limit: 255
+    t.string   "TAXREF_V",            limit: 255
     t.integer  "taxon_id"
+    t.integer  "site_owner_id_cache"
+    t.integer  "site_id_cache"
   end
 
   add_index "observations", ["releve_id"], name: "index_observations_on_releve_id", using: :btree
+  add_index "observations", ["site_id_cache"], name: "index_observations_on_site_id_cache", using: :btree
+  add_index "observations", ["site_owner_id_cache"], name: "index_observations_on_site_owner_id_cache", using: :btree
   add_index "observations", ["taxon_id"], name: "index_observations_on_taxon_id", using: :btree
 
-  create_table "ownerships", force: true do |t|
+  create_table "ownerships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "site_id"
-    t.string   "owner"
+    t.string   "owner",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "photos", force: true do |t|
-    t.string   "title"
-    t.string   "image"
+  create_table "photos", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "image",      limit: 255
     t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,15 +66,15 @@ ActiveRecord::Schema.define(version: 20160426164137) do
 
   add_index "photos", ["site_id"], name: "index_photos_on_site_id", using: :btree
 
-  create_table "releves", force: true do |t|
+  create_table "releves", force: :cascade do |t|
     t.date     "date"
     t.text     "name"
-    t.string   "structure"
-    t.string   "fonction"
+    t.string   "structure",         limit: 255
+    t.string   "fonction",          limit: 255
     t.time     "time_start"
     t.time     "time_end"
-    t.string   "hauteur"
-    t.string   "milieux"
+    t.string   "hauteur",           limit: 255
+    t.string   "milieux",           limit: 255
     t.integer  "user_id"
     t.integer  "site_id"
     t.datetime "created_at"
@@ -79,21 +83,21 @@ ActiveRecord::Schema.define(version: 20160426164137) do
     t.boolean  "fauche_export"
     t.integer  "paturage_pression"
     t.integer  "paturage_duree"
-    t.string   "fauche"
-    t.string   "fauche_periode"
-    t.string   "fauche_freq"
-    t.string   "paturage"
-    t.string   "traitement"
-    t.string   "pression"
+    t.string   "fauche",            limit: 255
+    t.string   "fauche_periode",    limit: 255
+    t.string   "fauche_freq",       limit: 255
+    t.string   "paturage",          limit: 255
+    t.string   "traitement",        limit: 255
+    t.string   "pression",          limit: 255
   end
 
   add_index "releves", ["site_id"], name: "index_releves_on_site_id", using: :btree
   add_index "releves", ["user_id"], name: "index_releves_on_user_id", using: :btree
 
-  create_table "roles", force: true do |t|
-    t.string   "name"
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",          limit: 255
     t.integer  "resource_id"
-    t.string   "resource_type"
+    t.string   "resource_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,54 +105,54 @@ ActiveRecord::Schema.define(version: 20160426164137) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "sites", force: true do |t|
-    t.string   "code"
+  create_table "sites", force: :cascade do |t|
+    t.string   "code",               limit: 255
     t.decimal  "latitude"
     t.decimal  "longitude"
-    t.string   "location"
+    t.string   "location",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password"
-    t.string   "photo"
+    t.string   "password",           limit: 255
+    t.string   "photo",              limit: 255
     t.boolean  "public"
-    t.string   "plan"
+    t.string   "plan",               limit: 255
     t.boolean  "propage"
-    t.string   "gen_freq"
-    t.string   "gen_gest"
+    t.string   "gen_freq",           limit: 255
+    t.string   "gen_gest",           limit: 255
     t.integer  "gen_surface"
     t.datetime "gestion_date"
-    t.string   "hist_date"
-    t.string   "gen_obj"
-    t.string   "hist_occsol"
-    t.string   "hist_trav"
-    t.string   "cult_amend"
-    t.string   "cult_amend_freq"
-    t.string   "cult_trav"
-    t.string   "cult_trav_freq"
-    t.string   "cult_trav_freqinfo"
-    t.string   "propage_identifier"
+    t.string   "hist_date",          limit: 255
+    t.string   "gen_obj",            limit: 255
+    t.string   "hist_occsol",        limit: 255
+    t.string   "hist_trav",          limit: 255
+    t.string   "cult_amend",         limit: 255
+    t.string   "cult_amend_freq",    limit: 255
+    t.string   "cult_trav",          limit: 255
+    t.string   "cult_trav_freq",     limit: 255
+    t.string   "cult_trav_freqinfo", limit: 255
+    t.string   "propage_identifier", limit: 255
   end
 
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
-    t.string   "taggable_type"
+    t.string   "taggable_type", limit: 255
     t.integer  "tagger_id"
-    t.string   "tagger_type"
+    t.string   "tagger_type",   limit: 255
     t.string   "context",       limit: 128
     t.datetime "created_at"
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
-  create_table "tags", force: true do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
+  create_table "tags", force: :cascade do |t|
+    t.string  "name",           limit: 255
+    t.integer "taggings_count",             default: 0
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "taxa", force: true do |t|
+  create_table "taxa", force: :cascade do |t|
     t.text     "regne"
     t.text     "phylum"
     t.text     "classe"
@@ -159,7 +163,7 @@ ActiveRecord::Schema.define(version: 20160426164137) do
     t.integer  "cd_nom"
     t.integer  "cd_taxsup"
     t.integer  "cd_ref"
-    t.string   "rang"
+    t.string   "rang",             limit: 255
     t.text     "lb_nom"
     t.text     "lb_auteur"
     t.text     "nom_complet"
@@ -167,23 +171,23 @@ ActiveRecord::Schema.define(version: 20160426164137) do
     t.text     "nom_valide"
     t.text     "nom_vern"
     t.text     "nom_vern_eng"
-    t.string   "habitat"
-    t.string   "fr"
-    t.string   "gf"
-    t.string   "mar"
-    t.string   "gua"
-    t.string   "sm"
-    t.string   "sb"
-    t.string   "spm"
-    t.string   "may"
-    t.string   "epa"
-    t.string   "reu"
-    t.string   "taaf"
-    t.string   "pf"
-    t.string   "nc"
-    t.string   "wf"
-    t.string   "cli"
-    t.string   "url"
+    t.string   "habitat",          limit: 255
+    t.string   "fr",               limit: 255
+    t.string   "gf",               limit: 255
+    t.string   "mar",              limit: 255
+    t.string   "gua",              limit: 255
+    t.string   "sm",               limit: 255
+    t.string   "sb",               limit: 255
+    t.string   "spm",              limit: 255
+    t.string   "may",              limit: 255
+    t.string   "epa",              limit: 255
+    t.string   "reu",              limit: 255
+    t.string   "taaf",             limit: 255
+    t.string   "pf",               limit: 255
+    t.string   "nc",               limit: 255
+    t.string   "wf",               limit: 255
+    t.string   "cli",              limit: 255
+    t.string   "url",              limit: 255
     t.integer  "taxref_v"
     t.boolean  "florileges"
     t.integer  "index_ranking"
@@ -191,36 +195,36 @@ ActiveRecord::Schema.define(version: 20160426164137) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "structure"
-    t.string   "fonction"
-    t.string   "avatar"
+    t.string   "name",                   limit: 255
+    t.string   "structure",              limit: 255
+    t.string   "fonction",               limit: 255
+    t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "users_roles", id: false, force: true do |t|
+  create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  create_table "woods", force: true do |t|
+  create_table "woods", force: :cascade do |t|
     t.integer  "q1"
     t.integer  "q2"
     t.integer  "q3"
