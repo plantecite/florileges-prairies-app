@@ -29,30 +29,39 @@
         <% end %>
       <% end %>
     </div>
-    <% if user_signed_in? %>
-      <div class="dropdown">
-        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-500 hover:bg-white mt-4 mr-12 lg:mt-0 dropdown-toggle" data-toggle="dropdown">Session de <%= current_user.name %> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to edit_user_registration_path do %>
-              <span class="glyphicon glyphicon-pencil"></span> Modifier mon compte
-            <% end %>
-          </li>
-          <!-- <li><a href="#">Tableau de bord</a></li> -->
-          <li class="divider"></li>
-          <li><%= link_to sites_path do %>
-              Consulter mes prairies <span class="badge"><%= current_user.sites.count %> </span>
-            <% end %></li>
-          <!-- <li><a href="#">Mes Co-observateurs</a></li> -->
-          <li class="divider"></li>
-          <!-- <li><a href="#">Ajouter des co-observateurs</a></li> -->
-          <!-- <li class="divider"></li> -->
-          <li><%= link_to destroy_user_session_path, :method=>'delete' do %>
-              <span class="glyphicon glyphicon-remove-circle"></span> Déconnexion 
-            <% end %>
-          </li>
-        </ul>
+    <div class="flex flex-wrap">
+      <div class="w-full px-4">
+        <div class="relative inline-flex align-middle w-full">
+          <% if user_signed_in? %>
+            <button class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 bg-orange-800" style="transition:all .15s ease" type="button" onclick="openDropdown(event,'dropdown-id')">
+              Session de <%= current_user.name %> <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="hidden bg-white  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1" style="min-width:12rem" id="dropdown-id">
+              <%= link_to sites_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" do %>
+                Consulter mes prairies <span class="badge"><%= current_user.sites.count %> </span>
+              <% end %>
+              <%= link_to edit_user_registration_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" do %>
+                <i class="fas fa-cog mr-3"></i>Modifier mon compte 
+              <% end %>
+              <% if current_user.has_role? :admin %>
+                <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
+                <a href="#admin" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-700 font-bold">
+                  Espace administrateur
+                </a>
+              <% end %>
+              <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
+              <%= link_to destroy_user_session_path, method: "delete",  class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent font-bold text-red-600" do %>
+                <i class="fa fa-sign-out mr-3"></i>Déconnexion
+              <% end %>
+            </div>
+          <% else %>
+            <button class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 bg-orange-800" style="transition:all .15s ease" type="button" onclick="openDropdown(event,'dropdown-id')">
+              <%= link_to 'Me connecter', new_user_session_path, class: "text-white font-bold uppercase text-sm px-6 py-3" %>
+            </button>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
 </nav>
 <script>
@@ -85,5 +94,18 @@
               if(!this.view.atTopOfPage) this.view.atTopOfPage = true
           }
       }
+  }
+</script>
+<script>
+  function openDropdown(event,dropdownID){
+    let element = event.target;
+    while(element.nodeName !== "BUTTON"){
+      element = element.parentNode;
+    }
+    var popper = new Popper(element, document.getElementById(dropdownID), {
+      placement: 'bottom-start'
+    });
+    document.getElementById(dropdownID).classList.toggle("hidden");
+    document.getElementById(dropdownID).classList.toggle("block");
   }
 </script>
