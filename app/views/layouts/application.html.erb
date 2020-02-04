@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
     <title><%= content_for?(:title) ? yield(:title) : "Prairies urbaines" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "P Urb" %>">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Bevan|Bowlby+One+SC|Bree+Serif|Lora|Muli:300,400,700|Ultra&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= yield :style_head %>
@@ -13,21 +17,13 @@
     <%= yield :javascript_head %>
     <%= csrf_meta_tags %>
   </head>
-  <body id="top" data-spy="scroll" data-target="#navbar" >
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
+  <body id="top" data-spy="scroll" data-target="#navbar" class="flex flex-col min-h-screen ">
+    <%= render 'layouts/navigation' %>
+    <main role="main" class="mt-80">
       <%= render 'layouts/messages' %>
-      <div class="section-page-landing section-light-grey" id="features">
-        <div class="inner-section">
-          <div class="container">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-      <%= render 'layouts/footer' %>
+      <%= yield %>
     </main>
+    <%= render 'layouts/footer' %>
     <%= yield :javascript_body %>
   </body>
 </html>

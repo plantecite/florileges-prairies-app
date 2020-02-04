@@ -1,3 +1,125 @@
+<div class="flex flex-wrap">
+  <div class="w-3/4 p-4 text-center text-gray-200">
+    <h1>SITES SUIVIS</h1>
+    <div class="flex flex-wrap" id="tabs-id">
+      <div class="w-full">
+        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+          <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-orange-600" onclick="changeAtiveTab(event,'tab-list')">
+              Vue Liste
+            </a>
+          </li>
+          <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-orange-600 bg-white" onclick="changeAtiveTab(event,'tab-map')">
+              Vue Carte
+            </a>
+          </li>
+          <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-orange-600 bg-white" onclick="changeAtiveTab(event,'tab-actions')">
+              Actions
+            </a>
+          </li>
+        </ul>
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+          <div class="px-4 py-5 flex-auto">
+            <div class="tab-content tab-space">
+              <div class="block" id="tab-list">
+                <p>
+                  Collaboratively administrate empowered markets via
+                  plug-and-play networks. Dynamically procrastinate B2C users
+                  after installed base benefits.
+                  <br />
+                  <br />
+                  Dramatically visualize customer directed convergence
+                  without revolutionary ROI.
+                </p>
+              </div>
+              <div class="hidden" id="tab-map">
+                <p>
+                  Completely synergize resource taxing relationships via
+                  premier niche markets. Professionally cultivate one-to-one
+                  customer service with robust ideas.
+                  <br />
+                  <br />
+                  Dynamically innovate resource-leveling customer service for
+                  state of the art customer service.
+                </p>
+              </div>
+              <div class="hidden" id="tab-actions">
+                <p>
+                  Efficiently unleash cross-media information without
+                  cross-media value. Quickly maximize timely deliverables for
+                  real-time schemas.
+                  <br />
+                  <br />
+                  Dramatically maintain clicks-and-mortar solutions
+                  without functional solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-1/4 bg-gray-400 p-4 text-center text-gray-700">
+    <div class="the-box-landing border-orange-topbottom">
+      <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
+      <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
+        <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
+      </div>
+    </div>
+    <!--MODAL BUTTON-->
+    <button class="bg-orange-700 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
+      Exporter mes données
+    </button>
+    <!--MODAL -->
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
+      <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <!--content-->
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <!--header-->
+          <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+            <h3 class="text-3xl font-semibold">
+              Export des données
+            </h3>
+            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
+              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                ×
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative p-6 flex-auto">
+            <p class="my-4 text-gray-600 text-lg leading-relaxed">
+              Vos données seront rassemblés dans un tableur au format .xlsx qui sera envoyé à l'adresse électronique 
+              associée à votre profil Florilèges, à savoir <%= @current_user.email %>. 
+              Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil.
+            </p>
+          </div>
+          <!--footer-->
+          <div class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+            <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
+              Annuler
+            </button>
+            <button class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
+              M'envoyer le fichier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+    <script type="text/javascript">
+      function toggleModal(modalID){
+        document.getElementById(modalID).classList.toggle("hidden");
+        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+        document.getElementById(modalID).classList.toggle("flex");
+        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+      }
+    </script>
+  </div>
+</div>
 <h1>CONSULTER LES PRAIRIES SUIVIES</h1>
 <div class="row">
   <% unless @sites.empty? %>
@@ -5,53 +127,82 @@
   <% else %>
     <div class="col-md-9">
       <div class="the-box-landing border-orange-topbottom">
-    <h3>CRÉER VOTRE PREMIÈRE PRAIRIE</h3>
-    <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
-      <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
-    </div>
-    </div>
-  <% end %> 
-</div>
-
-
-<script type="text/javascript">
-
-$("#pillSites").on('shown.bs.tab', function initializeMap() {
-  var markers = <%= raw @hash.to_json %>;
-  var center = { lat: 47.295493, lng: -1.3938170000000127 }; 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
-    center: center
-  });
-  console.log('markers', markers)
-
-  var marker = new google.maps.Marker({
-    position: center,
-    map: map,
-    title: 'Hello World!'
-  });
-  for (var i = 0; i < markers.length; i++) {
-    var site = markers[i];
-    console.log("lat", site.lat)
-    var marker = new google.maps.Marker({
-      position: {lat: parseFloat(site.lat), lng: parseFloat(site.lng) },
-      map: map,
-      title: site.infowindow
-    });
-    var infowindow = new google.maps.InfoWindow({
-      content: site.infowindow
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-  // Sets the map on all markers in the array.
-      function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-        }
+        <h3>CRÉER VOTRE PREMIÈRE PRAIRIE</h3>
+        <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
+          <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <script type="text/javascript">
+    $("#pillSites").on('shown.bs.tab', function initializeMap() {
+      var markers = <%= raw @hash.to_json %>;
+      var center = { lat: 47.295493, lng: -1.3938170000000127 };
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: center
+      });
+      console.log('markers', markers)
+    
+      var marker = new google.maps.Marker({
+        position: center,
+        map: map,
+        title: 'Hello World!'
+      });
+      for (var i = 0; i < markers.length; i++) {
+        var site = markers[i];
+        console.log("lat", site.lat)
+        var marker = new google.maps.Marker({
+          position: {lat: parseFloat(site.lat), lng: parseFloat(site.lng) },
+          map: map,
+          title: site.infowindow
+        });
+        var infowindow = new google.maps.InfoWindow({
+          content: site.infowindow
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
       }
-});
-</script>
-
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap", {defer: true, async: true} %>
+      // Sets the map on all markers in the array.
+          function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(map);
+            }
+          }
+    });
+  </script>
+  <script type="text/javascript">
+    function changeAtiveTab(event,tabID){
+      let element = event.target;
+      while(element.nodeName !== "A"){
+        element = element.parentNode;
+      }
+      ulElement = element.parentNode.parentNode;
+      aElements = ulElement.querySelectorAll("li > a");
+      tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+      for(let i = 0 ; i < aElements.length; i++){
+        aElements[i].classList.remove("text-white");
+        aElements[i].classList.remove("bg-orange-600");
+        aElements[i].classList.add("text-orange-600");
+        aElements[i].classList.add("bg-white");
+        tabContents[i].classList.add("hidden");
+        tabContents[i].classList.remove("block");
+      }
+      element.classList.remove("text-orange-600");
+      element.classList.remove("bg-white");
+      element.classList.add("text-white");
+      element.classList.add("bg-orange-600");
+      document.getElementById(tabID).classList.remove("hidden");
+      document.getElementById(tabID).classList.add("block");
+    }
+  </script>
+  <script type="text/javascript">
+    function toggleModal(modalID){
+      document.getElementById(modalID).classList.toggle("hidden");
+      document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+      document.getElementById(modalID).classList.toggle("flex");
+      document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    }
+  </script>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap", {defer: true, async: true} %>

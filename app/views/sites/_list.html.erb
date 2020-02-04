@@ -1,7 +1,11 @@
 <div class="col-sm-9">
   <ul class="nav nav-pills nav-justified" id="pillSites">
-    <li class="filter active"><a href="#liste" data-toggle="pill"><h4 class="glyphicon glyphicon-th-list"></h4></a></li>
-    <li class="filter"><a href="#carte" data-toggle="pill"><h4 class="glyphicon glyphicon-globe"></h4></a></li>
+    <li class="filter active"><a href="#liste" data-toggle="pill">
+        <h4 class="glyphicon glyphicon-th-list"></h4>
+      </a></li>
+    <li class="filter"><a href="#carte" data-toggle="pill">
+        <h4 class="glyphicon glyphicon-globe"></h4>
+      </a></li>
     <!-- <li class="filter"><a href="#stats" data-toggle="pill"><h4 class="glyphicon glyphicon-stats"></h4></a></li> -->
   </ul>
   <div class="tab-content">
@@ -9,180 +13,206 @@
     <div class="tab-pane active" id="liste">
       <br>
       <% for site in @sites %>
-      <div class="the-box-landing border-color-left">
-        <div class="row">
-          <div class="col-sm-3">
-            <%= image_tag site.photo_url(:thumb).to_s, class: 'img-responsive img-circle'  %>
-          </div>
-          <div class="col-sm-7">
-            <h3><%= link_to site.code, site  %></h3>
-            <p><i><%= site.location %></i></p>
-            <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
-
-            <div>Vous avez <strong><%= site.releves.length %> fiche de relevés et de gestion</strong> associée à ce site</div>
-            <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
+        <div class="the-box-landing border-color-left">
+          <div class="row">
+            <div class="col-sm-3">
+              <%= image_tag site.photo_url(:thumb).to_s, class: 'img-responsive img-circle'  %>
+            </div>
+            <div class="col-sm-7">
+              <h3><%= link_to site.code, site  %></h3>
+              <p><i><%= site.location %></i></p>
+              <span class="hint"><b>Code de suivi: </b><%= site.code %> | <b>Créé par: </b><i> <%= site.users.first.name %></i></span><hr>
+              <div>Vous avez <strong><%= site.releves.length %> fiche de relevés et de gestion</strong> associée à ce site</div>
+              <div class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
                 <i class="glyphicon glyphicon-pencil"></i> Fiche de relevés et de gestion
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div>
+                <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
+                  <i class="glyphicon glyphicon-pencil"></i> Modifier
+                <% end %>
+              </div>
+              <div></div>
+              <div>
+                <%= link_to site, method: :delete, data: { confirm: "Cette action est définitive. Êtes-vous sûr de vouloir supprimer le site?" }, class:'btn btn-danger btn-xs' do %>
+                  <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
+                <% end %>
+              </div>
+              <!-- Modal GESTION-->
+              <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of Modal GESTION-->
+              <!-- Modal RELEVÉS-->
+              <div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
+                    </div>
+                    <div class="modal-body">
+                      <% site.releves.each do |g| %>
+                        <div class="fields">
+                          <h4>Fiche-relevés en date du <%= g.date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4>
+                        </div>
+                        <br>
+                      <% end %>
+                      <div class="action">
+                        <% unless site.releves.empty? %>
+                          <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
+                        <% else %>
+                          <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of Modal RELEVÉS-->
             </div>
           </div>
-          <div class="col-sm-2">
-            <div>
-              <%= link_to  edit_site_path(site), class:'btn btn-info btn-xs' do %>
-                <i class="glyphicon glyphicon-pencil"></i> Modifier
-              <% end %>
+        </div>
+      <% end %>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="https://source.unsplash.com/random/400x400" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+          <p class="text-gray-700 text-base">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+          </p>
+        </div>
+        <div class="px-6 py-4">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#photography</span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
+        </div>
+      </div>
+      <div class="max-w-sm w-full lg:max-w-full lg:flex">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+            <p class="text-sm text-gray-600 flex items-center">
+              <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+              </svg>
+              Members only
+            </p>
+            <div class="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
+            <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+          </div>
+          <div class="flex items-center">
+            <img class="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink">
+            <div class="text-sm">
+              <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+              <p class="text-gray-600">Aug 18</p>
             </div>
-            <div></div>
-            <div>
-              <%= link_to site, method: :delete, data: { confirm: "Cette action est définitive. Êtes-vous sûr de vouloir supprimer le site?" }, class:'btn btn-danger btn-xs' do %>
-                  <i class="glyphicon glyphicon-remove-sign"></i> Supprimer
-               <% end %>
-            </div>
-            <!-- Modal GESTION-->
-            <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
-                  </div>
-                  <div class="modal-body">
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End of Modal GESTION-->
-            <!-- Modal RELEVÉS-->
-            <div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
-                  </div>
-                  <div class="modal-body">
-                    <% site.releves.each do |g| %>
-                    <div class="fields">
-                      <h4>Fiche-relevés en date du <%= g.date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4> 
-
-                    </div>
-                    <br>
-                    <% end %>
-                    <div class="action">
-                      <% unless site.releves.empty? %>
-                        <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
-                      <% else %>
-                        <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
-                      <% end %>
-                    </div>
-                    
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End of Modal RELEVÉS-->
           </div>
         </div>
       </div>
-
-        <% end %>
-    </div>
-    <!-- MAP OF SITES -->
-    <div class="tab-pane" id="carte">
-      <br>
-      <div style="width: auto">
-        <div id="map" style="width: auto; height: 400px"></div>
+      <!-- MAP OF SITES -->
+      <div class="tab-pane" id="carte">
+        <br>
+        <div style="width: auto">
+          <div id="map" style="width: auto; height: 400px"></div>
+        </div>
       </div>
-    </div>
-    <!-- STATS OF SITES -->
-<!--     <div class="tab-pane" id="stats">
+      <!-- STATS OF SITES -->
+      <!--     <div class="tab-pane" id="stats">
       <br>
       <div style="width: auto">
         <div style="width: auto; height: 400px; background: #0000">STATS</div>
       </div>
     </div> -->
-
-  </div><!-- tab content -->
-</div>
-<div class="col-sm-3">
-  <div class="the-box-landing border-orange-topbottom">
-    <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
-    <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
-      <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
     </div>
+    <!-- tab content -->
   </div>
-  <div class="the-box-landing border-orange-topbottom">
-    <h3 style="text-align: center; padding: 10px 0 0 0;">EXPORTER VOS DONNÉES</h3>
-    <div style="text-align: center; margin: 10px 10px 10px 20px">
-      <%= link_to  sites_path(format: :csv), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>(CSV - UTF8)</br>
+  <div class="col-sm-3">
+    <div class="the-box-landing border-orange-topbottom">
+      <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
+      <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
+        <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
+      </div>
+    </div>
+    <div class="the-box-landing border-orange-topbottom">
+      <h3 style="text-align: center; padding: 10px 0 0 0;">EXPORTER VOS DONNÉES</h3>
+      <div style="text-align: center; margin: 10px 10px 10px 20px">
+        <%= link_to  sites_path(format: :csv), class:'btn btn-default' do %>
+          <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>
+          (CSV - UTF8)</br>
       <% end %>
       <div style="margin-top: 10px;"></div>
       <%= link_to  sites_path(format: :xlsx), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>(XLSX)</br>
-      <% end %>
-      <div style="margin-top: 10px;"></div>
-
-      <%= link_to  observations_path(format: :csv), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>(CSV - UTF8)</br>
-      <% end %>
-      <div style="margin-top: 10px;"></div>
-      <%= link_to  observations_path(format: :xlsx), class:'btn btn-default' do %>
-        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>(XLSX)</br>
-      <% end %>
-      
-      <!-- Button trigger export modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
-        <i class="glyphicon glyphicon-send"></i> Export des données </br>
-      </button>
-
-      <!-- Modal -->
-      <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="exportModalLabel">Export de vos données</h4>
-            </div>
-            <div class="modal-body tl ">
-              <p>Vos données seront rassemblés dans 2 tableurs au format XLSX:</p>
-              <ul>
-                <li>le premier tableur contiendra l'ensemble de vos sites et les données d'historique associées à ces derniers</li>
-                <li>le second tableur contiendra l'ensemble des observations, données de gestion par relevé comprises</li>
-              </ul>
-              <p>Ces 2 fichiers vous seront envoyés à l'adresse électronique associée à votre profil Florilèges, à savoir <<%= @current_user.email %>> </p>
-              <p>Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil</p>
-            </div>
-            <div class="modal-footer">
-              <div class='inline-block'>
-                <button type="button" class="btn btn-default inline-block" data-dismiss="modal">Annuler l'export</button>
-              </div>
-              <div class='inline-block'>
-                <%= button_to export_path, class:'btn btn-primary inline-block' do %>
-                  <i class="glyphicon glyphicon-send"></i> Envoyer les données </br>
-                <% end %>
-              </div>
-            </div>
+        <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos sites <br>
+        (XLSX)</br>
+    <% end %>
+    <div style="margin-top: 10px;"></div>
+    <%= link_to  observations_path(format: :csv), class:'btn btn-default' do %>
+      <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>
+      (CSV - UTF8)</br>
+  <% end %>
+  <div style="margin-top: 10px;"></div>
+  <%= link_to  observations_path(format: :xlsx), class:'btn btn-default' do %>
+    <i class="glyphicon glyphicon-cloud-download"></i> Télécharger vos observations <br>
+    (XLSX)</br>
+<% end %>
+<!-- Button trigger export modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
+  <i class="glyphicon glyphicon-send"></i> Export des données </br>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exportModalLabel">Export de vos données</h4>
+      </div>
+      <div class="modal-body tl ">
+        <p>Vos données seront rassemblés dans 2 tableurs au format XLSX:</p>
+        <ul class="list-disc">
+          <li>le premier tableur contiendra l'ensemble de vos sites et les données d'historique associées à ces derniers</li>
+          <li>le second tableur contiendra l'ensemble des observations, données de gestion par relevé comprises</li>
+        </ul>
+        <p>Ces 2 fichiers vous seront envoyés à l'adresse électronique associée à votre profil Florilèges, à savoir <<%= @current_user.email %>> </p>
+          <p>Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil</p>
+        </div>
+        <div class="modal-footer">
+          <div class='inline-block'>
+            <button type="button" class="btn btn-default inline-block" data-dismiss="modal">Annuler l'export</button>
           </div>
+          <div class='inline-block'>
+            <%= button_to export_path, class:'btn btn-primary inline-block' do %>
+              <i class="glyphicon glyphicon-send"></i> Envoyer les données </br>
+          <% end %>
         </div>
       </div>
-      <!-- /Modal -->
-
-
-
     </div>
   </div>
-  
 </div>
-
+<!-- /Modal -->
+</div>
+</div>
+</div>
 <script>
-$('#exportModal').on('show.bs.modal', function (e) {
-  console.log(e);
-})
+  $('#exportModal').on('show.bs.modal', function (e) {
+    console.log(e);
+  })
 </script>

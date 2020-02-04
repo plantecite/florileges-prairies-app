@@ -127,7 +127,7 @@ class SitesController < ApplicationController
     export.call
     AdminMailer.export_process_complete(export.user, export.attachment).deliver_now
     respond_to do |format|
-      format.html { redirect_to sites_url, notice: "L'export est en cours d'envoi à l'adresse <#{current_user.email}>" }
+      format.html { redirect_to sites_url, notice: "#{export.message}. Dès qu'elles seront prêtes, ces données seront envoyées à l'adresse <#{current_user.email}>" }
       format.json { head :no_content }
     end
   end
