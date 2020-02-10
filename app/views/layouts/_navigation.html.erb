@@ -1,8 +1,10 @@
 <nav class="flex fixed w-full items-center justify-between flex-wrap bg-orange-500 p-6 top-0 animated">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <span class="font-semibold text-xl tracking-tight">Florilèges</span>
-  </div>
+  <%= link_to root_path, class: "py-2 px-4" do %>
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+      <span class="font-semibold text-xl tracking-tight">Florilèges</span>
+    </div>
+  <% end %>
   <div class="block lg:hidden">
     <button class="flex items-center px-3 py-2 border rounded text-orange-200 border-orange-400 hover:text-white hover:border-white">
       <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
@@ -10,24 +12,6 @@
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4">
-        Docs
-      </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white mr-4">
-        Examples
-      </a>
-      <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-orange-200 hover:text-white">
-        Blog
-      </a>
-      <% unless user_signed_in? %>
-        <%= link_to 'Connexion', new_user_session_path %>
-        <%= link_to 'Inscription', new_user_registration_path %>
-      <% end %>
-      <% if user_signed_in? %>
-        <% if current_user.has_role? :admin %>
-          <%= link_to 'Liste des utilisateurs', users_path %>
-        <% end %>
-      <% end %>
     </div>
     <div class="flex flex-wrap">
       <div class="w-full px-4">
@@ -64,38 +48,6 @@
     </div>
   </div>
 </nav>
-<script>
-  // in data, I like to store a view object with all
-  // the values I need for a component to manage
-  // it's 'view' state - ie loading,
-  // or in this case, if the user is at the top of the page or not
-  data () {
-      return {
-          view: {
-              atTopOfPage: true
-          }
-      }
-  },
-  
-  // a beforeMount call to add a listener to the window
-  beforeMount () {
-      window.addEventListener('scroll', this.handleScroll);
-  },
-  
-  methods: {
-  	// the function to call when the user scrolls, added as a method
-      handleScroll(){
-          // when the user scrolls, check the pageYOffset
-          if(window.pageYOffset>0){
-              // user is scrolled
-              if(this.view.atTopOfPage) this.view.atTopOfPage = false
-          }else{
-              // user is at top of page
-              if(!this.view.atTopOfPage) this.view.atTopOfPage = true
-          }
-      }
-  }
-</script>
 <script>
   function openDropdown(event,dropdownID){
     let element = event.target;

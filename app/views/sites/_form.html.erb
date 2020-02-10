@@ -1,10 +1,9 @@
 <%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
   <%= f.error_notification %>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="list-block">
+  <div class="flex">
+    <div class="w-1/2">
+      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
         <%= f.input :code, label: "Prairie suivie" %>
-
         <div class="row">
           <div class="col-md-6">
             <% if @site.photo? %>
@@ -31,61 +30,62 @@
           <div class="col-md-6">
             <%= f.input :longitude, label: "Longitude", as: :hidden  %>
           </div>
-          </div>
+        </div>
       </div>
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Questions générales</div>
+      <div class="rounded shadow-lg border-2 border-gray-400 m-5 mt-8 p-3">
+        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Questions générales</div>
         <%= f.input :gen_gest, label: "Gestionaire du site (nom)" %>
         <%= f.input :gen_surface, label: "Surface, même approximative (en m2)" %>
         <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie" %>
         <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["nulle","faible","forte"] %>
-
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="w-1/2">
       <div class="info-block">
-        <span style="font-size: 12px; color: #fff"><p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p></span>
-        <span style="font-size: 10px; color: #fff"><p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p></span>
+        <span style="font-size: 12px; color: #fff">
+          <p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p>
+        </span>
+        <span style="font-size: 10px; color: #fff">
+          <p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p>
+        </span>
       </div>
       <input id="pac-input" class="gmcontrols" type="text" placeholder="Saisir un lieu ou une adresse">
       <div id="map-canvas" style='width: auto; height: 420px;'></div>
-          <div class="pac-card" id="pac-card">
+      <div class="pac-card" id="pac-card">
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">
+  <div class="flex">
+    <div class="w-1/2">
+      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">
           Ce que vous savez de l'histoire du site
         </div>
         <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie" %>
         <%= f.input :hist_date, label: "Date de création de la prairie" %>
         <%= f.input :hist_trav, label: "Travaux préalables à la création de la prairie" %>
       </div>
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Lien avec les papillons</div>
-         <%= f.input :propage, as: :radio_buttons, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
-
-         <%= f.input :propage_identifier, label: "Si oui, quel est votre identifiant PROPAGE?" %>
+      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Lien avec les papillons</div>
+        <%= f.input :propage, as: :radio_buttons, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
+        <%= f.input :propage_identifier, label: "Si oui, quel est votre identifiant PROPAGE?" %>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="list-block">
-        <div style="font-style: bold; font-size: 16px; margin-bottom: 10px; ">Itinéraire de culture de la prairie</div>
+    <div class="w-1/2">
+      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Itinéraire de culture de la prairie</div>
         <%= f.input :cult_trav, label: "Travail du sol préalable à la mise ne place de la prairie" %>
         <%= f.input :cult_trav_freq, label: "Fréquence du travail du sol" %>
         <%= f.input :cult_trav_freqinfo, label: "Si régulier, à quelle fréquence" %>
         <%= f.input :cult_amend, label: "Amendement de la prairie" %>
         <%= f.input :cult_amend_freq, label: "Fréquence de l'amendement" %>
-
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="flex">
     <div class="col-md-2">
       <%= link_to sites_path, class: "col-md-12 btn btn-danger btn-lg" do %>
-      <span class="fa fa-backward"></span> ANNULER
+        <span class="fa fa-backward"></span> ANNULER
       <% end %>
     </div>
     <div class="col-md-10">
@@ -94,10 +94,8 @@
   </div>
 <% end %>
 <hr>
-
-
 <script>
-  $(document).ready(function() { 
+  $(document).ready(function() {
     $("#site_ensoleillement").select2({
       allowClear: true,
       placeholder: "Sélectionner une valeur"
@@ -159,11 +157,9 @@
       placeholder: "Sélectionner une ou plusieurs valeurs et/ou ajouter vos propres termes",
       tags:["aucun","à la mise en place","régulier"]
     });
-
+  
   });
 </script>
-
-
 <script>
   function initializeMap() {
     <% if @site.latitude? %>
@@ -178,15 +174,15 @@
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     var input = document.getElementById('pac-input');
     var types = document.getElementById('type-selector');
-
+  
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
+  
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo('bounds', map);
-
+  
     var infowindow = new google.maps.InfoWindow();
-
+  
     <% if @site.latitude? %>
     var site = new google.maps.Marker({
       position: myLatlng,
@@ -201,9 +197,9 @@
       draggable: true
     });
     <% end %>
-
-
-
+  
+  
+  
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
       infowindow.close();
       site.setVisible(false);
@@ -228,7 +224,7 @@
       }));
       site.setPosition(place.geometry.location);
       site.setVisible(true);
-
+  
       var address = '';
       if (place.address_components) {
         address = [
@@ -236,34 +232,34 @@
           (place.address_components[1] && place.address_components[1].short_name || ''),
           (place.address_components[2] && place.address_components[2].short_name || '')
         ].join(' ');
-        var lat=document.getElementById("site_latitude").value=place.geometry.location.lat();    
+        var lat=document.getElementById("site_latitude").value=place.geometry.location.lat();
         var lng=document.getElementById("site_longitude").value=place.geometry.location.lng();
-
+  
         var site_location=document.getElementById("site_location").value=place.formatted_address;
-
+  
       }
-
+  
       infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
       infowindow.open(map, site);
     });
-
+  
     //Sets a listener on marker drag to update lat/long fields based on new location
-
+  
     google.maps.event.addListener(site,'drag',function(event) {
       document.getElementById('site_latitude').value = event.latLng.lat();
       document.getElementById('site_longitude').value = event.latLng.lng();
       console.log('drag');
     });
-
+  
     google.maps.event.addListener(site, 'click', function() {
       map.setZoom(18);
       map.setCenter(site.getPosition());
       console.log('click');
     });
-
-
-
-
+  
+  
+  
+  
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.
     function setupClickListener(id, types) {
@@ -272,16 +268,14 @@
         autocomplete.setTypes(types);
       });
     }
-
+  
     setupClickListener('changetype-all', []);
     setupClickListener('changetype-establishment', ['establishment']);
     setupClickListener('changetype-geocode', ['geocode']);
   }
-
   
-
+  
+  
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-
 <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap&libraries=places", {defer: true, async: true} %>
-

@@ -6,11 +6,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    if params[:content] == "user"
-      @sites = current_user.sites(:order => "code ASC")
-    elsif params[:content] == "all"
-      @sites = Site.all
-    end
+    @sites = current_user.sites(:order => "code ASC")
     # @sites = Site.where{updated_at >= 10.months.ago}
     # @sites = Site.joins{users}.where{id >= 39}.order('id ASC')
     @hash = Gmaps4rails.build_markers(@sites) do |site, marker|
