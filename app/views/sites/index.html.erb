@@ -34,16 +34,19 @@
                         <div class="text-gray-900 font-bold text-xl text-left mb-2"><%= site.code%> </div>
                         <p class="text-gray-700 text-base text-left"><%= site.location%></p>
                         <div class="py-2 text-left">
-                          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#photography</span>
-                          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
+                          <% for purpose in site.gen_obj.split('|')%>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 lowercase">#<%= purpose%></span>
+                          <%end%>
                         </div>
                         <div class="px-6 py-4 text-right">
-                          <button class="bg-orange-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">
-                            Relevé
+                          <button class="bg-orange-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            Relevés
                           </button>
-                          <button class="bg-blue-700 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">
-                            Modifier ce site
+                          <button class="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-xl hover:underline outline-none focus:outline-none ml-3 mr-1 mb-1" type="button" style="transition: all .15s ease">
+                            <%= link_to  edit_site_path(site), class:'uppercase text-white font-bold hover:text-white' do %>
+                              <i class="glyphicon glyphicon-pencil"></i> Modifier
+                            <% end %>
                           </button>
                         </div>
                       </div>
@@ -64,15 +67,6 @@
                 </div>
               </div>
               <div class="hidden" id="tab-actions">
-                <p>
-                  Efficiently unleash cross-media information without
-                  cross-media value. Quickly maximize timely deliverables for
-                  real-time schemas.
-                  <br />
-                  <br />
-                  Dramatically maintain clicks-and-mortar solutions
-                  without functional solutions.
-                </p>
               </div>
             </div>
           </div>
@@ -145,6 +139,53 @@
     </div>
   <% end %>
 </div>
+<!-- Modal GESTION-->
+<div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal GESTION-->
+<!-- Modal RELEVÉS-->
+<div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
+      </div>
+      <div class="modal-body">
+        <% site.releves.each do |g| %>
+          <div class="fields">
+            <h4>Fiche-relevés en date du <%= g.date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4>
+          </div>
+          <br>
+        <% end %>
+        <div class="action">
+          <% unless site.releves.empty? %>
+            <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
+          <% else %>
+            <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal RELEVÉS-->
 <script type="text/javascript">
   function toggleModal(modalID){
     document.getElementById(modalID).classList.toggle("hidden");
@@ -218,5 +259,10 @@
     document.getElementById(modalID).classList.toggle("flex");
     document.getElementById(modalID + "-backdrop").classList.toggle("flex");
   }
+</script>
+<script>
+  $('#exportModal').on('show.bs.modal', function (e) {
+    console.log(e);
+  })
 </script>
 <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_CLOUD_API_KEY']}&callback=initializeMap", {defer: true, async: true} %>

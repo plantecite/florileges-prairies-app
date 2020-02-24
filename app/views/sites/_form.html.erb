@@ -1,98 +1,103 @@
-<%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
-  <%= f.error_notification %>
-  <div class="flex">
-    <div class="w-1/2">
-      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
-        <%= f.input :code, label: "Prairie suivie" %>
-        <div class="row">
-          <div class="col-md-6">
-            <% if @site.photo? %>
-              <%= image_tag @site.photo_url(:thumb).to_s  %>
-              <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
-            <% else %>
-              <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
-            <% end %>
+<div class="mx-20">
+  <%= simple_form_for(@site, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' }, :html => {:multipart => true} }) do |f| %>
+    <%= f.error_notification %>
+    <div class="flex my-8">
+      <div class="w-1/2">
+        <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+          <%= f.input :code, label: "Prairie suivie" %>
+          <div class="row">
+            <div class="col-md-6">
+              <% if @site.photo? %>
+                <%= image_tag @site.photo_url(:thumb).to_s  %>
+                <%= f.input :photo, label: 'Modifier la photo du site', class: 'btn btn-alert' %>
+              <% else %>
+                <%= f.input :photo, class: 'btn btn-warning', label: 'Ajouter une photo du site' %>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <% if @site.plan? %>
+                <%= image_tag @site.plan_url(:thumb).to_s  %>
+                <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
+              <% else %>
+                <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
+              <% end %>
+            </div>
           </div>
-          <div class="col-md-6">
-            <% if @site.plan? %>
-              <%= image_tag @site.plan_url(:thumb).to_s  %>
-              <%= f.input :plan, label: 'Modifier le plan du site', class: 'btn btn-alert' %>
-            <% else %>
-              <%= f.input :plan, class: 'btn btn-warning', label: 'Ajouter un plan du site' %>
-            <% end %>
+          <%= f.input :location, label: "Adresse de la prairie", as: :hidden  %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :latitude, label: "Latitude", as: :hidden %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :longitude, label: "Longitude", as: :hidden  %>
+            </div>
           </div>
         </div>
-        <%= f.input :location, label: "Adresse de la prairie", as: :hidden  %>
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.input :latitude, label: "Latitude", as: :hidden %>
-          </div>
-          <div class="col-md-6">
-            <%= f.input :longitude, label: "Longitude", as: :hidden  %>
-          </div>
+        <div class="rounded shadow-lg border-2 border-gray-400 m-5 mt-8 p-3">
+          <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Questions générales</div>
+          <%= f.input :gen_gest, label: "Gestionaire du site (nom)" %>
+          <%= f.input :gen_surface, label: "Surface, même approximative (en m2)" %>
+          <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie" %>
+          <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["nulle","faible","forte"] %>
         </div>
       </div>
-      <div class="rounded shadow-lg border-2 border-gray-400 m-5 mt-8 p-3">
-        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Questions générales</div>
-        <%= f.input :gen_gest, label: "Gestionaire du site (nom)" %>
-        <%= f.input :gen_surface, label: "Surface, même approximative (en m2)" %>
-        <%= f.input :gen_obj, label: "Objectif(s) recherché(s) pour la prairie" %>
-        <%= f.input :gen_freq, label: "Fréquentation de cette prairie par les usagers", collection: ["nulle","faible","forte"] %>
-      </div>
-    </div>
-    <div class="w-1/2">
-      <div class="info-block">
-        <span style="font-size: 12px; color: #fff">
-          <p>Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p>
-        </span>
-        <span style="font-size: 10px; color: #fff">
-          <p>Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p>
-        </span>
-      </div>
-      <input id="pac-input" class="gmcontrols" type="text" placeholder="Saisir un lieu ou une adresse">
-      <div id="map-canvas" style='width: auto; height: 420px;'></div>
-      <div class="pac-card" id="pac-card">
-      </div>
-    </div>
-  </div>
-  <div class="flex">
-    <div class="w-1/2">
-      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
-        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">
-          Ce que vous savez de l'histoire du site
+      <div class="w-1/2 mx-4">
+        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-6 mb-4" role="alert">
+          <div class="flex">
+            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+              <p class="font-bold">Localisation de votre site</p>
+              <p class="text-sm">Saisir une adresse ou un lieu proche de la prairie dans la barre de recherche et 
+                sélectionner le lieu qui correspond parmi la liste proposée par le moteur de recherche.</p>
+              <p class="text-sm">Vous pourrez ensuite déplacer le marqueur à l'emplacement précis de la prairie.</p>
+            </div>
+          </div>
         </div>
-        <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie" %>
-        <%= f.input :hist_date, label: "Date de création de la prairie" %>
-        <%= f.input :hist_trav, label: "Travaux préalables à la création de la prairie" %>
-      </div>
-      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
-        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Lien avec les papillons</div>
-        <%= f.input :propage, as: :radio_buttons, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
-        <%= f.input :propage_identifier, label: "Si oui, quel est votre identifiant PROPAGE?" %>
+        <input id="pac-input" class="gmcontrols" type="text" placeholder="Saisir un lieu ou une adresse">
+        <div id="map-canvas" style='width: auto; height: 420px;'></div>
+        <div class="pac-card" id="pac-card">
+        </div>
       </div>
     </div>
-    <div class="w-1/2">
-      <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
-        <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Itinéraire de culture de la prairie</div>
-        <%= f.input :cult_trav, label: "Travail du sol préalable à la mise ne place de la prairie" %>
-        <%= f.input :cult_trav_freq, label: "Fréquence du travail du sol" %>
-        <%= f.input :cult_trav_freqinfo, label: "Si régulier, à quelle fréquence" %>
-        <%= f.input :cult_amend, label: "Amendement de la prairie" %>
-        <%= f.input :cult_amend_freq, label: "Fréquence de l'amendement" %>
+    <div class="flex">
+      <div class="w-1/2">
+        <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+          <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">
+            Ce que vous savez de l'histoire du site
+          </div>
+          <%= f.input :hist_occsol, label: "Dernier(s) mode(s) d'occupation du sol avant la prairie" %>
+          <%= f.input :hist_date, label: "Date de création de la prairie" %>
+          <%= f.input :hist_trav, label: "Travaux préalables à la création de la prairie" %>
+        </div>
+        <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+          <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Lien avec les papillons</div>
+          <%= f.input :propage, as: :radio_buttons, label: "Le protocole papillons gestionnaires (PROPAGE) est-il mis en place?", collection: [["oui",TRUE],["non",FALSE]], :wrapper_html => {:class => ''}, :input_html => { :class => 'radio-inline'} %>
+          <%= f.input :propage_identifier, label: "Si oui, quel est votre identifiant PROPAGE?" %>
+        </div>
+      </div>
+      <div class="w-1/2">
+        <div class="rounded shadow-lg border-2 border-gray-400 m-5 p-3">
+          <div class="font-bold text-xl uppercase text-gray-800 mt-3 mb-5">Itinéraire de culture de la prairie</div>
+          <%= f.input :cult_trav, label: "Travail du sol préalable à la mise ne place de la prairie" %>
+          <%= f.input :cult_trav_freq, label: "Fréquence du travail du sol" %>
+          <%= f.input :cult_trav_freqinfo, label: "Si régulier, à quelle fréquence" %>
+          <%= f.input :cult_amend, label: "Amendement de la prairie" %>
+          <%= f.input :cult_amend_freq, label: "Fréquence de l'amendement" %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="flex">
-    <div class="col-md-2">
-      <%= link_to sites_path, class: "col-md-12 btn btn-danger btn-lg" do %>
-        <span class="fa fa-backward"></span> ANNULER
-      <% end %>
+    <div class="flex">
+      <div class="col-md-2">
+        <%= link_to sites_path, class: "col-md-12 btn btn-danger btn-lg" do %>
+          <span class="fa fa-backward"></span> ANNULER
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-success btn-lg' %>
+      </div>
     </div>
-    <div class="col-md-10">
-      <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'col-md-12 btn btn-success btn-lg' %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 <hr>
 <script>
   $(document).ready(function() {
