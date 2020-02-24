@@ -35,6 +35,7 @@ FlorilegesPrairies::Application.routes.draw do
     resources :users, only: :show do
       post :generate_new_password_email
     end
+    resources :actions, only: :index
   end
 
   mount Sidekiq::Web => "/sidekiq"

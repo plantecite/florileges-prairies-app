@@ -29,9 +29,9 @@
               <% end %>
               <% if current_user.has_role? :admin %>
                 <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
-                <a href="#admin" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-700 font-bold">
+                <%= link_to admin_actions_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-700 font-bold" do %>
                   Espace administrateur
-                </a>
+                <% end %>
               <% end %>
               <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
               <%= link_to destroy_user_session_path, method: "delete",  class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent font-bold text-red-600" do %>
