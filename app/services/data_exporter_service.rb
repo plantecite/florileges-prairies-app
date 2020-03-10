@@ -3,7 +3,6 @@ class DataExporterService
 
   def initialize(user_id)
     @user = User.find user_id
-    @is_admin_request = @user.has_role? :admin
     @workbook = nil
     @attachment = nil
     @message = ""
@@ -40,54 +39,29 @@ class DataExporterService
       "id_PROPAGE",
     ], bold)
     i = 1
-    if @is_admin_request
-      Site.all.find_each(batch_size: 300) do |site|
-        sites_worksheet.write_row(i, [
-          site.id,
-          site.code,
-          site.latitude,
-          site.longitude,
-          site.location,
-          site.gen_freq,
-          site.gen_gest,
-          site.gen_surface,
-          site.gen_obj.to_s.split("|"),
-          site.hist_date,
-          site.hist_occsol,
-          site.hist_trav,
-          site.cult_amend,
-          site.cult_amend_freq,
-          site.cult_trav,
-          site.cult_trav_freq,
-          site.propage,
-          site.propage_identifier,
-        ])
-        i += 1
-      end
-    else
-      @user.sites.find_each(batch_size: 300) do |site|
-        sites_worksheet.write_row(i, [
-          site.id,
-          site.code,
-          site.latitude,
-          site.longitude,
-          site.location,
-          site.gen_freq,
-          site.gen_gest,
-          site.gen_surface,
-          site.gen_obj.to_s.split("|"),
-          site.hist_date,
-          site.hist_occsol,
-          site.hist_trav,
-          site.cult_amend,
-          site.cult_amend_freq,
-          site.cult_trav,
-          site.cult_trav_freq,
-          site.propage,
-          site.propage_identifier,
-        ])
-        i += 1
-      end
+
+    @user.sites.find_each(batch_size: 300) do |site|
+      sites_worksheet.write_row(i, [
+        site.id,
+        site.code,
+        site.latitude,
+        site.longitude,
+        site.location,
+        site.gen_freq,
+        site.gen_gest,
+        site.gen_surface,
+        site.gen_obj.to_s.split("|"),
+        site.hist_date,
+        site.hist_occsol,
+        site.hist_trav,
+        site.cult_amend,
+        site.cult_amend_freq,
+        site.cult_trav,
+        site.cult_trav_freq,
+        site.propage,
+        site.propage_identifier,
+      ])
+      i += 1
     end
 
     # OBSERVATIONS
@@ -133,105 +107,53 @@ class DataExporterService
       "obs_hors_q",
     ])
     j = 1
-    if @is_admin_request
-      Observation.find_each(:batch_size => 300) do |observation|
-        if observation.releve.present? & observation.taxon.present?
-          observations_worksheet.write_row(j, [
-            observation.id,
-            observation.releve.site_id,
-            # observation.releve.site.code,
-            observation.releve.date,
-            observation.releve.name,
-            observation.releve.structure,
-            # observation.releve.site.users.map { |u| "#{u.email}" }.join("|"),
-            observation.releve.time_start.to_s.gsub("01/01/2000 ", ""),
-            observation.releve.time_end.to_s.gsub("01/01/2000 ", ""),
-            observation.releve.hauteur,
-            observation.releve.milieux.split("|"),
-            observation.releve.semis,
-            observation.releve.fauche,
-            observation.releve.fauche_periode,
-            observation.releve.fauche_freq,
-            observation.releve.fauche_export,
-            observation.releve.paturage,
-            observation.releve.paturage_pression,
-            observation.releve.paturage_duree,
-            observation.releve.traitement,
-            observation.releve.pression,
-            observation.taxon.lb_nom,
-            observation.taxon.nom_valide,
-            observation.taxon.cd_nom,
-            observation.taxon.cd_ref,
-            observation.taxon.florileges,
-            "v8.0",
-            observation.q1,
-            observation.q2,
-            observation.q3,
-            observation.q4,
-            observation.q5,
-            observation.q6,
-            observation.q7,
-            observation.q8,
-            observation.q9,
-            observation.q10,
-            observation.q0,
-          ])
-          j += 1
-        end
-      end
-    else
-      Observation.where(site_owner_id_cache: @user.id).find_each(:batch_size => 300) do |observation|
-        if observation.releve.present? & observation.taxon.present?
-          observations_worksheet.write_row(j, [
-            observation.id,
-            observation.releve.site_id,
-            # observation.releve.site.code,
-            observation.releve.date,
-            observation.releve.name,
-            observation.releve.structure,
-            # observation.releve.site.users.map { |u| "#{u.email}" }.join("|"),
-            observation.releve.time_start.to_s.gsub("01/01/2000 ", ""),
-            observation.releve.time_end.to_s.gsub("01/01/2000 ", ""),
-            observation.releve.hauteur,
-            observation.releve.milieux.split("|"),
-            observation.releve.semis,
-            observation.releve.fauche,
-            observation.releve.fauche_periode,
-            observation.releve.fauche_freq,
-            observation.releve.fauche_export,
-            observation.releve.paturage,
-            observation.releve.paturage_pression,
-            observation.releve.paturage_duree,
-            observation.releve.traitement,
-            observation.releve.pression,
-            observation.taxon.lb_nom,
-            observation.taxon.nom_valide,
-            observation.taxon.cd_nom,
-            observation.taxon.cd_ref,
-            observation.taxon.florileges,
-            "v8.0",
-            observation.q1,
-            observation.q2,
-            observation.q3,
-            observation.q4,
-            observation.q5,
-            observation.q6,
-            observation.q7,
-            observation.q8,
-            observation.q9,
-            observation.q10,
-            observation.q0,
-          ])
-          j += 1
-        end
+    Observation.where(site_owner_id_cache: @user.id).find_each(:batch_size => 300) do |observation|
+      if observation.releve.present? & observation.taxon.present?
+        observations_worksheet.write_row(j, [
+          observation.id,
+          observation.releve.site_id,
+          # observation.releve.site.code,
+          observation.releve.date,
+          observation.releve.name,
+          observation.releve.structure,
+          # observation.releve.site.users.map { |u| "#{u.email}" }.join("|"),
+          observation.releve.time_start.to_s.gsub("01/01/2000 ", ""),
+          observation.releve.time_end.to_s.gsub("01/01/2000 ", ""),
+          observation.releve.hauteur,
+          observation.releve.milieux.split("|"),
+          observation.releve.semis,
+          observation.releve.fauche,
+          observation.releve.fauche_periode,
+          observation.releve.fauche_freq,
+          observation.releve.fauche_export,
+          observation.releve.paturage,
+          observation.releve.paturage_pression,
+          observation.releve.paturage_duree,
+          observation.releve.traitement,
+          observation.releve.pression,
+          observation.taxon.lb_nom,
+          observation.taxon.nom_valide,
+          observation.taxon.cd_nom,
+          observation.taxon.cd_ref,
+          observation.taxon.florileges,
+          "v8.0",
+          observation.q1,
+          observation.q2,
+          observation.q3,
+          observation.q4,
+          observation.q5,
+          observation.q6,
+          observation.q7,
+          observation.q8,
+          observation.q9,
+          observation.q10,
+          observation.q0,
+        ])
+        j += 1
       end
     end
 
-    if @is_admin_request
-      @message = "L'export de toutes les données d'observations est en cours d'assemblage."
-    else
-      @message = "L'export de vos données d'observations est en cours d'assemblage."
-    end
+    @message = "L'export de vos données d'observations est en cours d'assemblage."
 
     @workbook.close
     content = @workbook.read_string
@@ -239,26 +161,4 @@ class DataExporterService
     File.open("#{@tmp_path}/#{filename}", "wb") { |f| f.write(content) }
     @attachment = OpenStruct.new(:name => filename, :path => "#{@tmp_path}/#{filename}")
   end
-
-  # def example
-  #   @workbook = FastExcel.open(constant_memory: true)
-  #   worksheet = @workbook.add_worksheet("Observations")
-
-  #   for i in 0..5
-  #     for n in 0..3
-  #       worksheet.write_number(i, n, (i + 1) * (n + 1), nil)
-  #     end
-  #   end
-
-  #   chart = @workbook.add_chart(Libxlsxwriter::enum_type(:chart_type)[:column])
-
-  #   chart.add_series("Bob", "Observations!$A$1:$A$5")
-  #   chart.add_series("Alice", "Observations!$B$1:$B$5")
-  #   chart.add_series("Montgomery", "Observations!$C$1:$C$5")
-
-  #   worksheet.insert_chart(1, 7, chart)
-
-  #   @workbook.close
-  #   content = @workbook.read_string
-  # end
 end
