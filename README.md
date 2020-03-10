@@ -25,7 +25,7 @@ Cette application a été réalisée par [Plante & Cité](http://www.plante-et-c
 
 ## Application Version
 
-1.1
+1.2.0
 
 ## License
 
