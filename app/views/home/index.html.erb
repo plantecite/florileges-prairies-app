@@ -4,7 +4,7 @@
       >
   <div
           class="absolute top-0 w-full h-full bg-center bg-cover"
-          style='background-image: url("https://source.unsplash.com/1267x900/?nature,flower");'
+          style='background-image: url("https://natureenvilleacergypontoise.files.wordpress.com/2019/03/formation-florilc3a8ges-cergy-31-05-2018-1.jpg");'
         >
     <span
             id="blackOverlay"
@@ -274,7 +274,7 @@
               Créer un compte utilisateur pour saisir vos données d'observations en cours ou à venir!
             </p>
             <div class="relative w-full mb-3">
-              <label
+              <%# <label
                       class="block uppercase text-gray-700 text-xs font-bold mb-2"
                       for="email"
                       >Adresse électronique</label
@@ -308,29 +308,31 @@
                       placeholder="Confirmation du mot de passe"
                       style="transition: all 0.15s ease 0s;"
                     />
-                  </div>
-                  <div class="text-center mt-6">
-                    <button
+                  </div> %>
+              <div class="text-center mt-6">
+                <%= link_to new_user_registration_path do %>
+                  <button
                       class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                       type="button"
                       style="transition: all 0.15s ease 0s;"
                     >
-                      Créer mon compte
-                    </button>
-                  </div>
-                </div>
+                    Créer un compte Florilèges
+                  </button>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <!-- /// -->
-      <section class="relative block lg:pt-0 bg-gray-900">
-        <div
+      </div>
+    </div>
+  </section>
+  <!-- /// -->
+  <section class="relative block lg:pt-0 bg-gray-900">
+    <div
         class="bottom-auto top-0 left-0 right-0 w-full z-20 absolute pointer-events-none overflow-hidden -mt-20"
         style="height: 80px; transform: translateZ(0px);"
       >
-          <svg
+      <svg
           class="absolute bottom-0 overflow-hidden"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
@@ -339,57 +341,57 @@
           x="0"
           y="0"
         >
-            <polygon
+        <polygon
             class="text-gray-300 fill-current"
             points="2560 0 2560 100 0 100"
           ></polygon>
-          </svg>
-        </div>
-      </section>
-      <!--VIDEO MODAL-->
-      <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-30 outline-none focus:outline-none justify-center items-center" id="modal-video">
-        <div class="relative w-screen my-6 mx-auto max-w-6xl">
-          <!--content-->
-          <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <!--body-->
-            <div class="relative p-6 flex-auto">
-              <div class="absolute z-50 top-0 left-0 m-2">
-                <button
+      </svg>
+    </div>
+  </section>
+  <!--VIDEO MODAL-->
+  <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-30 outline-none focus:outline-none justify-center items-center" id="modal-video">
+    <div class="relative w-screen my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+          <div class="absolute z-50 top-0 left-0 m-2">
+            <button
                 class="text-gray-900 bg-red-800 p-3 w-12 h-12 shadow-lg rounded-full inline-flex items-center justify-center focus:outline-none"
                 type="button"
                 onclick="toggleModal('modal-video')"
               >
-                  <i class="fas fa-close text-white text-xl"></i>
-                </button>
-              </div>
-              <div style="position:relative;padding-bottom:56.25%;">
-                <div style="position:absolute;left:0px;top:0px;" id="my-video">
-                </div>
-              </div>
+              <i class="fas fa-close text-white text-xl"></i>
+            </button>
+          </div>
+          <div style="position:relative;padding-bottom:56.25%;">
+            <div style="position:absolute;left:0px;top:0px;" id="my-video">
             </div>
           </div>
         </div>
       </div>
-      <div class="hidden opacity-75 fixed inset-0 z-20 bg-black" id="modal-video-backdrop" onclick="toggleModal('modal-video')"></div>
-      <%# <div class="opacity-0 fixed inset-0 flex" style="z-index: 51;"onclick="closeModal('modal-video')"></div> %>
-      <script src="https://api.dmcdn.net/all.js"></script>
-      <script>
-        var player = DM.player(document.getElementById("my-video"), {
-            video: "x57vi3z",
-            width: "100%",
-            height: "100%",
-            params: {
-                autoplay: true,
-                mute: false
-            }
-        });
-      </script>
-      <script type="text/javascript">
-        function toggleModal(modalID){
-          document.getElementById(modalID).classList.toggle("hidden");
-          document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
-          document.getElementById(modalID).classList.toggle("flex");
-          document.getElementById(modalID + "-backdrop").classList.toggle("flex");
-          player.contentWindow.postMessage('{"command":"pause","parameters":[]}', "*");
+    </div>
+  </div>
+  <div class="hidden opacity-75 fixed inset-0 z-20 bg-black" id="modal-video-backdrop" onclick="toggleModal('modal-video')"></div>
+  <%# <div class="opacity-0 fixed inset-0 flex" style="z-index: 51;"onclick="closeModal('modal-video')"></div> %>
+  <script src="https://api.dmcdn.net/all.js"></script>
+  <script>
+    var player = DM.player(document.getElementById("my-video"), {
+        video: "x57vi3z",
+        width: "100%",
+        height: "100%",
+        params: {
+            autoplay: true,
+            mute: false
         }
-      </script>
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleModal(modalID){
+      document.getElementById(modalID).classList.toggle("hidden");
+      document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+      document.getElementById(modalID).classList.toggle("flex");
+      document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+      player.contentWindow.postMessage('{"command":"pause","parameters":[]}', "*");
+    }
+  </script>
