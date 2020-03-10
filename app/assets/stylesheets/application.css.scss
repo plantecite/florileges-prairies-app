@@ -269,135 +269,6 @@ a.btn.btn-default.btn-teplok:focus {
   margin: 20px 0;
 }
 
-/** HEADER **/
-#header-landing {
-  height: 100vh;
-  position: relative;
-  background: rgba(1, 1, 1, 0.5);
-}
-#header-landing.inner-page {
-  height: auto;
-  position: relative;
-  background: rgba(1, 1, 1, 0.5);
-}
-#header-landing #logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-}
-#header-landing #logo h1 {
-  font-size: 32px;
-  line-height: 100%;
-  padding: 0;
-  margin: 0;
-  font-weight: 700;
-  letter-spacing: -1px;
-}
-#header-landing #logo h1 a {
-  color: #fff;
-  -webkit-transition: All 0.4s ease;
-  -moz-transition: All 0.4s ease;
-  -o-transition: All 0.4s ease;
-}
-#header-landing #logo h1 a:hover,
-#header-landing #logo h1 a:focus {
-  color: #fff;
-  text-decoration: none;
-}
-#header-landing #logo h1 i {
-  color: #c87e05;
-}
-#header-landing #nav-menu {
-  padding: 0;
-  background: #272727;
-  z-index: 20;
-  padding: 5px 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-#header-landing #nav-menu .menus {
-  float: right;
-  font-size: 14px;
-  padding: 5px 0;
-}
-#header-landing #nav-menu .menus ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-#header-landing #nav-menu .menus ul li {
-  display: inline-block;
-}
-#header-landing #nav-menu .menus ul li a {
-  color: #fff;
-  padding: 15px 15px;
-  border-radius: 5px;
-  line-height: 100%;
-  -webkit-transition: All 0.4s ease;
-  -moz-transition: All 0.4s ease;
-  -o-transition: All 0.4s ease;
-}
-#header-landing #nav-menu .menus ul li a:hover,
-#header-landing #nav-menu .menus ul li a:focus {
-  color: #c87e05;
-  background: #1c1c1c;
-}
-#header-landing #nav-menu .menus ul li.active a,
-#header-landing #nav-menu .menus ul li.active a:hover,
-#header-landing #nav-menu .menus ul li.active a:focus {
-  color: #c87e05;
-  background: #1c1c1c;
-}
-#header-landing #nav-menu .menus ul li a i {
-  display: none;
-}
-#header-landing .awesome-slogan {
-  text-align: center;
-  padding-top: 10%;
-}
-#header-landing .awesome-slogan h2 {
-  padding: 15px 20px;
-  color: #fff;
-  font-weight: 300;
-  font-size: 60px;
-  line-height: 100%;
-  letter-spacing: -2px;
-  display: block;
-  text-transform: uppercase;
-}
-#header-landing .awesome-slogan h4 {
-  padding: 10px 20px;
-  color: #fff;
-  font-weight: 300;
-  font-size: 30px;
-  line-height: 100%;
-  display: block;
-}
-#header-landing .awesome-slogan h2 span,
-#header-landing .awesome-slogan h4 span {
-  font-weight: 600;
-  color: #c87e05;
-}
-#header-landing .awesome-slogan p {
-  font-size: 18px;
-  margin: 20px 0;
-  color: #fff;
-  padding: 5px 10px;
-  display: block;
-}
-#header-landing .awesome-slogan .social-icons {
-  padding: 20px;
-  display: block;
-}
-#header-landing .awesome-slogan .social-icons img {
-  width: 35px;
-  margin: 2px;
-}
-
 /** SECTION **/
 .section-theme-landing {
   height: 10px;
@@ -425,7 +296,7 @@ a.btn.btn-default.btn-teplok:focus {
   box-shadow: 0px 1px 1px 0px rgba(82, 82, 82, 0.49);
 }
 .section-page-landing.section-light-grey {
-  background: #e4e4e4;
+  background: #f4f4f4;
 }
 .section-page-landing.section-beige {
   background: #f3efe0;
@@ -1747,4 +1618,8 @@ a img {
   transform: translateY(0%);
 }
 
-// /IMAGE CAPTIONS
+/// ATOMIC CSS
+
+.tl {
+  text-align: left;
+}

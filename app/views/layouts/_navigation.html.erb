@@ -1,22 +1,58 @@
-<%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Accueil', root_path, class: 'navbar-brand' %>
+<nav class="flex fixed w-full items-center justify-between flex-wrap bg-orange-500 p-6 top-0 animated">
+  <%= link_to root_path, class: "py-2 px-4" do %>
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <img src="http://assets.floriscope.io/florileges/florileges_logo_white_bckgrd.png" width="36" height="36" alt="florileges-logo" class="m-2">
+      <span class="font-semibold text-xl tracking-tight">Florilèges</span>
     </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <%= render 'layouts/navigation_links_right' %>
-      </ul>
+  <% end %>
+  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div class="text-sm lg:flex-grow">
+    </div>
+    <div class="flex flex-wrap">
+      <div class="w-full px-4">
+        <div class="relative inline-flex align-middle w-full">
+          <% if user_signed_in? %>
+            <button class="bg-orange-800 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" style="transition:all .15s ease" type="button" onclick="openDropdown(event,'dropdown-id')">
+              Session de <%= current_user.name %> <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="hidden bg-white  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1" style="min-width:12rem" id="dropdown-id">
+              <%= link_to sites_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" do %>
+                Consulter mes prairies <span class="badge"><%= current_user.sites.count %> </span>
+              <% end %>
+              <%= link_to edit_user_registration_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" do %>
+                <i class="fas fa-cog mr-3"></i>Modifier mon compte 
+              <% end %>
+              <% if current_user.has_role? :admin %>
+                <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
+                <%= link_to admin_actions_path, class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-700 font-bold" do %>
+                  Espace administrateur
+                <% end %>
+              <% end %>
+              <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25"></div>
+              <%= link_to destroy_user_session_path, method: "delete",  class: "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent font-bold text-red-600" do %>
+                <i class="fa fa-sign-out mr-3"></i>Déconnexion
+              <% end %>
+            </div>
+          <% else %>
+            <button class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 bg-orange-800" style="transition:all .15s ease" type="button" onclick="openDropdown(event,'dropdown-id')">
+              <%= link_to 'Me connecter', new_user_session_path, class: "text-white font-bold uppercase text-sm px-6 py-3" %>
+            </button>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
+<script>
+  function openDropdown(event,dropdownID){
+    let element = event.target;
+    while(element.nodeName !== "BUTTON"){
+      element = element.parentNode;
+    }
+    var popper = new Popper(element, document.getElementById(dropdownID), {
+      placement: 'bottom-start'
+    });
+    document.getElementById(dropdownID).classList.toggle("hidden");
+    document.getElementById(dropdownID).classList.toggle("block");
+  }
+</script>

@@ -49,18 +49,30 @@
   font-style: normal;
 }
 
-body {
-  font-family: "open_sansregular", "open_sansregular", Arial, sans-serif;
-  line-height: 170%;
+html {
+  font-size: 16px;
 }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: "Muli", sans-serif;
+  line-height: 150%;
+}
+
+main {
+  margin-top: 80px;
+}
+
 h1,
 h2,
 .h1,
 .h2 {
-  font-family: "open_sansbold", "open_sansbold", Arial, sans-serif;
+  font-family: "Alfa Slab One", cursive;
   font-weight: 400;
   line-height: 1.1;
-  color: inherit;
+  color: #5e4a38;
   font-weight: 400;
   line-height: 140%;
 }
@@ -72,12 +84,29 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "open_sanssemibold", "open_sanssemibold", Arial, sans-serif;
+  font-family: "Bree Serif", serif;
   font-weight: 400;
   line-height: 1.1;
-  color: inherit;
+  color: #7e5a37;
   font-weight: 400;
   line-height: 140%;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #5e4a38;
+}
+
+nav {
+  z-index: 10;
+}
+
+nav.scrolled {
+  border-bottom: 0px;
 }
 
 // input margin ovverides
@@ -138,10 +167,7 @@ main {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #fff;
-  padding-bottom: 0px;
   width: 100%;
-  margin-top: -20px;
 }
 section {
   @extend .row;
@@ -244,7 +270,9 @@ label {
   display: inline-block;
   margin-bottom: 5px;
   font-weight: bold;
-  font-family: "open_sansregular", "open_sansregular", Arial, sans-serif;
+  font-family: "Muli", sans-serif;
+  font-size: 0.9rem;
+  color: #a36d36;
 }
 
 // end of Overwrite SELECT2 CSS

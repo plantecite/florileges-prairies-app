@@ -1,27 +1,397 @@
-<div style="margin: 30px;">
-	<!-- SECTION TITLE -->
-	<h2 class="text-center">FLORILÈGES "Prairies urbaines"</h2>
-
-	<!-- WRITE SOMETHING ABOUT FEATURES HERE -->
-	<h4 class="text-center">
-	Bienvenue sur l'interface de saisie!
-	</h4>
-	<!-- END FEATURES DESCRIPTION -->	
+  <div
+        class="relative pt-16 pb-32 flex content-center items-center justify-center"
+        style="min-height: 75vh;"
+      >
+  <div
+          class="absolute top-0 w-full h-full bg-center bg-cover"
+          style='background-image: url("https://natureenvilleacergypontoise.files.wordpress.com/2019/03/formation-florilc3a8ges-cergy-31-05-2018-1.jpg");'
+        >
+    <span
+            id="blackOverlay"
+            class="w-full h-full absolute opacity-75 bg-black"
+          ></span>
+  </div>
+  <div class="container relative mx-auto">
+    <div class="items-center flex flex-wrap">
+      <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+        <div class="pr-12">
+          <h1 class="text-white text-5xl tracking-wide">
+            Prairies urbaines
+          </h1>
+          <p class="mt-4 text-lg text-gray-300">
+            Le protocole "Florilèges prairies urbaines" est composé d'outils qui permettent aux gestionnaires de réaliser un suivi de leurs prairies.
+          </p>
+          <button class="text-gray-600 p-3 text-center inline-flex items-center justify-center 
+                  w-12 h-12 mt-6 mb-5 shadow-lg rounded-full bg-white focus:outline-none" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-video')">
+            <i class="fas fa-play"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+          class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+          style="height: 70px; transform: translateZ(0px);"
+        >
+    <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+      <polygon
+              class="text-gray-300 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+    </svg>
+  </div>
 </div>
-
-<!-- FEATURES COLUMN -->
-<div class="row" style="width:950px; margin:0 auto;">
-	<div style="margin: 0 0 0 0;">
-		<div class="col-md-6 col-sm-6">
-				<%= link_to new_site_path, { :class => 'caption', :data => { :title => 'AJOUT PRAIRIE', :description => "Créer une nouvelle prairie et renseigner les fiches « localisation & historique » et « relevé & gestion » " } } do %>
-					<img src="images/prairies_add.jpg" alt="Ajout d'une prairie"/>
-				<% end %>	
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<%= link_to sites_path, { :class => 'caption', :data => { :title => 'PRAIRIES SUIVIES', :description => "Consulter l'ensemble des sites suivis et renseigner la fiche «  relevé & gestion »" } } do %>
-					<img src="images/prairies_search.jpg" alt="Consultations des prairies"/>
-				<% end %>	
-			</div>
-	</div>
-</div>
-<!-- END FEATURES COLUMN -->
+<section class="pb-20 bg-gray-300 -mt-24">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+        <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+          <div class="px-4 py-5 flex-auto">
+            <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400"
+                  >
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h6 class="text-xl font-semibold">Le Protocole</h6>
+            <p class="mt-2 mb-4 text-gray-600">
+              Après avoir <span class="font-bold cursor-pointer" onclick="toggleModal('modal-video')">visionné la vidéo d'introduction</span>, découvrez en détails le protocole ainsi les modalités de participation au programme.
+            </p>
+            <button
+              class="bg-red-400 text-white active:bg-red-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+              type="button"
+              style="transition: all 0.15s ease 0s;"
+            >
+              <a href="http://www.vigienature.fr/fr/participez-florileges-prairies-3480" target="_blank" class="appearance-none text-white">PARTICIPER</a>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-4/12 px-4 text-center">
+        <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+          <div class="px-4 py-5 flex-auto">
+            <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-blue-400"
+                  >
+              <i class="fas fa-book"></i>
+            </div>
+            <h6 class="text-xl font-semibold">Les Guides</h6>
+            <p class="mt-2 mb-4 text-gray-600">
+              Consulter la clés des prairies et la clé des Poacées pour vous aider à identifier les taxons cibles.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="pt-6 w-full md:w-4/12 px-4 text-center">
+        <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+              >
+          <div class="px-4 py-5 flex-auto">
+            <div
+                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400"
+                  >
+              <i class="fas fa-database"></i>
+            </div>
+            <h6 class="text-xl font-semibold">La Saisie des Données</h6>
+            <p class="mt-2 mb-4 text-gray-600">
+              Votre saison d'observations vient de s'achever. Faites remonter vos observations afin que ces dernières puissent être incluses dans le bilan annuel des observations!
+            </p>
+            <% if user_signed_in? %>
+              <button class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 bg-green-400" style="transition:all .15s ease" type="button">
+                <%= link_to 'Mes observations', sites_path, class: "text-white font-bold uppercase text-sm px-6 py-3" %>
+              </button>
+            <% else %>
+              <button class="text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 bg-green-400" style="transition:all .15s ease" type="button">
+                <%= link_to 'Me connecter', new_user_session_path, class: "text-white font-bold uppercase text-sm px-6 py-3" %>
+              </button>
+            <% end %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center mt-32">
+    <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+      <div
+                class="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-gray-100"
+              >
+        <i class="fas fa-user-friends text-xl"></i>
+      </div>
+      <h3 class="text-3xl mb-2 font-semibold leading-normal">
+        Les ateliers de formations
+      </h3>
+      <p
+                class="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700"
+              >
+        Le programme de sciences participatives Florilèges – prairies urbaines dédié aux gestionnaires 
+        d’espaces verts permet de caractériser la flore des prairies, de faire le lien avec les pratiques 
+        de gestion et de s’inscrire dans une démarche scientifique à l’échelle nationale.
+      </p>
+      <p
+                class="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700"
+              >
+        Les animateurs locaux du programme propose des formations à chaque saison d'observations.
+      </p>
+      <a
+                href="http://www.vigienature.fr/fr/atelier-formation-3594"
+                class="font-bold text-gray-800 mt-8"
+                >Retrouvez les prochaines dates ici!</a
+              >
+    </div>
+    <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
+      <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-orange-700"
+              >
+        <img
+                  alt="Formations Florilèges"
+                  src="http://www.arb-idf.fr/sites/arb-idf/files/styles/image_contenu/public/image/article/florileges-ateliers.jpg?itok=gmV2IrXu"
+                  class="w-full align-middle rounded-t-lg"
+                />
+          <blockquote class="relative p-8 mb-4 border-none">
+            <svg
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 583 95"
+                    class="absolute left-0 w-full block"
+                    style="height: 95px; top: -94px;"
+                  >
+              <polygon
+                      points="-30,95 583,95 583,65"
+                      class="text-orange-700 fill-current"
+                    ></polygon>
+            </svg>
+            <h4 class="text-xl font-bold text-white">
+              Bilans annuels
+            </h4>
+            <p class="text-md font-light mt-2 text-white">
+              Chaque année, retrouvez l'analyse de l'ensemble des observations conduites par les gestionnaires engagés dans le programme.  
+            </p>
+            <button
+              class="bg-red-400 text-white active:bg-red-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+              type="button"
+              style="transition: all 0.15s ease 0s;"
+            >
+              <a href="http://www.vigienature.fr/fr/resultats-bilans-3481" target="_blank" class="appearance-none">LES BILANS</a>
+            </button>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="pb-20 relative block bg-gray-900">
+  <div
+          class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          style="height: 80px; transform: translateZ(0px);"
+        >
+    <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+      <polygon
+              class="text-gray-900 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+    </svg>
+  </div>
+  <div class="container mx-auto px-4 lg:pt-24 lg:pb-64">
+    <div class="flex flex-wrap text-center justify-center">
+      <div class="w-full lg:w-6/12 px-4">
+        <h2 class="text-4xl text-white tracking-wide">Votre compte Florilèges</h2>
+        <p class="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
+          Ce compte est essentiel pour permettre les analyses au niveau national 
+          mais aussi pour accéder l'historique et l'évolutions des prairies que vous avez en gestion.
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-wrap mt-12 justify-center">
+      <div class="w-full lg:w-3/12 px-4 text-center">
+        <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+          <i class="fas fa-medal text-xl"></i>
+        </div>
+        <h6 class="text-xl mt-5 font-semibold text-white">
+          Observations nationales
+        </h6>
+        <p class="mt-2 mb-4 text-gray-500">
+          Toutes vos observations serviront aux analyses nationales et pourront être mutualisées avec d'autres programmes de sciences participatives.
+        </p>
+      </div>
+      <div class="w-full lg:w-3/12 px-4 text-center">
+        <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+          <i class="fas fa-poll text-xl"></i>
+        </div>
+        <h5 class="text-xl mt-5 font-semibold text-white">
+          Outils de suivi
+        </h5>
+        <p class="mt-2 mb-4 text-gray-500">
+          Nous ferons progressivement évolué cet outil de saisie pour qu'il puisse également vous servir comme un outil de suivi de vos prairies.
+        </p>
+      </div>
+      <div class="w-full lg:w-3/12 px-4 text-center">
+        <div
+                class="text-gray-900 p-3 w-12 h-12 shadow-lg rounded-full bg-white inline-flex items-center justify-center"
+              >
+          <i class="fas fa-lightbulb text-xl"></i>
+        </div>
+        <h5 class="text-xl mt-5 font-semibold text-white">Aide à la décision</h5>
+        <p class="mt-2 mb-4 text-gray-500">
+          Les coordinateurs régionaux du programme peuvent reprendre tout ou partie de vos observations pour vous faire des restitutions contextualisées.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="relative block py-24 lg:pt-0 bg-gray-900">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap justify-center lg:-mt-64 -mt-48">
+      <div class="w-full lg:w-6/12 px-4">
+        <div
+                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300"
+              >
+          <div class="flex-auto p-5 lg:p-10">
+            <h4 class="text-2xl font-semibold">Première visite sur ce site?</h4>
+            <p class="leading-relaxed mt-1 mb-4 text-gray-600">
+              Créer un compte utilisateur pour saisir vos données d'observations en cours ou à venir!
+            </p>
+            <div class="relative w-full mb-3">
+              <%# <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="email"
+                      >Adresse électronique</label
+                    ><input
+                      type="email"
+                      class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      placeholder="Email"
+                      style="transition: all 0.15s ease 0s;"
+                    />
+              </div>
+              <div class="relative w-full mb-3 mt-8">
+                <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="full-name"
+                      >Mot de passe</label
+                    ><input
+                      type="password"
+                      class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      placeholder="Mot de passe"
+                      style="transition: all 0.15s ease 0s;"
+                    />
+                </div>
+                <div class="relative w-full mb-3 mt-8">
+                  <label
+                      class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      for="full-name"
+                      >Confirmation du mot de passe</label
+                    ><input
+                      type="password"
+                      class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      placeholder="Confirmation du mot de passe"
+                      style="transition: all 0.15s ease 0s;"
+                    />
+                  </div> %>
+              <div class="text-center mt-6">
+                <%= link_to new_user_registration_path do %>
+                  <button
+                      class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                      type="button"
+                      style="transition: all 0.15s ease 0s;"
+                    >
+                    Créer un compte Florilèges
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /// -->
+  <section class="relative block lg:pt-0 bg-gray-900">
+    <div
+        class="bottom-auto top-0 left-0 right-0 w-full z-20 absolute pointer-events-none overflow-hidden -mt-20"
+        style="height: 80px; transform: translateZ(0px);"
+      >
+      <svg
+          class="absolute bottom-0 overflow-hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          version="1.1"
+          viewBox="0 0 2560 100"
+          x="0"
+          y="0"
+        >
+        <polygon
+            class="text-gray-300 fill-current"
+            points="2560 0 2560 100 0 100"
+          ></polygon>
+      </svg>
+    </div>
+  </section>
+  <!--VIDEO MODAL-->
+  <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-30 outline-none focus:outline-none justify-center items-center" id="modal-video">
+    <div class="relative w-screen my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+          <div class="absolute z-50 top-0 left-0 m-2">
+            <button
+                class="text-gray-900 bg-red-800 p-3 w-12 h-12 shadow-lg rounded-full inline-flex items-center justify-center focus:outline-none"
+                type="button"
+                onclick="toggleModal('modal-video')"
+              >
+              <i class="fas fa-close text-white text-xl"></i>
+            </button>
+          </div>
+          <div style="position:relative;padding-bottom:56.25%;">
+            <div style="position:absolute;left:0px;top:0px;" id="my-video">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hidden opacity-75 fixed inset-0 z-20 bg-black" id="modal-video-backdrop" onclick="toggleModal('modal-video')"></div>
+  <%# <div class="opacity-0 fixed inset-0 flex" style="z-index: 51;"onclick="closeModal('modal-video')"></div> %>
+  <script src="https://api.dmcdn.net/all.js"></script>
+  <script>
+    var player = DM.player(document.getElementById("my-video"), {
+        video: "x57vi3z",
+        width: "100%",
+        height: "100%",
+        params: {
+            autoplay: true,
+            mute: false
+        }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleModal(modalID){
+      document.getElementById(modalID).classList.toggle("hidden");
+      document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+      document.getElementById(modalID).classList.toggle("flex");
+      document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+      player.contentWindow.postMessage('{"command":"pause","parameters":[]}', "*");
+    }
+  </script>
