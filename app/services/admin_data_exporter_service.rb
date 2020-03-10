@@ -173,7 +173,7 @@ class AdminDataExporterService
 
     @workbook.close
     content = @workbook.read_string
-    filename = "export-test-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+    filename = "florileges-prairies-export-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     File.open("#{@tmp_path}/#{filename}", "wb") { |f| f.write(content) }
     @attachment = OpenStruct.new(:name => filename, :path => "#{@tmp_path}/#{filename}")
   end

@@ -18,6 +18,7 @@ FlorilegesPrairies::Application.routes.draw do
   end
 
   post "export" => "sites#export", as: :export
+  post "admin_export" => "admin/actions#admin_export", as: :admin_export
 
   resources :sites
 
