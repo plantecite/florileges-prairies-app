@@ -14,6 +14,7 @@ class AdminDataExporterService
   end
 
   def call()
+    puts "Processing Admin Exporter Service"
     @workbook = FastExcel.open(constant_memory: true)
     bold = @workbook.bold_cell_format
     @sites = Site.all
