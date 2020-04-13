@@ -1,187 +1,190 @@
 <div class="flex flex-wrap">
   <div class="w-3/4 p-4 text-center text-gray-200">
     <h1 class="uppercase">Sites suivis</h1>
-    <div class="flex flex-wrap" id="tabs-id">
+    <% if @sites.empty? %>
       <div class="w-full">
-        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-          <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-orange-600" onclick="changeAtiveTab(event,'tab-list')">
-              Liste
-            </a>
-          </li>
-          <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-            <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-orange-600 bg-white" onclick="changeAtiveTab(event,'tab-map')">
-              Carte
-            </a>
-          </li>
-        </ul>
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
-          <div class="px-4 py-5 flex-auto">
-            <div class="tab-content tab-space">
-              <div id="tab-list">
-                <% for site in @sites %>
-                  <div class="w-full flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t rounded-t-none rounded-l text-center overflow-hidden bg-cover bg-center" style="background-image: url(<%= site.photo_url.to_s %>)" title="Image test">
-                    </div>
-                    <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
-                      <div class="p-4">
-                        <p class="text-sm text-gray-600 flex items-center">
-                          <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                          </svg>
-                          Accès restreint
-                        </p>
-                        <div class="text-gray-900 font-bold text-xl text-left mb-2"><%= site.code%> </div>
-                        <p class="text-gray-700 text-base text-left"><%= site.location%></p>
-                        <div class="py-2 text-left">
-                          <% for purpose in site.gen_obj.split('|')%>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 lowercase">#<%= purpose%></span>
-                          <%end%>
-                        </div>
-                        <div class="px-6 py-4 text-right">
-                          <button class="bg-orange-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
-                            <i class="glyphicon glyphicon-list-alt"></i>
-                            Relevés
-                          </button>
-                          <button class="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-xl hover:underline outline-none focus:outline-none ml-3 mr-1 mb-1" type="button" style="transition: all .15s ease">
-                            <%= link_to  edit_site_path(site), class:'uppercase text-white font-bold hover:text-white' do %>
-                              <i class="glyphicon glyphicon-pencil"></i> Modifier
-                            <% end %>
-                          </button>
-                        </div>
+        <div class="the-box-landing border-orange-topbottom">
+          <h3>CRÉER VOTRE PREMIÈRE PRAIRIE</h3>
+          <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
+            <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="flex flex-wrap" id="tabs-id">
+        <div class="w-full">
+          <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-orange-600" onclick="changeAtiveTab(event,'tab-list')">
+                Liste
+              </a>
+            </li>
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-orange-600 bg-white" onclick="changeAtiveTab(event,'tab-map')">
+                Carte
+              </a>
+            </li>
+          </ul>
+          <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
+            <div class="px-4 py-5 flex-auto">
+              <div class="tab-content tab-space">
+                <div id="tab-list">
+                  <% for site in @sites %>
+                    <div class="w-full flex">
+                      <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t rounded-t-none rounded-l text-center overflow-hidden bg-cover bg-center" style="background-image: url(<%= site.photo_url.to_s %>)" title="Image test">
                       </div>
-                      <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25 -py-2"></div>
-                      <div class="px-6 py-4 text-right">
-                        <button class="bg-red-700 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">
-                          Supprimer
-                        </button>
+                      <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+                        <div class="p-4">
+                          <p class="text-sm text-gray-600 flex items-center">
+                            <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                              <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                            </svg>
+                            Accès restreint
+                          </p>
+                          <div class="text-gray-900 font-bold text-xl text-left mb-2"><%= site.code%> </div>
+                          <p class="text-gray-700 text-base text-left"><%= site.location%></p>
+                          <div class="py-2 text-left">
+                            <% for purpose in site.gen_obj.split('|')%>
+                              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 lowercase">#<%= purpose%></span>
+                            <%end%>
+                          </div>
+                          <div class="px-6 py-4 text-right">
+                            <button class="bg-orange-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" data-toggle="modal" data-target="#mesReleves<%=site.id%>">
+                              <i class="glyphicon glyphicon-list-alt"></i>
+                              Relevés
+                            </button>
+                            <button class="bg-blue-700 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-xl hover:underline outline-none focus:outline-none ml-3 mr-1 mb-1" type="button" style="transition: all .15s ease">
+                              <%= link_to  edit_site_path(site), class:'uppercase text-white font-bold hover:text-white' do %>
+                                <i class="glyphicon glyphicon-pencil"></i> Modifier
+                              <% end %>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25 -py-2"></div>
+                        <div class="px-6 py-4 text-right">
+                          <button class="bg-red-700 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease">
+                            Supprimer
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
+                <% end %>
+                <div class="hidden" id="tab-map">
+                  <!-- MAP -->
+                  <div style="width: auto">
+                    <div id="map" style="width: auto; height: 400px"></div>
+                  </div>
                 </div>
-              <% end %>
-              <div class="hidden" id="tab-map">
-                <!-- MAP -->
-                <div style="width: auto">
-                  <div id="map" style="width: auto; height: 400px"></div>
+                <div class="hidden" id="tab-actions">
                 </div>
-              </div>
-              <div class="hidden" id="tab-actions">
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="w-1/4 bg-gray-400 p-4 text-center text-gray-700">
-    <div class="the-box-landing border-orange-topbottom">
-      <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
-      <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
-        <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
-      </div>
-    </div>
-    <!--MODAL BUTTON-->
-    <button class="bg-orange-700 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
-      Exporter mes données
-    </button>
-    <!--MODAL -->
-    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
-      <div class="relative w-auto my-6 mx-auto max-w-3xl">
-        <!--content-->
-        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <!--header-->
-          <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-            <h3 class="text-3xl font-semibold">
-              Export des données
-            </h3>
-            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
-              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                ×
-              </span>
-            </button>
-          </div>
-          <!--body-->
-          <div class="relative p-6 flex-auto">
-            <p class="my-4 text-gray-600 text-lg leading-relaxed">
-              Vos données seront rassemblés dans un tableur au format .xlsx qui sera envoyé à l'adresse électronique 
-              associée à votre profil Florilèges, à savoir <%= @current_user.email %>. 
-              Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil.
-            </p>
-          </div>
-          <!--footer-->
-          <div class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-            <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
-              Annuler
-            </button>
-            <%= button_to export_path, class:'bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'  do %>
-              <i class="fa fa-paper-plane mr-3"></i> Envoyer les données </br>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
-</div>
-</div>
-<div class="row">
-  <% if @sites.empty? %>
-    <div class="col-md-9">
+    <div class="w-1/4 bg-gray-400 p-4 text-center text-gray-700">
       <div class="the-box-landing border-orange-topbottom">
-        <h3>CRÉER VOTRE PREMIÈRE PRAIRIE</h3>
+        <h3 style="text-align: center; padding: 10px 0 0 0;">AJOUTER UN SITE</h3>
         <div class="hi-icon-wrap hi-icon-effect-1 hi-icon-effect-1b">
           <%= link_to 'Nouvelle prairie', new_site_path , class: 'hi-icon hi-icon-location' %>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<!-- Modal GESTION-->
-<div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End of Modal GESTION-->
-<!-- Modal RELEVÉS-->
-<div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
-      </div>
-      <div class="modal-body">
-        <% site.releves.each do |g| %>
-          <div class="fields">
-            <h4>Fiche-relevés en date du <%= g.date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4>
+      <!--MODAL BUTTON-->
+      <button class="bg-orange-700 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
+        Exporter mes données
+      </button>
+      <!--MODAL -->
+      <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <!--content-->
+          <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+              <h3 class="text-3xl font-semibold">
+                Export des données
+              </h3>
+              <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
+                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                  ×
+                </span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+              <p class="my-4 text-gray-600 text-lg leading-relaxed">
+                Vos données seront rassemblés dans un tableur au format .xlsx qui sera envoyé à l'adresse électronique 
+                associée à votre profil Florilèges, à savoir <%= @current_user.email %>. 
+                Si nécessaire, vous pouvez modifier cette adresse électronique depuis les paramètres de votre profil.
+              </p>
+            </div>
+            <!--footer-->
+            <div class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+              <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id')">
+                Annuler
+              </button>
+              <%= button_to export_path, class:'bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'  do %>
+                <i class="fa fa-paper-plane mr-3"></i> Envoyer les données </br>
+            <% end %>
           </div>
-          <br>
-        <% end %>
-        <div class="action">
-          <% unless site.releves.empty? %>
-            <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
-          <% else %>
-            <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
-          <% end %>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+    </div>
+  <% end %>
+  <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+</div>
+</div>
+<!-- Modal GESTION-->
+<% unless @sites.empty? %>
+  <div class="modal fade" id="mesGestions<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-gestions de <b><%= site.code %></b></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
+<!-- End of Modal GESTION-->
+<!-- Modal RELEVÉS-->
+<% unless @sites.empty? %>
+  <div class="modal fade" id="mesReleves<%=site.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="maDescriptionLabel">Modifier les fiches-relevés de <b><%= site.code %></b> </h4>
+        </div>
+        <div class="modal-body">
+          <% site.releves.each do |g| %>
+            <div class="fields">
+              <h4>Fiche-relevés en date du <%= g.date %> | <%= link_to "Modifier la fiche", edit_site_releve_path(site,g) %> </h4>
+            </div>
+            <br>
+          <% end %>
+          <div class="action">
+            <% unless site.releves.empty? %>
+              <%= link_to "Créer une nouvelle fiche de relevés", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block' %>
+            <% else %>
+              <%= link_to "Créer votre première fiche de relevés pour cette prairie", new_site_releve_path(site), class:'btn btn-primary btn-lg center-block'%>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 <!-- End of Modal RELEVÉS-->
 <script type="text/javascript">
   function toggleModal(modalID){
