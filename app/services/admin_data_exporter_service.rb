@@ -77,8 +77,13 @@ class AdminDataExporterService
     observations_worksheet = @workbook.add_worksheet("Observations")
     observations_worksheet.write_row(0, [
       "obs_id",
+      "owner_email",
+      "owner_organisation",
       "site_id",
       # "site_code",
+      "site_latitude",
+      "site_longitude",
+      "site_location",
       "releve_date",
       "releve_nom",
       "releve_structure",
@@ -118,11 +123,30 @@ class AdminDataExporterService
     j = 1
     if @is_admin_request
       Observation.find_each(:batch_size => 300) do |observation|
-        if observation.releve.present? & observation.taxon.present?
+        if observation.releve.present? & observation.taxon.present? & observation.site_owner_id_cache.present? & observation.site_id_cache.present?
+          begin
+            @owner = User.find(observation.site_owner_id_cache)
+          rescue ActiveRecord::RecordNotFound => e
+            puts e
+            @owner = nil
+          end
+
+          begin
+            @site = Site.find(observation.site_id_cache)
+          rescue ActiveRecord::RecordNotFound => e
+            puts e
+            @site = nil
+          end
           observations_worksheet.write_row(j, [
             observation.id,
-            observation.releve.site_id,
-            # observation.releve.site.code,
+            # OWNER DATA
+            @owner.present? ? @owner.email : nil,
+            @owner.present? ? @owner.structure : nil,
+            #SITE DATA
+            @site.present? ? @site.id : nil,
+            @site.present? ? @site.latitude : nil,
+            @site.present? ? @site.longitude : nil,
+            @site.present? ? @site.location : nil,
             observation.releve.date,
             observation.releve.name,
             observation.releve.structure,
